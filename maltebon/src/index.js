@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import UserMiniBox from './components/UserPanel/UserMiniBox'
+import UserMiniBox from './components/UserPanel/UserMiniBox';
+import EditProfile from './components/UserPanel/EditProfile';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <UserMiniBox />
+    <EditProfile />
   </React.StrictMode>,
   document.getElementById('root')
 );
