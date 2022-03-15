@@ -9,10 +9,11 @@ import Box from "@material-ui/core/Box";
 import UserMiniBox from "./UserMiniBox";
 import EditProfile from "./EditProfile";
 // import { Tab } from "semantic-ui-react";
-import { Card, Grid } from "@material-ui/core";
+import { Avatar, Card, Grid, Paper, ThemeProvider } from "@material-ui/core";
 import { AppBar } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
-
+import FaceIcon from "@material-ui/icons/Face";
+import ExtensionIcon from "@material-ui/icons/Extension";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -54,7 +55,7 @@ class Profile extends Component {
     // const classes = useStyles();
     console.log(this.props);
     this.setState();
-    this.setState({ classes: this.props.theme });
+    this.setState({ classes: this.props.classes });
   };
 
   handleChange = (event, newValue) => {
@@ -63,78 +64,131 @@ class Profile extends Component {
 
   render() {
     return (
-      <div style={{ padding: "5vw" }}>
-        {/* <AppBar position="static"> */}
+      <ThemeProvider theme={this.props.theme}>
+        <div style={{ padding: "5vw" }}>
+          {/* <AppBar position="static"> */}
 
-        {/* </AppBar> */}
-        <Grid container>
-          <Grid item lg={1}></Grid>
-          <Grid item lg={2}>
-            <div>
-              {this.state.classes !== null && (
-                <Tabs
-                  orientation="vertical"
-                  variant="scrollable"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  aria-label="Vertical tabs example"
-                  className={this.state.classes.tabs}
-                  style={{
-                    width: "60%",
-                    margin: "auto",
-                    alignItems: "center",
-                  }}
-                >
-                  <Card style={{ marginTop: "1vh" }}>
-                    <Tab
-                      label="Item One"
-                      onClick={() => {
-                        this.setState({ value: 0 });
+          {/* </AppBar> */}
+          <Grid container>
+            <Grid item lg={1} xs={1} md={1}></Grid>
+            <Grid item lg={10} xs={10} md={10}>
+              <Paper>
+                <Grid container>
+                  <Grid item lg={2} xs={2} md={2}>
+                    <div
+                      style={{
+                        padding: "1vw 1vw",
+                        // borderRight: "1px solid",
+                        backgroundColor: "#1a4922",
+                        color: "#cbf3dafd",
                       }}
-                      //   style={{ width: "2vw" }}
-                    />
-                  </Card>
-                  <Card style={{ marginTop: "1vh" }}>
-                    <Tab
-                      label="Item Two"
-                      onClick={() => {
-                        this.setState({ value: 1 });
-                      }}
-                    />
-                  </Card>
-                  <Card style={{ marginTop: "1vh" }}>
-                    <Tab
-                      label="Item Three"
-                      onClick={() => {
-                        this.setState({ value: 2 });
-                      }}
-                    />
-                  </Card>
-                </Tabs>
-              )}
-            </div>
-          </Grid>
-          <Grid item lg={8}>
-            <Card>
-              <TabPanel value={this.state.value} index={0}>
-                <EditProfile />
-              </TabPanel>
-              <TabPanel value={this.state.value} index={1}>
-                Item Two
-              </TabPanel>
-              <TabPanel value={this.state.value} index={2}>
-                Item Three
-              </TabPanel>
-              {/* <Tab
+                    >
+                      <div>
+                        <Avatar
+                          style={{
+                            margin: "auto",
+                            marginTop: "1vw",
+                            marginBottom: "2vw",
+                            width: "4vw",
+                            height: "4vw",
+                          }}
+                        ></Avatar>
+                      </div>
+
+                      {this.state.classes !== null && (
+                        <Tabs
+                          selectionFollowsFocus
+                          orientation="vertical"
+                          value={this.state.value}
+                          variant="fullWidth"
+                          onChange={this.handleChange}
+                          aria-label="Vertical tabs example"
+                          // className={this.state.classes.tabs}
+                          style={{
+                            margin: "auto",
+                            alignItems: "center",
+                          }}
+                        >
+                          {/* <Divider></Divider> */}
+                          <Tab
+                            style={{
+                              marginTop: "1vw",
+                              marginBottom: "1vw",
+                              borderBottom: "1px solid",
+                              borderTop: "1px solid",
+                              // padding: "1vw",
+                              alignItems: "center",
+                            }}
+                            label="Edit Profile"
+                            icon={<FaceIcon />}
+                            onClick={() => {
+                              this.setState({ value: 0 });
+                            }}
+                            //   style={{ width: "2vw" }}
+                          />
+                          {/* <Divider></Divider> */}
+
+                          <Tab
+                            style={{
+                              marginTop: "1vw",
+                              marginBottom: "1vw",
+                              borderBottom: "1px solid",
+                              borderTop: "1px solid",
+                              // padding: "1vw",
+                              textAlign: "center",
+                            }}
+                            label="Tokens"
+                            icon={<ExtensionIcon />}
+                            onClick={() => {
+                              this.setState({ value: 1 });
+                            }}
+                          >
+                            {/* <Divider></Divider> */}
+                          </Tab>
+                          <Tab
+                            style={{
+                              marginTop: "1vw",
+                              marginBottom: "1vw",
+                              borderBottom: "1px solid",
+                              borderTop: "1px solid",
+                              // padding: "1vw",
+                            }}
+                            label="Item Three"
+                            onClick={() => {
+                              this.setState({ value: 2 });
+                            }}
+                          />
+                          {/* <Divider></Divider> */}
+                        </Tabs>
+                      )}
+                    </div>
+                  </Grid>
+
+                  <Grid item lg={8} xs={8} md={8}>
+                    <div>
+                      <TabPanel value={this.state.value} index={0}>
+                        <EditProfile />
+                      </TabPanel>
+                      <TabPanel value={this.state.value} index={1}>
+                        Item Two
+                      </TabPanel>
+                      <TabPanel value={this.state.value} index={2}>
+                        Item Three
+                      </TabPanel>
+                    </div>
+                    {/* <Tab
               menu={{ fluid: true, vertical: true }}
               menuPosition="left"
               panes={panes}
             /> */}
-            </Card>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+            <Grid item lg={2} xs={2} md={2}></Grid>
           </Grid>
-          <Grid item lg={2}></Grid>
-        </Grid>
-      </div>
+        </div>
+      </ThemeProvider>
     );
   }
 }
