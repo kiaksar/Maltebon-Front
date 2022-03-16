@@ -14,6 +14,7 @@ import { AppBar } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import FaceIcon from "@material-ui/icons/Face";
 import ExtensionIcon from "@material-ui/icons/Extension";
+import { theme } from "../Theme/theme";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -53,7 +54,7 @@ class Profile extends Component {
   state = { value: 0, classes: null };
   componentDidMount = () => {
     // const classes = useStyles();
-    console.log(this.props);
+
     this.setState();
     this.setState({ classes: this.props.classes });
   };
@@ -64,7 +65,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={this.props.theme}>
+      <ThemeProvider theme={theme}>
         <div style={{ padding: "5vw" }}>
           {/* <AppBar position="static"> */}
 
@@ -79,8 +80,8 @@ class Profile extends Component {
                       style={{
                         padding: "1vw 1vw",
                         // borderRight: "1px solid",
-                        backgroundColor: "#1a4922",
-                        color: "#cbf3dafd",
+                        backgroundColor: theme.palette.primary.dark,
+                        color: theme.palette.secondary.light,
                       }}
                     >
                       <div>
@@ -164,7 +165,7 @@ class Profile extends Component {
                     </div>
                   </Grid>
 
-                  <Grid item lg={8} xs={8} md={8}>
+                  <Grid item lg={10} xs={10} md={10}>
                     <div>
                       <TabPanel value={this.state.value} index={0}>
                         <EditProfile />
