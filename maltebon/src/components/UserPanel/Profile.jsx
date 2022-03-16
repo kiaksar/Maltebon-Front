@@ -15,6 +15,7 @@ import Divider from "@material-ui/core/Divider";
 import FaceIcon from "@material-ui/icons/Face";
 import ExtensionIcon from "@material-ui/icons/Extension";
 import { theme } from "../Theme/theme";
+import EditTokens from "./EditTokens";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -75,13 +76,13 @@ class Profile extends Component {
             <Grid item lg={10} xs={10} md={10}>
               <Paper>
                 <Grid container>
-                  <Grid item lg={2} xs={2} md={2}>
+                  <Grid item lg={2} xs={12} md={2}>
                     <div
                       style={{
                         padding: "1vw 1vw",
                         // borderRight: "1px solid",
-                        backgroundColor: theme.palette.primary.dark,
-                        color: theme.palette.secondary.light,
+                        backgroundColor: theme.palette.primary.black,
+                        color: theme.palette.secondary.contrastText,
                       }}
                     >
                       <div>
@@ -119,8 +120,9 @@ class Profile extends Component {
                               borderTop: "1px solid",
                               // padding: "1vw",
                               alignItems: "center",
+                              // textAlign: "left",
                             }}
-                            label="Edit Profile"
+                            label={<span>Edit Profile</span>}
                             icon={<FaceIcon />}
                             onClick={() => {
                               this.setState({ value: 0 });
@@ -165,13 +167,13 @@ class Profile extends Component {
                     </div>
                   </Grid>
 
-                  <Grid item lg={10} xs={10} md={10}>
+                  <Grid item lg={10} xs={12} md={10}>
                     <div>
                       <TabPanel value={this.state.value} index={0}>
                         <EditProfile />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={1}>
-                        Item Two
+                        <EditTokens />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={2}>
                         Item Three

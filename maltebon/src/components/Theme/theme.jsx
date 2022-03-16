@@ -3,16 +3,17 @@ import { alpha, createTheme, makeStyles } from "@material-ui/core";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#99c72d",
-      textColor: "#f2ff37",
-      dark: "#063013",
-      light: "#8ECAE6",
+      main: "#457b9d",
+      textColor: "#f1faee",
+      dark: "#1d3557",
+      light: "#a8dadc",
+      black: "#10002b",
     },
     secondary: {
-      main: "#a77d24",
-      light: "#f7d378",
-      dark: "#834d0f",
-      textColor: "#2c312e",
+      main: "#ec5a66",
+      light: "#ff9da0",
+      dark: "#9d0208",
+      textColor: "#370617",
     },
   },
   direction: "ltr",
@@ -27,6 +28,7 @@ export const theme = createTheme({
     '"Apple Color Emoji"',
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
+    "Fredoka",
   ].join(","),
 });
 
@@ -37,9 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
   },
-  tabs: {
-    borderLeft: `1px solid ${theme.palette.divider}`,
-  },
+  tabs: {},
   typography: {
     fontFamily: "BYekan",
     textDecoration: "none",

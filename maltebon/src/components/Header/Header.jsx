@@ -135,46 +135,46 @@ function Header(props) {
                       <ListItem
                         button
                         onClick={() => {
-                          window.location.replace("/communities");
+                          window.location.replace("/Something");
                         }}
                       >
                         <ListItemIcon>
                           <PeopleOutlineIcon />
                         </ListItemIcon>
-                        <ListItemText primary="همه کامیونیتی ها" />
+                        <ListItemText primary="Something" />
                       </ListItem>
                       <ListItem
                         button
                         onClick={() => {
-                          window.location.replace("/books");
+                          window.location.replace("/SomethingElse");
                         }}
                       >
                         <ListItemIcon>
                           <StorefrontIcon />
                         </ListItemIcon>
-                        <ListItemText primary="همه محصولات" />
+                        <ListItemText primary="SomethingElse" />
                       </ListItem>
                       <ListItem
                         button
                         onClick={() => {
-                          window.location.replace("/BuyCredits");
+                          window.location.replace("/SomethingElseElse");
                         }}
                       >
                         <ListItemIcon>
                           <MonetizationOnIcon />
                         </ListItemIcon>
-                        <ListItemText primary="افزایش اعتبار" />
+                        <ListItemText primary="SomethingElseElse" />
                       </ListItem>
                       <ListItem
                         button
                         onClick={() => {
-                          window.location.replace("/Cart");
+                          window.location.replace("/SomethingElseElseElse");
                         }}
                       >
                         <ListItemIcon>
                           <ShoppingCartIcon />
                         </ListItemIcon>
-                        <ListItemText primary="سبد خرید" />
+                        <ListItemText primary="SomethingElseElseElse" />
                       </ListItem>
                     </div>
                   </List>
@@ -325,8 +325,11 @@ function Header(props) {
                 <Button
                   onClick={() => setAccountBoxTrigger(true)}
                   variant="contained"
-                  color="secondary"
-                  style={{ fontFamily: "Segoe UI" }}
+                  // color="secondary"
+                  style={{
+                    fontFamily: "Segoe UI",
+                    backgroundColor: theme.palette.secondary.main,
+                  }}
                   className={classes.sectionDesktop}
                 >
                   {/* <AccountCircle /> */}
@@ -339,11 +342,13 @@ function Header(props) {
                 <Button
                   onClick={() => setAccountBoxTrigger(true)}
                   variant="contained"
-                  color="secondary"
-                  style={{ fontFamily: "BYekan" }}
+                  style={{
+                    fontFamily: "Segoe UI",
+                    backgroundColor: theme.palette.secondary.light,
+                  }}
                 >
                   {/* <AccountCircle /> */}
-                  ورود/ثبت نام
+                  Login / Register{" "}
                 </Button>
               </Hidden>
             )}
@@ -453,7 +458,7 @@ class NotificationsList extends React.Component {
         <div style={{ margin: "auto", width: "90%" }}>
           <Typography style={{ fontSize: 16 }} component="div">
             <Link color="primary" href="/profile/notifications">
-              مشاهده همه
+              View All
             </Link>
           </Typography>
         </div>

@@ -6,6 +6,7 @@ import { theme, useStyles } from "./components/Theme/theme.jsx";
 import Header from "./components/Header/Header";
 // import { Router } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -34,6 +35,7 @@ function App() {
                 style={{ position: "sticky", top: 0 }}
               />
               <Profile theme={theme} classes={Theme} />
+              <Footer />
             </div>
           }
         ></Route>
