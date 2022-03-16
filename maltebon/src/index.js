@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+<<<<<<< Updated upstream
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+=======
+import LoginPage from './components/LoginPage/LoginPage';
+import SignupPage from './components/SignupPage/SignupPage';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <SignupPage />
+>>>>>>> Stashed changes
   </React.StrictMode>,
   document.getElementById('root')
 );
