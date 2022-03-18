@@ -8,6 +8,9 @@ class EditProfile extends Component {
     imageURL: null,
     isEditting: true,
     EditText: "Edit",
+    email: "",
+    name: "",
+    username: "",
   };
   PhotoChanged = async (event) => {
     await this.setState({ selectedFile: event.target.files[0] });
@@ -88,6 +91,7 @@ class EditProfile extends Component {
                     label="Email"
                     style={{ width: "100%", fontFamily: "Fredoka" }}
                     disabled
+                    value={this.state.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -96,6 +100,10 @@ class EditProfile extends Component {
                     label="Name"
                     style={{ width: "100%", fontFamily: "Fredoka" }}
                     disabled={this.state.isEditting}
+                    value={this.state.name}
+                    onChange={(e) => {
+                      this.setState({ name: e.target.value });
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -104,6 +112,10 @@ class EditProfile extends Component {
                     label="Username"
                     style={{ width: "100%" }}
                     disabled={this.state.isEditting}
+                    value={this.state.username}
+                    onChange={(e) => {
+                      this.setState({ username: e.target.value });
+                    }}
                   />
                 </Grid>
               </Grid>
