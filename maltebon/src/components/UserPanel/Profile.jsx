@@ -16,6 +16,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import ExtensionIcon from "@material-ui/icons/Extension";
 import { theme } from "../Theme/theme";
 import EditTokens from "./EditTokens";
+import ChangePassword from "./ChangePassword";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -69,7 +70,6 @@ class Profile extends Component {
       <ThemeProvider theme={theme}>
         <div style={{ padding: "5vw" }}>
           {/* <AppBar position="static"> */}
-
           {/* </AppBar> */}
           <Grid container>
             <Grid item lg={1} xs={1} md={1}></Grid>
@@ -79,20 +79,21 @@ class Profile extends Component {
                   <Grid item lg={2} xs={12} md={2}>
                     <div
                       style={{
-                        padding: "1vw 1vw",
+                        padding: "0vw 1vw",
                         // borderRight: "1px solid",
                         backgroundColor: theme.palette.primary.black,
                         color: theme.palette.secondary.contrastText,
+                        height: "100%",
                       }}
                     >
-                      <div>
+                      <div style={{ paddingTop: "1vw" }}>
                         <Avatar
                           style={{
+                            // marginTop: "1vw",
                             margin: "auto",
-                            marginTop: "1vw",
                             marginBottom: "2vw",
-                            width: "4vw",
-                            height: "4vw",
+                            width: "10vh",
+                            height: "10vh",
                           }}
                         ></Avatar>
                       </div>
@@ -110,6 +111,7 @@ class Profile extends Component {
                             margin: "auto",
                             alignItems: "center",
                           }}
+                          cent
                         >
                           {/* <Divider></Divider> */}
                           <Tab
@@ -148,7 +150,7 @@ class Profile extends Component {
                           >
                             {/* <Divider></Divider> */}
                           </Tab>
-                          <Tab
+                          {/* <Tab
                             style={{
                               marginTop: "1vw",
                               marginBottom: "1vw",
@@ -160,7 +162,7 @@ class Profile extends Component {
                             onClick={() => {
                               this.setState({ value: 2 });
                             }}
-                          />
+                          /> */}
                           {/* <Divider></Divider> */}
                         </Tabs>
                       )}
@@ -170,13 +172,13 @@ class Profile extends Component {
                   <Grid item lg={10} xs={12} md={10}>
                     <div>
                       <TabPanel value={this.state.value} index={0}>
-                        <EditProfile />
+                        <EditProfile change={this.handleChange} />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={1}>
                         <EditTokens />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={2}>
-                        Item Three
+                        <ChangePassword />
                       </TabPanel>
                     </div>
                     {/* <Tab
@@ -188,7 +190,7 @@ class Profile extends Component {
                 </Grid>
               </Paper>
             </Grid>
-            <Grid item lg={2} xs={2} md={2}></Grid>
+            <Grid item lg={1} xs={1} md={1}></Grid>
           </Grid>
         </div>
       </ThemeProvider>

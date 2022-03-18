@@ -9,7 +9,7 @@ class EditTokens extends Component {
   state = {};
   render() {
     return (
-      <div style={{ padding: "2vh" }}>
+      <div style={{ padding: "0.5vh" }}>
         <Typography
           variant="h3"
           style={{

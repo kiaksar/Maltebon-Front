@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 // import { Router } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
+// import LandingPage from "./components/LandingPage/LandingPage.jsx";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -39,6 +40,7 @@ function App() {
             </div>
           }
         ></Route>
+        {/* <Route path="/Landing" element={<LandingPage />}></Route> */}
       </Routes>
     </Router>
   );
