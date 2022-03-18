@@ -83,7 +83,7 @@ class EditProfile extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item lg={4} xs={12} md={4}>
+            <Grid item lg={8} xs={12} md={8}>
               <Grid container spacing={2} style={{ textAlign: "left" }}>
                 <Grid item xs={12}>
                   <TextField
@@ -120,17 +120,34 @@ class EditProfile extends Component {
                 </Grid>
               </Grid>
               <Grid item xs={12} lg={12}>
-                <Button
-                  variant="contained"
-                  style={{
-                    backgroundColor: theme.palette.primary.light,
-                    marginTop: "2vh",
-                    width: "80%",
-                  }}
-                  onClick={this.makeEditable}
-                >
-                  {this.state.EditText}
-                </Button>
+                <Grid container>
+                  <Grid item lg={6} md={12} xs={12}>
+                    <Button
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.primary.light,
+                        marginTop: "2vh",
+                        width: "80%",
+                      }}
+                      onClick={this.makeEditable}
+                    >
+                      {this.state.EditText}
+                    </Button>
+                  </Grid>
+                  <Grid item lg={6} md={12} xs={12}>
+                    <Button
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.primary.light,
+                        marginTop: "2vh",
+                        width: "80%",
+                      }}
+                      onClick={this.props.changePass}
+                    >
+                      Change password
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

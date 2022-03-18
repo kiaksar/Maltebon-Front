@@ -172,13 +172,22 @@ class Profile extends Component {
                   <Grid item lg={10} xs={12} md={10}>
                     <div>
                       <TabPanel value={this.state.value} index={0}>
-                        <EditProfile change={this.handleChange} />
+                        <EditProfile
+                          change={this.handleChange}
+                          changePass={() => {
+                            this.setState({ value: 2 });
+                          }}
+                        />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={1}>
                         <EditTokens />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={2}>
-                        <ChangePassword />
+                        <ChangePassword
+                          changeProf={() => {
+                            this.setState({ value: 0 });
+                          }}
+                        />
                       </TabPanel>
                     </div>
                     {/* <Tab
