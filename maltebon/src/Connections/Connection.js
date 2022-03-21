@@ -1,8 +1,8 @@
 import axios from "axios";
 import references from "../assets/References.json";
-import { setUserSession, cookie, getUser } from "../Connections/Common";
+import { setUserSession, cookie, getUser } from "./Common";
 import Cookies from "universal-cookie";
-import { makeURL } from "../Connections/Common";
+import { makeURL } from "./Common";
 
 export const Logout = async () => {
   cookie.remove("x-access-token");
