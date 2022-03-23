@@ -4,6 +4,7 @@ import { theme } from "../Theme/theme";
 import { GetProfile } from "../../Connections/Connection";
 import axios from "axios";
 import { makeURL } from "../../Connections/Common";
+import references from "../../assets/References.json";
 // import { type } from "@testing-library/user-event/dist/type";
 class EditProfile extends Component {
   state = {
@@ -17,14 +18,14 @@ class EditProfile extends Component {
   };
   async componentDidMount() {
     await axios
-      .get(makeURL("/account/profile"))
+      .get(makeURL("/account/myprofile"))
       .then((response) => {
         console.log("This is profile", response);
         this.setState({
           name: response.data[0].profile_name,
           username: response.data[0].username,
           email: response.data[0].email,
-          imageURL: response.data[0].avatar,
+          imageURL: references.url_address + response.data[0].avatar,
         });
       })
       .catch((error) => {
@@ -61,6 +62,12 @@ class EditProfile extends Component {
         .catch((error) => {
           console.log("error in editing profile information", error);
         });
+
+      const data = new FormData();
+      data.append("file", this.state.selectedFile);
+      await axios.post(makeURL("/account/upload/pp"), data).then((response) => {
+        console.log("image uploaded successfully", response);
+      });
     }
   };
   render() {

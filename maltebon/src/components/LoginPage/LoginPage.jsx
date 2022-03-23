@@ -38,6 +38,7 @@ class LoginPage extends Component {
   handleLogin = () => {
     Login(this.state.username, this.state.password).then((response) => {
       checkResponse(response);
+      console.log("Login response", response);
     });
   };
   render() {

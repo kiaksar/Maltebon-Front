@@ -13,7 +13,9 @@ class SignupPage extends Component {
   };
   handleRegister = () => {
     Register(this.state.email, this.state.username, this.state.password).then(
-      (message) => {}
+      (message) => {
+        console.log("Register message", message);
+      }
     );
   };
   render() {
