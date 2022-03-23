@@ -1,61 +1,199 @@
-import React from "react";
-// import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import { theme } from "../Theme/theme";
-import { ThemeProvider } from "@material-ui/core";
+import React, { Component } from "react";
+import {
+  Box,
+  Grid,
+  Hidden,
+  Paper,
+  Typography,
+  Toolbar,
+  AppBar,
+  TextField,
+  Avatar,
+} from "@material-ui/core";
+import Navbar from "../Navbar/Navbar";
+import Typed from "react-typed";
+import Button from "@material-ui/core/Button";
+import arshia from "../pics/arshia.jpg";
+import kia from "../pics/kia.jpg";
+import arda from "../pics/arda.jpg";
+import amir from "../pics/amir.png";
+import telegram from "../pics/telegram.png";
+import instagram from "../pics/instagram.png";
+import gmail from "../pics/gmail.png";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color={theme.palette.secondary.light}>
-      {"Copyright © "}
-      <Link color="inherit" href="https://maltebon.com/">
-        Maltebon
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
+class Footer extends Component {
+  state = {};
+  render() {
+    return (
+      <Grid
+        container
+        direction="column-reverse"
+        justify="flex-end"
+        alignItems="right"
+      >
+        <Grid item>
+          <Box component="nav">
+            <AppBar position="static" style={{ background: "#222" }}>
+              <Toolbar>
+                <Grid container>
+                  <Grid item lg={12} xs={12} md={12}>
+                    <Typography
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "4vh",
+                        margin: "5vh 5vw",
+                      }}
+                    >
+                      about us
+                    </Typography>
+                  </Grid>
+                  <Paper
+                    elevation={10}
+                    style={{
+                      padding: "0 3vw",
+                      width: "100%",
+                      background: "green",
+                    }}
+                  >
+                    <Grid container direction="column" alignItems="center">
+                      <Grid item lg={2} xs={4} md={2}>
+                        <Paper elevation={10} style={{ background: "#222" }}>
+                          <Typography
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "3vh",
+                              margin: "5vh 5vw",
+                              color: "white",
+                            }}
+                          >
+                            Carbon Studio:
+                          </Typography>
+                        </Paper>
+                      </Grid>
+                      <Grid item>
+                        <Grid container direction="row">
+                          <Grid item lg={3} xs={6} md={6}>
+                            <Typography
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2vh",
+                                margin: "5vh 5vw",
+                                color: "white",
+                                margin: "0 10vw",
+                              }}
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={arshia}
+                                style={{ width: "8vh", height: "8vh" }}
+                              />
+                              Arshia Pain
+                            </Typography>
+                          </Grid>
+                          <Grid item lg={3} xs={6} md={6}>
+                            <Typography
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2vh",
+                                margin: "5vh 5vw",
+                                color: "white",
+                                margin: "0 10vw",
+                              }}
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={amir}
+                                style={{ width: "8vh", height: "8vh" }}
+                              />
+                              Amir Smart
+                            </Typography>
+                          </Grid>
+                          <Grid item lg={3} xs={6} md={6}>
+                            <Typography
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2vh",
+                                margin: "5vh 5vw",
+                                color: "white",
+                                margin: "0 10vw",
+                              }}
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={kia}
+                                style={{ width: "8vh", height: "8vh" }}
+                              />
+                              Kia Loko
+                            </Typography>
+                          </Grid>
+                          <Grid item lg={3} xs={6} md={6}>
+                            <Typography
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "2vh",
+                                margin: "5vh 5vw",
+                                color: "white",
+                                margin: "0 10vw",
+                              }}
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={arda}
+                                style={{ width: "8vh", height: "8vh" }}
+                              />
+                              Arda Sag
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                  <br />
+                  <Paper
+                    elevation={10}
+                    style={{
+                      padding: "3vh 3vw",
+                      width: "100%",
+                      background: "green",
+                    }}
+                  >
+                    <Grid container direction="column" alignItems="center">
+                      <Grid item>
+                        <Grid container direction="row">
+                          <Grid item lg={4} xs={4} md={4}>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={telegram}
+                              style={{ margin: "0 10vw" }}
+                            />
+                          </Grid>
+                          <Grid item lg={4} xs={4} md={4}>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={instagram}
+                              style={{ margin: "0 10vw" }}
+                            />
+                          </Grid>
+                          <Grid item lg={4} xs={4} md={4}>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={gmail}
+                              style={{ margin: "0 10vw" }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                  <br />
+                </Grid>
+              </Toolbar>
+            </AppBar>
+          </Box>
+        </Grid>
+      </Grid>
+    );
+  }
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-  },
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    padding: theme.spacing(3, 2),
-    marginTop: "auto",
-    // backgroundColor: theme.palette.secondary.light,
-    //   theme.palette.type === "light"
-    //     ? theme.palette.grey[200]
-    //     : theme.palette.grey[800],
-  },
-}));
-
-export default function Footer() {
-  const classes = useStyles(theme);
-
-  return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <footer
-          className={classes.footer}
-          style={{ backgroundColor: theme.palette.secondary.light }}
-        >
-          <Container maxWidth="sm">
-            <Typography variant="body1">Here we admire DATA !</Typography>
-            <Copyright />
-          </Container>
-        </footer>
-      </div>
-    </ThemeProvider>
-  );
-}
+export default Footer;

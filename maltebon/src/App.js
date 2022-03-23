@@ -8,6 +8,15 @@ import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 // import LandingPage from "./components/LandingPage/LandingPage.jsx";
+// import Profile from "./components/UserPanel/Profile";
+// import { theme, useStyles } from "./components/Theme/theme.jsx";
+// import Header from "./components/Header/Header";
+// import { Router } from "react-router-dom";
+// import Footer from "./components/Footer/Footer";
+// import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import LoginPage from "./components/LoginPage/LoginPage";
+import LandingPage from "./components/LandingPage/LandingPage";
+import SignupPage from "./components/SignupPage/SignupPage";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -23,23 +32,18 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   const Theme = useStyles(theme);
+  // const Theme = useStyles(theme);
   return (
     <Router>
       <Routes>
         <Route
           path="/"
           exact={true}
-          element={
-            <div className="App">
-              <Header
-                isLoggedIn={false}
-                style={{ position: "sticky", top: 0 }}
-              />
-              <Profile theme={theme} classes={Theme} />
-              <Footer />
-            </div>
-          }
+          element={<LandingPage/>}
         ></Route>
+        <Route element ={<LoginPage/>} path="/login" exact="true"/>
+        <Route element ={<SignupPage/>} path="/register" exact="true"/>
+        <Route element ={<Profile theme={theme}/>} path="/profile" exact="true"/>
         {/* <Route path="/Landing" element={<LandingPage />}></Route> */}
       </Routes>
     </Router>

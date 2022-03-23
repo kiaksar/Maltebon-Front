@@ -6,7 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import UserMiniBox from "./components/UserPanel/UserMiniBox";
 import EditProfile from "./components/UserPanel/EditProfile";
 import Profile from "./components/UserPanel/Profile";
-
+import LoginPage from './components/LoginPage/LoginPage';
+import SignupPage from './components/SignupPage/SignupPage';
+import LandingPage from './components/LandingPage/LandingPage';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}

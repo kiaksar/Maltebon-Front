@@ -132,7 +132,6 @@ export const EditName = async (profile_name) => {
     });
   return message;
 };
-
 export const GetProfile = async () => {
   await axios
     .get(makeURL("/account/profile"))
@@ -145,4 +144,3 @@ export const GetProfile = async () => {
       return error;
     })
 }
-
