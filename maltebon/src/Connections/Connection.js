@@ -133,3 +133,16 @@ export const EditName = async (profile_name) => {
   return message;
 };
 
+export const GetProfile = async () => {
+  await axios
+    .get(makeURL("/account/profile"))
+    .then((response) => {
+      console.log("This is profile", response)
+      return response;
+    })
+    .catch((error) => {
+      console.log("Error in getting profile info", error);
+      return error;
+    })
+}
+

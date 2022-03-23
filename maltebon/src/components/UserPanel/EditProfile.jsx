@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Avatar, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { theme } from "../Theme/theme";
+import { GetProfile } from "../../Connections/Connection";
+import axios from "axios";
+import { makeURL } from "../../Connections/Common";
 // import { type } from "@testing-library/user-event/dist/type";
 class EditProfile extends Component {
   state = {
@@ -12,6 +15,22 @@ class EditProfile extends Component {
     name: "",
     username: "",
   };
+  async componentDidMount() {
+    await axios
+      .get(makeURL("/account/profile"))
+      .then((response) => {
+        console.log("This is profile", response);
+        this.setState({
+          name: response.data[0].profile_name,
+          username: response.data[0].username,
+          email: response.data[0].email,
+          imageURL: response.data[0].avatar,
+        });
+      })
+      .catch((error) => {
+        console.log("Error in getting profile info", error);
+      });
+  }
   PhotoChanged = async (event) => {
     await this.setState({ selectedFile: event.target.files[0] });
     // console.log(this.state.selectedFile);
