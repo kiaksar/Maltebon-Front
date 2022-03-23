@@ -44,11 +44,24 @@ class EditProfile extends Component {
   makeURL = async (file) => {
     return await URL.createObjectURL(new File(file, "ProfilePic"));
   };
-  makeEditable = () => {
+  makeEditable = async () => {
     // this.props.change(2, 2);
     this.setState({ isEditting: !this.state.isEditting });
     if (this.state.EditText === "Edit") this.setState({ EditText: "Submit" });
-    else this.setState({ EditText: "Edit" });
+    else {
+      // edit profile functions
+      await axios
+        .post(makeURL("/account/changefname"), {
+          profile_name: this.state.name,
+        })
+        .then((response) => {
+          console.log("profile edited successfully", response);
+          this.setState({ EditText: "Edit" });
+        })
+        .catch((error) => {
+          console.log("error in editing profile information", error);
+        });
+    }
   };
   render() {
     return (
