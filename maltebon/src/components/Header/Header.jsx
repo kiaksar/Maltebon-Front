@@ -59,6 +59,7 @@ import axios from "axios";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import { cookie } from "../../Connections/Common";
 function Header(props) {
   const [drawerAnchor, setDrawerAnchor] = useState(false);
   const [accountBoxTrigger, setAccountBoxTrigger] = useState(false);
@@ -68,13 +69,19 @@ function Header(props) {
   const anchorRef = React.useRef(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [NotifCount, SetNotifCount] = useState(null);
-  // useEffect(
-  //   () =>
-  //     isLoggedIn &&
-  //     // NotificationsCount().then((data) => {
-  //     //   SetNotifCount(data);
-  //     // })
-  // );
+  useEffect(() =>
+    // isLoggedIn &&
+    // // NotificationsCount().then((data) => {
+    // //   SetNotifCount(data);
+    // // })
+    {
+      if (cookie.get("x-access-token") === undefined) {
+        setLoggedIn(false);
+      } else {
+        setLoggedIn(true);
+      }
+    }
+  );
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -323,7 +330,7 @@ function Header(props) {
             ) : (
               <Hidden xsDown>
                 <Button
-                  onClick={() => setAccountBoxTrigger(true)}
+                  onClick={() => window.location.replace("/login")}
                   variant="contained"
                   // color="secondary"
                   style={{
