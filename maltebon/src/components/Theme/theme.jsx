@@ -3,17 +3,17 @@ import { alpha, createTheme, makeStyles } from "@material-ui/core";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#457b9d",
-      textColor: "#f1faee",
-      dark: "#1d3557",
-      light: "#a8dadc",
-      black: "#10002b",
+      main: "#008000",
+      textColor: "#daf2da",
+      dark: "#004b23",
+      light: "#9ef01a",
+      black: "#222",
     },
     secondary: {
-      main: "#ec5a66",
-      light: "#ff9da0",
-      dark: "#9d0208",
-      textColor: "#370617",
+      main: "#ed9121",
+      light: "#ffbf00",
+      dark: "#cc0000",
+      textColor: "#28190e",
     },
   },
   direction: "ltr",
@@ -38,6 +38,21 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+  },
+  buttonSuccess: {
+    backgroundColor: theme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  },
+
+  buttonProgress: {
+    color: theme.palette.primary.main,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12,
   },
   tabs: {},
   typography: {

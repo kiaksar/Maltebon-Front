@@ -1,11 +1,38 @@
 import React, { Component } from "react";
-import { Avatar, Button, Grid, TextField, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { theme } from "../Theme/theme";
 import { GetProfile } from "../../Connections/Connection";
 import axios from "axios";
 import { makeURL } from "../../Connections/Common";
 import references from "../../assets/References.json";
 // import { type } from "@testing-library/user-event/dist/type";
+
+const useStyles = makeStyles((theme) => ({
+  buttonSuccess: {
+    backgroundColor: theme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  },
+
+  buttonProgress: {
+    color: theme.palette.primary.main,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12,
+  },
+}));
+
 class EditProfile extends Component {
   state = {
     selectedFile: null,
@@ -15,8 +42,12 @@ class EditProfile extends Component {
     email: "",
     name: "",
     username: "",
+    loading: false,
+    Success: false,
   };
+
   async componentDidMount() {
+    console.log(this.props.classes);
     await axios
       .get(makeURL("/account/myprofile"))
       .then((response) => {
@@ -48,8 +79,13 @@ class EditProfile extends Component {
   makeEditable = async () => {
     // this.props.change(2, 2);
     this.setState({ isEditting: !this.state.isEditting });
+
     if (this.state.EditText === "Edit") this.setState({ EditText: "Submit" });
     else {
+      if (!this.state.loading) {
+        this.setState({ Success: false });
+        this.setState({ loading: true });
+      }
       // edit profile functions
       await axios
         .post(makeURL("/account/changefname"), {
@@ -58,6 +94,8 @@ class EditProfile extends Component {
         .then((response) => {
           console.log("profile edited successfully", response);
           this.setState({ EditText: "Edit" });
+          this.setState({ Success: true });
+          this.setState({ loading: false });
         })
         .catch((error) => {
           console.log("error in editing profile information", error);
@@ -101,7 +139,13 @@ class EditProfile extends Component {
                     src={this.state.imageURL}
                   />
                 </Grid>
-                <Grid item lg={12} xs={12} md={12}>
+                <Grid
+                  item
+                  lg={12}
+                  xs={12}
+                  md={12}
+                  style={{ textAlign: "center" }}
+                >
                   <Button
                     variant="contained"
                     component="label"
@@ -109,6 +153,7 @@ class EditProfile extends Component {
                       marginTop: "2vh",
                       fontFamily: "Fredoka",
                       fontWeight: "bold",
+                      backgroundColor: theme.palette.secondary.main,
                     }}
                   >
                     Change Picture
@@ -160,7 +205,13 @@ class EditProfile extends Component {
               </Grid>
               <Grid item xs={12} lg={12}>
                 <Grid container>
-                  <Grid item lg={6} md={12} xs={12}>
+                  <Grid
+                    item
+                    lg={6}
+                    md={12}
+                    xs={12}
+                    style={{ textAlign: "center" }}
+                  >
                     <Button
                       variant="contained"
                       style={{
@@ -168,12 +219,25 @@ class EditProfile extends Component {
                         marginTop: "2vh",
                         width: "80%",
                       }}
+                      disabled={this.state.loading}
                       onClick={this.makeEditable}
                     >
                       {this.state.EditText}
+                      {this.state.loading && (
+                        <CircularProgress
+                          size={24}
+                          className={this.props.classes.buttonProgress}
+                        />
+                      )}
                     </Button>
                   </Grid>
-                  <Grid item lg={6} md={12} xs={12}>
+                  <Grid
+                    item
+                    lg={6}
+                    md={12}
+                    xs={12}
+                    style={{ textAlign: "center" }}
+                  >
                     <Button
                       variant="contained"
                       style={{

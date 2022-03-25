@@ -20,6 +20,7 @@ import amir from "../pics/amir.png";
 import telegram from "../pics/telegram.png";
 import instagram from "../pics/instagram.png";
 import gmail from "../pics/gmail.png";
+import { theme } from "../Theme/theme";
 
 class Footer extends Component {
   state = {};
@@ -52,12 +53,15 @@ class Footer extends Component {
                     style={{
                       padding: "0 3vw",
                       width: "100%",
-                      background: "green",
+                      background: theme.palette.primary.main,
                     }}
                   >
                     <Grid container direction="column" alignItems="center">
                       <Grid item lg={2} xs={4} md={2}>
-                        <Paper elevation={10} style={{ background: "#222" }}>
+                        <Paper
+                          elevation={10}
+                          style={{ background: theme.palette.primary.black }}
+                        >
                           <Typography
                             style={{
                               fontWeight: "bold",
@@ -78,7 +82,7 @@ class Footer extends Component {
                                 fontWeight: "bold",
                                 fontSize: "2vh",
                                 margin: "5vh 5vw",
-                                color: "white",
+                                color: theme.palette.primary.contrastText,
                                 margin: "0 10vw",
                               }}
                             >
@@ -96,7 +100,7 @@ class Footer extends Component {
                                 fontWeight: "bold",
                                 fontSize: "2vh",
                                 margin: "5vh 5vw",
-                                color: "white",
+                                color: theme.palette.primary.contrastText,
                                 margin: "0 10vw",
                               }}
                             >
@@ -114,7 +118,7 @@ class Footer extends Component {
                                 fontWeight: "bold",
                                 fontSize: "2vh",
                                 margin: "5vh 5vw",
-                                color: "white",
+                                color: theme.palette.primary.contrastText,
                                 margin: "0 10vw",
                               }}
                             >
@@ -132,7 +136,7 @@ class Footer extends Component {
                                 fontWeight: "bold",
                                 fontSize: "2vh",
                                 margin: "5vh 5vw",
-                                color: "white",
+                                color: theme.palette.primary.contrastText,
                                 margin: "0 10vw",
                               }}
                             >

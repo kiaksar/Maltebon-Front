@@ -6,7 +6,7 @@ import GitHub from "../../assets/GitHub-Mark.png";
 import maltego from "../../assets/images.png";
 
 class EditTokens extends Component {
-  state = {};
+  state = { WhoIs: "", Maltego: "", Github: "" };
   render() {
     return (
       <div style={{ padding: "0.5vh" }}>
@@ -36,7 +36,12 @@ class EditTokens extends Component {
               <Typography>who.is</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
-              <TextField fullWidth />
+              <TextField
+                fullWidth
+                onChange={(e) => {
+                  this.setState({ WhoIs: e.target.value });
+                }}
+              />
             </Grid>
           </Grid>
         </div>
@@ -55,7 +60,12 @@ class EditTokens extends Component {
               <Typography>Maltego</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
-              <TextField fullWidth />
+              <TextField
+                fullWidth
+                onChange={(e) => {
+                  this.setState({ Maltego: e.target.value });
+                }}
+              />
             </Grid>
           </Grid>
         </div>
@@ -74,7 +84,12 @@ class EditTokens extends Component {
               <Typography>Github</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
-              <TextField fullWidth />
+              <TextField
+                fullWidth
+                onChange={(e) => {
+                  this.setState({ Github: e.target.value });
+                }}
+              />
             </Grid>
           </Grid>
         </div>

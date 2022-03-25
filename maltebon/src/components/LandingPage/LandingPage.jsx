@@ -15,6 +15,7 @@ import Typed from "react-typed";
 import Button from "@material-ui/core/Button";
 import Footer from "../Footer/Footer";
 import landingBG from "../pics/landingbg.jpg";
+import { theme } from "../Theme/theme";
 
 const styles = {
   heroContainer: {
@@ -44,7 +45,7 @@ class LandingPage extends Component {
                 <br />
                 <Typed
                   style={{
-                    color: "white",
+                    color: theme.palette.primary.contrastText,
                     position: "absolute",
                     left: "82%",
                     top: "48%",
@@ -62,7 +63,7 @@ class LandingPage extends Component {
                 <br />
                 <Typed
                   style={{
-                    color: "white",
+                    color: theme.palette.primary.contrastText,
                     position: "absolute",
                     left: "48%",
                     top: "55%",
@@ -82,7 +83,7 @@ class LandingPage extends Component {
                 />
                 <Typed
                   style={{
-                    color: "green",
+                    color: theme.palette.primary.main,
                     fontSize: "10vh",
                     position: "absolute",
                     left: "65%",
@@ -98,7 +99,7 @@ class LandingPage extends Component {
               <Typography variant="h4" style={{ margin: "10% 10hw" }}>
                 <Typed
                   style={{
-                    color: "white",
+                    color: theme.palette.primary.contrastText,
                     position: "absolute",
                     left: "50%",
                     top: "40%",
@@ -121,8 +122,8 @@ class LandingPage extends Component {
               variant="contained"
               style={{
                 borderRadius: "20px",
-                color: "white",
-                background: "green",
+                color: theme.palette.primary.contrastText,
+                background: theme.palette.primary.main,
                 position: "absolute",
                 left: "25%",
                 top: "80%",
@@ -138,8 +139,8 @@ class LandingPage extends Component {
               variant="contained"
               style={{
                 borderRadius: "20px",
-                color: "white",
-                background: "green",
+                color: theme.palette.primary.contrastText,
+                background: theme.palette.primary.main,
                 position: "absolute",
                 left: "25%",
                 top: "91%",

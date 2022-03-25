@@ -36,14 +36,14 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" exact={true} element={<LandingPage />}></Route>
+        <Route element={<LoginPage />} path="/login" exact="true" />
+        <Route element={<SignupPage />} path="/register" exact="true" />
         <Route
-          path="/"
-          exact={true}
-          element={<LandingPage/>}
-        ></Route>
-        <Route element ={<LoginPage/>} path="/login" exact="true"/>
-        <Route element ={<SignupPage/>} path="/register" exact="true"/>
-        <Route element ={<Profile theme={theme}/>} path="/profile" exact="true"/>
+          element={<Profile theme={Theme} />}
+          path="/profile"
+          exact="true"
+        />
         {/* <Route path="/Landing" element={<LandingPage />}></Route> */}
       </Routes>
     </Router>

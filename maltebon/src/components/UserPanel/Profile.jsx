@@ -82,7 +82,7 @@ class Profile extends Component {
                         padding: "0vw 1vw",
                         // borderRight: "1px solid",
                         backgroundColor: theme.palette.primary.black,
-                        color: theme.palette.secondary.contrastText,
+                        color: theme.palette.primary.contrastText,
                         height: "100%",
                       }}
                     >
@@ -111,7 +111,7 @@ class Profile extends Component {
                             margin: "auto",
                             alignItems: "center",
                           }}
-                          cent
+                          centered
                         >
                           {/* <Divider></Divider> */}
                           <Tab
@@ -173,6 +173,7 @@ class Profile extends Component {
                     <div>
                       <TabPanel value={this.state.value} index={0}>
                         <EditProfile
+                          classes={this.props.theme}
                           change={this.handleChange}
                           changePass={() => {
                             this.setState({ value: 2 });
