@@ -1,9 +1,42 @@
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Grid, IconButton, TextField, Button } from "@material-ui/core";
 import React, { Component } from "react";
+import references from "../../assets/References.json";
+import axios from "axios";
+import { makeURL } from "../../Connections/Common";
 
 class ChangePassword extends Component {
   state = { oldPass: "", newPass: "", confirmPass: "" };
+  async changePassword() {
+    let message = "";
+    await axios
+      .post(makeURL(references.url_change_pass), {
+        old_password: this.state.oldPass,
+        new_password: this.state.newPass,
+      })
+      .then((response) => {
+        if (response.data.message == "Wrong password entered.") {
+          document.getElementById("errors").innerHTML =
+            "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
+        } else {
+          window.alert("رمز شما با موفقیت تغییر کرد");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        // window.alert("خطای سرور. لطفا دوباره تلاش کنید");
+        console.log(error, error.response.data);
+        if (error.response.data.message == "Wrong password entered.") {
+          document.getElementById("errors").innerHTML =
+            "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
+        } else if (error.response.status == 401) {
+          message = error.response.data.message;
+        } else {
+          message = error.response.data;
+        }
+      });
+    return message;
+  }
   render() {
     return (
       <Grid container>

@@ -181,7 +181,9 @@ class EditProfile extends Component {
                         marginTop: "2vh",
                         width: "80%",
                       }}
-                      onClick={this.props.changePass}
+                      onClick={() => {
+                        this.props.changePass();
+                      }}
                     >
                       Change password
                     </Button>
