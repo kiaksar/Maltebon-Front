@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 
 function successfulLogin() {
   window.alert(references.alert_login_successful);
-  window.location.reload();
+  window.location.replace("/");
 }
 
 function checkResponse(responseData) {

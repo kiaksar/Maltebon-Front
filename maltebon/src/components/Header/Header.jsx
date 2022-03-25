@@ -60,6 +60,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import { cookie } from "../../Connections/Common";
+import { Logout } from "../../Connections/Connection";
 function Header(props) {
   const [drawerAnchor, setDrawerAnchor] = useState(false);
   const [accountBoxTrigger, setAccountBoxTrigger] = useState(false);
@@ -142,15 +143,15 @@ function Header(props) {
                       <ListItem
                         button
                         onClick={() => {
-                          window.location.replace("/Something");
+                          window.location.replace("/Profile");
                         }}
                       >
                         <ListItemIcon>
                           <PeopleOutlineIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Something" />
+                        <ListItemText primary="Profile" />
                       </ListItem>
-                      <ListItem
+                      {/* <ListItem
                         button
                         onClick={() => {
                           window.location.replace("/SomethingElse");
@@ -182,7 +183,7 @@ function Header(props) {
                           <ShoppingCartIcon />
                         </ListItemIcon>
                         <ListItemText primary="SomethingElseElseElse" />
-                      </ListItem>
+                      </ListItem> */}
                     </div>
                   </List>
                 </Drawer>
@@ -201,7 +202,11 @@ function Header(props) {
                 className={classes.link}
                 color="inherit"
                 href="/"
-                style={{ fontFamily: "Segoe UI" }}
+                style={{
+                  fontFamily: "Fredoka",
+                  fontWeight: "bold",
+                  fontSize: "4vw",
+                }}
               >
                 Maltebon
               </Link>
@@ -214,7 +219,7 @@ function Header(props) {
 
             {isLoggedIn ? (
               <div className={classes.icons}>
-                <IconButton
+                {/* <IconButton
                   color="inherit"
                   ref={anchorRef}
                   aria-controls={open ? "menu-list-grow" : undefined}
@@ -224,7 +229,7 @@ function Header(props) {
                   <Badge badgeContent={NotifCount} color="secondary">
                     <NotificationsIcon />
                   </Badge>
-                </IconButton>
+                </IconButton> */}
                 <Popper
                   open={open}
                   anchorEl={anchorRef.current}
@@ -270,17 +275,17 @@ function Header(props) {
                   )}
                 </Popper>
 
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                   <IconButton color="inherit">
                     <MonetizationOnIcon />
                   </IconButton>
-                </Hidden>
+                </Hidden> */}
 
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                   <IconButton color="inherit">
                     <ShoppingCartIcon />
                   </IconButton>
-                </Hidden>
+                </Hidden> */}
                 <IconButton
                   edge="end"
                   onClick={handleProfileMenuOpen}
@@ -301,6 +306,7 @@ function Header(props) {
                     }}
                   >
                     <AvatarCredit />
+                    <Typography>Profile</Typography>
                   </MenuItem>
                   {/* <MenuItem
                     onClick={() => {
@@ -312,16 +318,20 @@ function Header(props) {
                       <Link to="/profile">حساب کاربری</Link>
                     </li>
                   </MenuItem> */}
-                  <MenuItem
+                  {/* <MenuItem
                     onClick={() => {
                       window.location.replace("/profile/myCommunities");
                     }}
                   >
                     My Somethings
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuItem
                     // onClick={handleLogout}
                     className={classes.typography}
+                    onClick={() => {
+                      Logout();
+                      window.location.replace("/");
+                    }}
                   >
                     Logout
                   </MenuItem>
@@ -336,18 +346,32 @@ function Header(props) {
                   style={{
                     fontFamily: "Segoe UI",
                     backgroundColor: theme.palette.secondary.main,
+                    margin: "2px",
                   }}
                   className={classes.sectionDesktop}
                 >
                   {/* <AccountCircle /> */}
-                  Login / Register
+                  Login
+                </Button>
+                <Button
+                  onClick={() => window.location.replace("/Register")}
+                  variant="contained"
+                  // color="secondary"
+                  style={{
+                    fontFamily: "Segoe UI",
+                    backgroundColor: theme.palette.secondary.main,
+                  }}
+                  className={classes.sectionDesktop}
+                >
+                  {/* <AccountCircle /> */}
+                  Register
                 </Button>
               </Hidden>
             )}
             {!isLoggedIn && (
               <Hidden mdUp>
                 <Button
-                  onClick={() => setAccountBoxTrigger(true)}
+                  onClick={() => window.location.replace("/login")}
                   variant="contained"
                   style={{
                     fontFamily: "Segoe UI",
@@ -355,7 +379,18 @@ function Header(props) {
                   }}
                 >
                   {/* <AccountCircle /> */}
-                  Login / Register{" "}
+                  Login{" "}
+                </Button>
+                <Button
+                  onClick={() => window.location.replace("/login")}
+                  variant="contained"
+                  style={{
+                    fontFamily: "Segoe UI",
+                    backgroundColor: theme.palette.secondary.light,
+                  }}
+                >
+                  {/* <AccountCircle /> */}
+                  Register{" "}
                 </Button>
               </Hidden>
             )}
