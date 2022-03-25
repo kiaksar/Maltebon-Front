@@ -68,7 +68,7 @@ class Profile extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div style={{ padding: "5vw" }}>
+        <div style={{ padding: "5vw", minHeight: "80vh" }}>
           {/* <AppBar position="static"> */}
           {/* </AppBar> */}
           <Grid container>

@@ -153,7 +153,7 @@ class LandingPage extends Component {
             </Button>
           </Grid>
         </Grid>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

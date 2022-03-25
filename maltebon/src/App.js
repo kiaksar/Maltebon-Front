@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import LoginPage from "./components/LoginPage/LoginPage";
 import LandingPage from "./components/LandingPage/LandingPage";
 import SignupPage from "./components/SignupPage/SignupPage";
+import Footer2 from "./components/Footer/Footer2";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -39,6 +40,7 @@ function App() {
         />
         {/* <Route path="/Landing" element={<LandingPage />}></Route> */}
       </Routes>
+      <Footer2 />
     </Router>
   );
 }

@@ -117,7 +117,7 @@ function Header(props) {
         <AppBar
           position="static"
           color="primary"
-          //style={{ backgroundColor: "#40a9b3" }}
+          // style={{ backgroundColor: "#40a9b3" }}
         >
           <Toolbar style={{ display: "inline-flex" }}>
             {isLoggedIn && (
