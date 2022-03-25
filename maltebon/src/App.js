@@ -4,16 +4,8 @@ import { makeStyles } from "@material-ui/core";
 import Profile from "./components/UserPanel/Profile";
 import { theme, useStyles } from "./components/Theme/theme.jsx";
 import Header from "./components/Header/Header";
-// import { Router } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-// import LandingPage from "./components/LandingPage/LandingPage.jsx";
-// import Profile from "./components/UserPanel/Profile";
-// import { theme, useStyles } from "./components/Theme/theme.jsx";
-// import Header from "./components/Header/Header";
-// import { Router } from "react-router-dom";
-// import Footer from "./components/Footer/Footer";
-// import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import LoginPage from "./components/LoginPage/LoginPage";
 import LandingPage from "./components/LandingPage/LandingPage";
 import SignupPage from "./components/SignupPage/SignupPage";
@@ -35,6 +27,7 @@ function App() {
   // const Theme = useStyles(theme);
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" exact={true} element={<LandingPage />}></Route>
         <Route element={<LoginPage />} path="/login" exact="true" />

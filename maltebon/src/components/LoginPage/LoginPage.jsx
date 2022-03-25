@@ -1,4 +1,4 @@
-import { Grid, Paper, ThemeProvider } from "@material-ui/core";
+import { Grid, Paper, ThemeProvider, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -73,8 +73,19 @@ class LoginPage extends Component {
                     md={12}
                     style={{ margin: "auto", textAlign: "center" }}
                   >
-                    <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
-                      Log in
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        // fontSize: "2vh",
+                        fontFamily: "Fredoka",
+                      }}
+                    >
+                      <Typography
+                        variant="h4"
+                        style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                      >
+                        Log in
+                      </Typography>
                     </div>
                   </Grid>
                   <Grid
@@ -89,7 +100,7 @@ class LoginPage extends Component {
                         this.setState({ username: e.target.value });
                       }}
                       id="outlined-basic"
-                      label="Email"
+                      label="Username"
                       variant="filled"
                     />
                   </Grid>
@@ -107,6 +118,7 @@ class LoginPage extends Component {
                       id="outlined-basic"
                       label="Password"
                       variant="filled"
+                      type="password"
                     />
                   </Grid>
                   <Grid

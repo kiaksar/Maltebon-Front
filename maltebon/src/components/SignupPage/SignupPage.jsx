@@ -1,6 +1,7 @@
 import { Grid, Paper, ThemeProvider } from "@material-ui/core";
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { Register, checkResponse } from "../../Connections/Connection";
 import { theme } from "../Theme/theme";
@@ -51,7 +52,12 @@ class SignupPage extends Component {
                     style={{ margin: "auto", textAlign: "center" }}
                   >
                     <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
-                      Sign Up
+                      <Typography
+                        variant="h4"
+                        style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                      >
+                        Register
+                      </Typography>
                     </div>
                   </Grid>
                   <Grid
@@ -84,6 +90,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Password"
                       variant="filled"
+                      type="password"
                     />
                   </Grid>
                   <Grid
@@ -100,6 +107,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Conf-Password"
                       variant="filled"
+                      type="password"
                     />
                   </Grid>
                   <Grid
@@ -116,6 +124,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Email"
                       variant="filled"
+                      type="email"
                     />
                   </Grid>
                   <Grid

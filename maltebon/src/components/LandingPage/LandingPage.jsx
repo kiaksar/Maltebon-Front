@@ -31,7 +31,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Grid
           container
           direction="column-reverse"
@@ -153,7 +153,7 @@ class LandingPage extends Component {
             </Button>
           </Grid>
         </Grid>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

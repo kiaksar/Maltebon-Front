@@ -155,6 +155,7 @@ class EditProfile extends Component {
                       fontWeight: "bold",
                       backgroundColor: theme.palette.secondary.main,
                     }}
+                    disabled={this.state.isEditting}
                   >
                     Change Picture
                     <input
@@ -195,7 +196,8 @@ class EditProfile extends Component {
                     variant="filled"
                     label="Username"
                     style={{ width: "100%" }}
-                    disabled={this.state.isEditting}
+                    // disabled={this.state.isEditting}
+                    disabled
                     value={this.state.username}
                     onChange={(e) => {
                       this.setState({ username: e.target.value });
