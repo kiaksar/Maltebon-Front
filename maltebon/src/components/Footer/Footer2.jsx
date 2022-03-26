@@ -22,9 +22,9 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    // display: "flex",
     flexDirection: "column",
-    minHeight: "0vh",
+    // minHeight: "90vh",
     // position: "initial",
     // bottom: "0",
     // width: "100%",

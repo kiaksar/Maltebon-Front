@@ -4,15 +4,19 @@ import React, { Component } from "react";
 import references from "../../assets/References.json";
 import axios from "axios";
 import { makeURL } from "../../Connections/Common";
+import { theme } from "../Theme/theme";
 
 class ChangePassword extends Component {
   state = { oldPass: "", newPass: "", confirmPass: "" };
-  async changePassword() {
+  changePassword = async () => {
     let message = "";
+    // let oldPass = await this.state.oldPass;
+    // let newPass = await this.state.newPass;
+    console.log("call shod");
     await axios
       .post(makeURL(references.url_change_pass), {
         old_password: this.state.oldPass,
-        new_password: this.state.newPass,
+        new_password: this.state.oldPass,
       })
       .then((response) => {
         if (response.data.message == "Wrong password entered.") {
@@ -20,12 +24,14 @@ class ChangePassword extends Component {
             "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
         } else {
           window.alert("رمز شما با موفقیت تغییر کرد");
-          window.location.reload();
+          // window.location.reload();
+          this.props.changeProf();
         }
       })
       .catch((error) => {
         // window.alert("خطای سرور. لطفا دوباره تلاش کنید");
-        console.log(error, error.response.data);
+        // console.log(error.response.data.message);
+        window.alert(error.response.data.message);
         if (error.response.data.message == "Wrong password entered.") {
           document.getElementById("errors").innerHTML =
             "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
@@ -36,7 +42,7 @@ class ChangePassword extends Component {
         }
       });
     return message;
-  }
+  };
   render() {
     return (
       <Grid container>
@@ -76,17 +82,18 @@ class ChangePassword extends Component {
                 style={{ width: "100%" }}
                 value={this.state.confirmPass}
                 onChange={(e) => {
-                  this.setState({ oldPass: e.target.value });
+                  this.setState({ confirmPass: e.target.value });
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={12} style={{ textAlign: "center" }}>
               <Button
                 variant="contained"
                 style={{
                   width: "30%",
+                  backgroundColor: theme.palette.primary.light,
                 }}
-                onClick={this.props.changePass}
+                onClick={this.changePassword}
               >
                 Change password
               </Button>

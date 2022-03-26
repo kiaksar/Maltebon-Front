@@ -44,7 +44,7 @@ class LoginPage extends Component {
   };
   render() {
     return (
-      <form>
+      <form style={{ minHeight: "80vh" }}>
         <ThemeProvider theme={theme}>
           <Paper
             elevation={10}
