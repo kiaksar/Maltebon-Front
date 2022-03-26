@@ -7,9 +7,19 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import UserMiniBox from "./UserMiniBox";
+import CloseIcon from "@material-ui/icons/Close";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import EditProfile from "./EditProfile";
 // import { Tab } from "semantic-ui-react";
-import { Avatar, Card, Grid, Paper, ThemeProvider } from "@material-ui/core";
+import {
+  Avatar,
+  Card,
+  Collapse,
+  Grid,
+  IconButton,
+  Paper,
+  ThemeProvider,
+} from "@material-ui/core";
 import { AppBar } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import FaceIcon from "@material-ui/icons/Face";
@@ -53,12 +63,17 @@ function a11yProps(index) {
 //
 
 class Profile extends Component {
-  state = { value: 0, classes: null };
+  state = { value: 0, classes: null, open: false, alertMessage: "" };
   componentDidMount = () => {
     // const classes = useStyles();
 
     this.setState();
     this.setState({ classes: this.props.classes });
+  };
+
+  setAlert = (b, msg) => {
+    this.setState({ open: b });
+    this.setState({ alertMessage: msg });
   };
 
   handleChange = (event, newValue) => {
@@ -178,6 +193,7 @@ class Profile extends Component {
                           changePass={() => {
                             this.setState({ value: 2 });
                           }}
+                          openAlert={this.setAlert}
                         />
                       </TabPanel>
                       <TabPanel value={this.state.value} index={1}>
@@ -201,6 +217,27 @@ class Profile extends Component {
               </Paper>
             </Grid>
             <Grid item lg={1} xs={1} md={1}></Grid>
+            <Grid item lg={3} xs={12} md={6}>
+              <Collapse in={this.state.open}>
+                <Alert
+                  style={{ marginTop: "1vh" }}
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        this.setAlert(false, "");
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  {this.state.alertMessage}
+                </Alert>
+              </Collapse>
+            </Grid>
           </Grid>
         </div>
       </ThemeProvider>

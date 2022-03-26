@@ -41,6 +41,7 @@ class EditTokens extends Component {
                 onChange={(e) => {
                   this.setState({ WhoIs: e.target.value });
                 }}
+                disabled
               />
             </Grid>
           </Grid>
@@ -65,6 +66,7 @@ class EditTokens extends Component {
                 onChange={(e) => {
                   this.setState({ Maltego: e.target.value });
                 }}
+                disabled
               />
             </Grid>
           </Grid>
@@ -89,6 +91,7 @@ class EditTokens extends Component {
                 onChange={(e) => {
                   this.setState({ Github: e.target.value });
                 }}
+                disabled
               />
             </Grid>
           </Grid>

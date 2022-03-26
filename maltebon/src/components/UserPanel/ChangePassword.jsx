@@ -16,14 +16,14 @@ class ChangePassword extends Component {
     await axios
       .post(makeURL(references.url_change_pass), {
         old_password: this.state.oldPass,
-        new_password: this.state.oldPass,
+        new_password: this.state.newPass,
       })
       .then((response) => {
         if (response.data.message == "Wrong password entered.") {
           document.getElementById("errors").innerHTML =
-            "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
+            "Old password is incorrect";
         } else {
-          window.alert("رمز شما با موفقیت تغییر کرد");
+          window.alert("Password changed successfully");
           // window.location.reload();
           this.props.changeProf();
         }
@@ -34,7 +34,7 @@ class ChangePassword extends Component {
         window.alert(error.response.data.message);
         if (error.response.data.message == "Wrong password entered.") {
           document.getElementById("errors").innerHTML =
-            "پسور وارد شده با پسور قبلی شما مطابقت ندارد";
+            "Old password is incorrect";
         } else if (error.response.status == 401) {
           message = error.response.data.message;
         } else {
@@ -62,6 +62,7 @@ class ChangePassword extends Component {
                 onChange={(e) => {
                   this.setState({ oldPass: e.target.value });
                 }}
+                type="password"
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,6 +74,7 @@ class ChangePassword extends Component {
                 onChange={(e) => {
                   this.setState({ newPass: e.target.value });
                 }}
+                type="password"
               />
             </Grid>
             <Grid item xs={12}>
@@ -84,6 +86,13 @@ class ChangePassword extends Component {
                 onChange={(e) => {
                   this.setState({ confirmPass: e.target.value });
                 }}
+                error={this.state.newPass !== this.state.confirmPass}
+                helperText={
+                  this.state.newPass !== this.state.confirmPass
+                    ? "New password and confirmation should be the same"
+                    : ""
+                }
+                type="password"
               />
             </Grid>
             <Grid item xs={12} lg={12} style={{ textAlign: "center" }}>

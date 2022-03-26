@@ -93,6 +93,7 @@ class EditProfile extends Component {
         })
         .then((response) => {
           console.log("profile edited successfully", response);
+          this.props.openAlert(true, "Profile edited successfully");
           this.setState({ EditText: "Edit" });
           this.setState({ Success: true });
           this.setState({ loading: false });
