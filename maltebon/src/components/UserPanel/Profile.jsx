@@ -63,7 +63,13 @@ function a11yProps(index) {
 //
 
 class Profile extends Component {
-  state = { value: 0, classes: null, open: false, alertMessage: "" };
+  state = {
+    value: 0,
+    classes: null,
+    open: false,
+    alertMessage: "",
+    severity: "",
+  };
   componentDidMount = () => {
     // const classes = useStyles();
 
@@ -71,9 +77,10 @@ class Profile extends Component {
     this.setState({ classes: this.props.classes });
   };
 
-  setAlert = (b, msg) => {
+  setAlert = (b, msg, sev) => {
     this.setState({ open: b });
     this.setState({ alertMessage: msg });
+    this.setState({ severity: sev });
   };
 
   handleChange = (event, newValue) => {
@@ -204,6 +211,7 @@ class Profile extends Component {
                           changeProf={() => {
                             this.setState({ value: 0 });
                           }}
+                          openAlert={this.setAlert}
                         />
                       </TabPanel>
                     </div>
@@ -220,14 +228,16 @@ class Profile extends Component {
             <Grid item lg={3} xs={12} md={6}>
               <Collapse in={this.state.open}>
                 <Alert
-                  style={{ marginTop: "1vh" }}
+                  // variant="filled"
+                  style={{ marginTop: "1vh", top: "50%" }}
+                  severity={this.state.severity}
                   action={
                     <IconButton
                       aria-label="close"
                       color="inherit"
                       size="small"
                       onClick={() => {
-                        this.setAlert(false, "");
+                        this.setAlert(false, "", "success");
                       }}
                     >
                       <CloseIcon fontSize="inherit" />

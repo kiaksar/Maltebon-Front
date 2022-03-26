@@ -93,13 +93,18 @@ class EditProfile extends Component {
         })
         .then((response) => {
           console.log("profile edited successfully", response);
-          this.props.openAlert(true, "Profile edited successfully");
+          this.props.openAlert(true, "Profile edited successfully", "success");
           this.setState({ EditText: "Edit" });
           this.setState({ Success: true });
           this.setState({ loading: false });
         })
         .catch((error) => {
           console.log("error in editing profile information", error);
+          this.props.openAlert(
+            true,
+            "Error in editing profile information",
+            "error"
+          );
         });
 
       const data = new FormData();

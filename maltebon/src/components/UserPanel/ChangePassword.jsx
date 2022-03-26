@@ -12,36 +12,46 @@ class ChangePassword extends Component {
     let message = "";
     // let oldPass = await this.state.oldPass;
     // let newPass = await this.state.newPass;
-    console.log("call shod");
-    await axios
-      .post(makeURL(references.url_change_pass), {
-        old_password: this.state.oldPass,
-        new_password: this.state.newPass,
-      })
-      .then((response) => {
-        if (response.data.message == "Wrong password entered.") {
-          document.getElementById("errors").innerHTML =
-            "Old password is incorrect";
-        } else {
-          window.alert("Password changed successfully");
-          // window.location.reload();
-          this.props.changeProf();
-        }
-      })
-      .catch((error) => {
-        // window.alert("خطای سرور. لطفا دوباره تلاش کنید");
-        // console.log(error.response.data.message);
-        window.alert(error.response.data.message);
-        if (error.response.data.message == "Wrong password entered.") {
-          document.getElementById("errors").innerHTML =
-            "Old password is incorrect";
-        } else if (error.response.status == 401) {
-          message = error.response.data.message;
-        } else {
-          message = error.response.data;
-        }
-      });
-    return message;
+    if (this.state.confirmPass === this.state.newPass) {
+      await axios
+        .post(makeURL(references.url_change_pass), {
+          old_password: this.state.oldPass,
+          new_password: this.state.newPass,
+        })
+        .then((response) => {
+          if (response.data.message == "Wrong password entered.") {
+            document.getElementById("errors").innerHTML =
+              "Old password is incorrect";
+          } else {
+            // window.alert("Password changed successfully");
+            this.props.openAlert(
+              true,
+              "Password changed successfully",
+              "success"
+            );
+            // window.location.reload();
+            this.props.changeProf();
+          }
+        })
+        .catch((error) => {
+          // window.alert("خطای سرور. لطفا دوباره تلاش کنید");
+          // console.log(error.response.data.message);
+          // window.alert(error.response.data.message);
+          this.props.openAlert(true, error.response.data.message, "error");
+          if (error.response.data.message == "Wrong password entered.") {
+            this.props.openAlert(true, "Wrong password entered", "error");
+            document.getElementById("errors").innerHTML =
+              "Old password is incorrect";
+          } else if (error.response.status == 401) {
+            message = error.response.data.message;
+          } else {
+            message = error.response.data;
+          }
+        });
+      return message;
+    } else {
+      this.props.openAlert(true, "Passwords dont match", "warning");
+    }
   };
   render() {
     return (
