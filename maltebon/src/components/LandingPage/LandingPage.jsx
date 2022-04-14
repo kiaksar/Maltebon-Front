@@ -120,6 +120,7 @@ class LandingPage extends Component {
             <Button
               type="button"
               variant="contained"
+              onClick={() => window.location.replace("/sketch")}
               style={{
                 borderRadius: "20px",
                 color: theme.palette.primary.contrastText,
