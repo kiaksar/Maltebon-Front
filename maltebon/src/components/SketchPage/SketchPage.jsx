@@ -1,101 +1,99 @@
 import { Grid, Paper, ThemeProvider } from "@material-ui/core";
-import React, {  useState ,Component } from "react";
+import React, { useState, Component } from "react";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import { theme } from "../Theme/theme";
 import Graph from "react-graph-vis";
+// import Node from "react-graph-vis"
+import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
 
-import {AddNodeContainer} from './AddNode/AddNodeContainer'
-
+import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 
 class SketchPage extends Component {
   constructor(props) {
     super(props);
+    var node = [];
+    node.push(new Node(1, "Node1", "instagram"));
+    node.push(new Node(2, "Node2", "telegram"));
+    node.push(new Node(3, "Node3", "instagram"));
+    node.push(new Node(4, "Node4", "telegram"));
+    node.push(new Node(5, "Node5", "instagram"));
     this.state = {
-      graphKey: 0 ,
+      graphKey: 1,
       counter: 5,
       graph: {
-        nodes: [
-          { id: 1, label: "Node 1", color: "#e04141" ,x:0,y:0, typ: "def" },
-          { id: 2, label: "Node 2", color: "#e09c41" ,x:0,y:0, typ: "def" },
-          { id: 3, label: "Node 3", color: "#e0df41" ,x:0,y:0, typ: "def" },
-          { id: 4, label: "Node 4", color: "#7be041" ,x:0,y:0, typ: "def" },
-          { id: 5, label: "Node 5", color: "#41e0c9" ,x:0,y:0, typ: "def" }
-        ],
+        nodes: node,
         edges: [
-          { from: 1, to: 2 },
+          { from: 1, to: 2, style: "arrow-center" },
           { from: 1, to: 3 },
           { from: 2, to: 4 },
-          { from: 2, to: 5 }
-        ]
-      }, 
+          { from: 2, to: 5 },
+        ],
+      },
       events: {
         select: ({ nodes, edges }) => {
           console.log("Selected nodes:");
-          console.log(nodes);
-          console.log("Selected edges:");
-          console.log(edges);
-          alert("Selected node: " + nodes);
+          console.log(node.find((x) => x.id == nodes));
+
+          // console.log("Selected edges:");
+          // console.log(edges);
+          // alert("Selected node: " + nodes);
         },
-        doubleClick: ({ pointer: { canvas } }) => {
-          this.createNode(canvas.x, canvas.y );
-        }
-      }
-    }
+        // doubleClick: ({ pointer: { canvas } }) => {
+        //   this.createNode(canvas.x, canvas.y);
+        // },
+      },
+    };
   }
-   options = {
+  options = {
     layout: {
-      hierarchical: false
+      hierarchical: true,
     },
     edges: {
-      color: "#000000"
-    }
+      color: "#000000",
+    },
   };
   randomColor() {
-    const red = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
-    const green = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
-    const blue = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+    const red = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    const green = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    const blue = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
     return `#${red}${green}${blue}`;
   }
-  createNode = (x, y , name , typ) => {
+  createNode = (x, y, name, typ) => {
     const color = this.randomColor();
     const id = this.state.counter + 1;
-    console.log("()()()()" , this.state)
+    console.log("()()()()", this.state);
 
-    this.setState(({ graph: { nodes, edges }, counter , graphKey, ...rest }) => {
+    this.setState(({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
       //const id = this.state.counter + 1;
       return {
         graph: {
-          nodes: [
-            { id, label: `${name}`, color, x, y , typ },
-            ...nodes
-            
-          ],
-          edges: [
-            ...edges
-          ]
+          nodes: [{ id, label: `${name}`, color, x, y, typ }, ...nodes],
+          edges: [...edges],
         },
         counter: id,
-        graphKey:uuidv4,
-        ...rest
-      }
+        graphKey: uuidv4,
+        ...rest,
+      };
     });
-  }
-  triggerText = '+';
+  };
+  triggerText = "+";
   onSubmit = (event) => {
     event.preventDefault(event);
-    const plugin = event.target[0].value
-    const target = event.target[1].value
-    this.createNode(0, 0 , target , plugin );
-
-    
+    const plugin = event.target[0].value;
+    const target = event.target[1].value;
+    this.createNode(0, 0, target, plugin);
   };
- 
-  render() {
 
+  render() {
     return (
-      
       <form style={{ minHeight: "80vh" }}>
         <ThemeProvider theme={theme}>
           <Paper
@@ -135,7 +133,6 @@ class SketchPage extends Component {
                     </div>
                   </Grid>
 
-
                   <Grid
                     item
                     lg={12}
@@ -143,11 +140,15 @@ class SketchPage extends Component {
                     md={12}
                     style={{ margin: "auto", textAlign: "center" }}
                   >
-                    
-                  <Graph key={this.state.counter}  graph={this.state.graph} events={this.state.events} options={this.state.options} style={{ height: "640px" }} />
-                    
+                    <Graph
+                      key={this.state.counter}
+                      graph={this.state.graph}
+                      events={this.state.events}
+                      options={this.state.options}
+                      style={{ height: "50vh" }}
+                    />
                   </Grid>
-                 
+
                   <Grid
                     item
                     lg={12}
@@ -155,12 +156,13 @@ class SketchPage extends Component {
                     md={12}
                     style={{
                       margin: "auto",
-                      textAlign: "center"
-                     
+                      textAlign: "center",
                     }}
                   >
-
-                    <AddNodeContainer triggerText={this.triggerText} onSubmit={this.onSubmit} />
+                    <AddNodeContainer
+                      triggerText={this.triggerText}
+                      onSubmit={this.onSubmit}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
