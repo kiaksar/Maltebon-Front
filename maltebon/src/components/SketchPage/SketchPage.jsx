@@ -9,36 +9,81 @@ import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
+import { green } from "@material-ui/core/colors";
 
 class SketchPage extends Component {
+  state = {
+    posX: 0,
+    posY: 0,
+    vis: false,
+    selectedNode: "",
+  };
   constructor(props) {
     super(props);
     var node = [];
-    node.push(new Node(1, "Node1", "instagram"));
-    node.push(new Node(2, "Node2", "telegram"));
-    node.push(new Node(3, "Node3", "instagram"));
-    node.push(new Node(4, "Node4", "telegram"));
-    node.push(new Node(5, "Node5", "instagram"));
+    node.push(new Node(1, "instagram id 1", "instagram", "ardasamadi"));
+    node.push(new Node(2, "telegram id 1", "telegram", "HolyArda"));
+    // node.push(new Node(3, "instagram id 2", "instagram"));
+    node.push(new Node(4, "user id 2", "user", "ardasamadi"));
+    node.push(new Node(5, "github id 1", "git", "ardasamadi"));
     this.state = {
       graphKey: 1,
       counter: 5,
       graph: {
         nodes: node,
         edges: [
-          { from: 1, to: 2, style: "arrow-center" },
-          { from: 1, to: 3 },
-          { from: 2, to: 4 },
-          { from: 2, to: 5 },
+          { from: 4, to: 2, style: "arrow-center" },
+          { from: 4, to: 1 },
+          { from: 4, to: 5 },
         ],
       },
       events: {
         select: ({ nodes, edges }) => {
-          console.log("Selected nodes:");
-          console.log(node.find((x) => x.id == nodes));
+          if (nodes.length !== 0) {
+            console.log("Selected nodes:");
+            var selectedNode = node.find((x) => x.id == nodes);
+
+            console.log(node.find((x) => x.id == nodes));
+            var paper = document.getElementById("paperr");
+
+            paper.style.position = "absolute";
+            paper.style.visibility = "visible";
+            var e = window.event;
+
+            // paper.style.backgroundColor = green;
+            this.setState({ posX: e.clientX });
+            this.setState({ posY: e.clientY });
+            this.setState({ selectedNode: selectedNode });
+            // console.log(this.state.selectedType);
+            paper.style.top = this.state.posY + "px";
+            // paper.setAttribute("top", this.state.posY);
+            paper.style.left = this.state.posX + "px";
+            this.setState({ vis: true });
+            // console.log(this.state.posX, this.state.posY);
+            console.log(paper.style);
+            // console.log(posX, posY);
+          }
 
           // console.log("Selected edges:");
           // console.log(edges);
           // alert("Selected node: " + nodes);
+        },
+        click: ({ nodes }) => {
+          console.log(nodes);
+          if (nodes.length === 0) {
+            this.setState({ vis: false });
+            var paper = document.getElementById("paperr");
+
+            // paper.style.position = "fixed";
+            paper.style.visibility = "hidden";
+          }
+        },
+        zoom: ({}) => {
+          this.setState({ vis: false });
+          var paper = document.getElementById("paperr");
+
+          // paper.style.position = "fixed";
+          paper.style.visibility = "hidden";
         },
         // doubleClick: ({ pointer: { canvas } }) => {
         //   this.createNode(canvas.x, canvas.y);
@@ -162,11 +207,42 @@ class SketchPage extends Component {
                     <AddNodeContainer
                       triggerText={this.triggerText}
                       onSubmit={this.onSubmit}
+                      // disabled
                     />
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
+          </Paper>
+          <Paper
+            variant="outlined"
+            elevation={3}
+            id="paperr"
+            style={{
+              height: "10vh",
+              width: "10vh",
+              backgroundColor: "#bbbbbb",
+              top: "100px",
+              left: "100px",
+              visibility: "hidden",
+            }}
+          >
+            {this.state.selectedNode !== undefined &&
+              this.state.selectedNode.nodeType === "instagram" && (
+                <div>
+                  <a
+                    href={
+                      "https://www.instagram.com/" +
+                      this.state.selectedNode.data
+                    }
+                  >
+                    @{this.state.selectedNode.data}
+                  </a>
+                  <Typography>
+                    type = {this.state.selectedNode.nodeType}
+                  </Typography>
+                </div>
+              )}
           </Paper>
         </ThemeProvider>
       </form>

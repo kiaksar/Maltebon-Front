@@ -9,11 +9,15 @@ class Node {
   y;
   //   color;
   type = "def";
-  shape = "circularImage";
+  shape = "image";
+  nodeType = "";
+  data = "";
 
-  constructor(id, label, type) {
+  constructor(id, label, type, data) {
     this.id = id;
     this.label = label;
+    this.nodeType = type;
+    this.data = data;
     var DIR = "../../assets/";
     switch (type) {
       case "instagram":
@@ -23,6 +27,13 @@ class Node {
       case "telegram":
         this.image =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/640px-Telegram_logo.svg.png";
+        break;
+      case "git":
+        this.image =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png";
+        break;
+      case "user":
+        this.image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
         break;
       default:
         break;

@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { AddNodeModal } from './AddNodeModal';
-import AddNodeTrigger from './AddNodeButton';
-import './AddNodeStyle.css'
+import React, { Component } from "react";
+import { AddNodeModal } from "./AddNodeModal";
+import AddNodeTrigger from "./AddNodeButton";
+import "./AddNodeStyle.css";
 import { Grid, Paper, ThemeProvider } from "@material-ui/core";
 
 import { theme } from "../../Theme/theme";
-
 
 export class AddNodeContainer extends Component {
   state = { isShown: false };
@@ -31,12 +30,11 @@ export class AddNodeContainer extends Component {
   };
 
   toggleScrollLock = () => {
-    document.querySelector('html').classList.toggle('scroll-lock');
+    document.querySelector("html").classList.toggle("scroll-lock");
   };
   render() {
     return (
       <ThemeProvider theme={theme}>
-
         <AddNodeTrigger
           showModal={this.showModal}
           buttonRef={(n) => (this.AddNodeTrigger = n)}
