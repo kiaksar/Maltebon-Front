@@ -1,6 +1,8 @@
 // import Telegram from "../../assets/Telegram_logo.svg.png";
 // import Instagram from "../../assets/800px-Instagram-Icon.png";
 
+import { getGithubInfo } from "../../Connections/Connection";
+
 class Node {
   id;
   label;
@@ -17,12 +19,13 @@ class Node {
     this.id = id;
     this.label = label;
     this.nodeType = type;
-    this.data = data;
+    // this.data = data;
     var DIR = "../../assets/";
     switch (type) {
       case "instagram":
         this.image =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/800px-Instagram-Icon.png";
+
         break;
       case "telegram":
         this.image =
@@ -31,6 +34,11 @@ class Node {
       case "git":
         this.image =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png";
+        getGithubInfo("ardasamadi").then((res) => {
+          console.log(res);
+          data = res;
+        });
+
         break;
       case "user":
         this.image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";

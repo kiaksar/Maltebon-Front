@@ -17,6 +17,7 @@ class SketchPage extends Component {
     posY: 0,
     vis: false,
     selectedNode: "",
+    menu: "",
   };
   constructor(props) {
     super(props);
@@ -62,6 +63,44 @@ class SketchPage extends Component {
             // console.log(this.state.posX, this.state.posY);
             console.log(paper.style);
             // console.log(posX, posY);
+            if (selectedNode.nodeType === "instagram") {
+              this.setState({
+                menu: (
+                  <div>
+                    <a
+                      href={
+                        "https://www.instagram.com/" +
+                        this.state.selectedNode.data
+                      }
+                    >
+                      @{this.state.selectedNode.data}
+                    </a>
+                  </div>
+                ),
+              });
+            } else if (selectedNode.nodeType === "telegram") {
+              this.setState({
+                menu: (
+                  <div>
+                    <a
+                      href={"https://www.t.me/" + this.state.selectedNode.data}
+                    >
+                      @{this.state.selectedNode.data}
+                    </a>
+                  </div>
+                ),
+              });
+            } else if (selectedNode.nodeType === "git") {
+              this.setState({
+                menu: (
+                  <div>
+                    <a href={this.state.selectedNode.data}>
+                      @{this.state.selectedNode.data}
+                    </a>
+                  </div>
+                ),
+              });
+            }
           }
 
           // console.log("Selected edges:");
@@ -220,29 +259,14 @@ class SketchPage extends Component {
             id="paperr"
             style={{
               height: "10vh",
-              width: "10vh",
+              // width: "10vh",
               backgroundColor: "#bbbbbb",
               top: "100px",
               left: "100px",
               visibility: "hidden",
             }}
           >
-            {this.state.selectedNode !== undefined &&
-              this.state.selectedNode.nodeType === "instagram" && (
-                <div>
-                  <a
-                    href={
-                      "https://www.instagram.com/" +
-                      this.state.selectedNode.data
-                    }
-                  >
-                    @{this.state.selectedNode.data}
-                  </a>
-                  <Typography>
-                    type = {this.state.selectedNode.nodeType}
-                  </Typography>
-                </div>
-              )}
+            {this.state.menu}
           </Paper>
         </ThemeProvider>
       </form>
