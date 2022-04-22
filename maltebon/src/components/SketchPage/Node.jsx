@@ -9,7 +9,6 @@ class Node {
   image;
   x;
   y;
-  //   color;
   type = "def";
   shape = "image";
   nodeType = "";
@@ -19,7 +18,8 @@ class Node {
     this.id = id;
     this.label = label;
     this.nodeType = type;
-    // this.data = data;
+    this.data = data;
+    console.log(this.data);
     var DIR = "../../assets/";
     switch (type) {
       case "instagram":
@@ -34,14 +34,11 @@ class Node {
       case "git":
         this.image =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png";
-        getGithubInfo("ardasamadi").then((res) => {
-          console.log(res);
-          data = res;
-        });
 
         break;
       case "user":
-        this.image = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+        this.image =
+          "https://cdn0.iconfinder.com/data/icons/network-ui-line-badge-filled-outline/64/Network-hierarchy-root-connection-512.png";
         break;
       default:
         break;

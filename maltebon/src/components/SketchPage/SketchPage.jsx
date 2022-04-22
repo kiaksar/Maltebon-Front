@@ -1,4 +1,4 @@
-import { Grid, Paper, ThemeProvider } from "@material-ui/core";
+import { Avatar, Grid, Link, Paper, ThemeProvider } from "@material-ui/core";
 import React, { useState, Component } from "react";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
@@ -10,41 +10,89 @@ import { v4 as uuidv4 } from "uuid";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
+import {
+  getGithubInfo,
+  getInstagramInfo,
+  getTelegramInfo,
+} from "../../Connections/Connection";
 
 class SketchPage extends Component {
   state = {
     posX: 0,
     posY: 0,
-    vis: false,
+    vis: "hidden",
     selectedNode: "",
     menu: "",
+    nodeList: [],
+  };
+  addGithubNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getGithubInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        this.createNode(
+          this.state.selectedNode.label,
+          "git",
+          e,
+          this.state.selectedNode.id
+        );
+      }
+    });
+  };
+  addInstagramNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getInstagramInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        this.createNode(
+          this.state.selectedNode.label,
+          "instagram",
+          e,
+          this.state.selectedNode.id
+        );
+      }
+    });
+  };
+  addTelegramNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getTelegramInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        this.createNode(
+          this.state.selectedNode.label,
+          "telegram",
+          e,
+          this.state.selectedNode.id
+        );
+      }
+    });
   };
   constructor(props) {
     super(props);
-    var node = [];
-    node.push(new Node(1, "instagram id 1", "instagram", "ardasamadi"));
-    node.push(new Node(2, "telegram id 1", "telegram", "HolyArda"));
-    // node.push(new Node(3, "instagram id 2", "instagram"));
-    node.push(new Node(4, "user id 2", "user", "ardasamadi"));
-    node.push(new Node(5, "github id 1", "git", "ardasamadi"));
+
     this.state = {
+      posX: 0,
+      posY: 0,
+      vis: "hidden",
+      selectedNode: "",
+      menu: "",
+      // nodeList: [new Node(4, "amirsmart", "user", "")],
       graphKey: 1,
-      counter: 5,
+      counter: 1,
       graph: {
-        nodes: node,
-        edges: [
-          { from: 4, to: 2, style: "arrow-center" },
-          { from: 4, to: 1 },
-          { from: 4, to: 5 },
-        ],
+        nodes: [new Node(4, "amirsmart", "user", "")],
+        edges: [],
       },
       events: {
         select: ({ nodes, edges }) => {
           if (nodes.length !== 0) {
             console.log("Selected nodes:");
-            var selectedNode = node.find((x) => x.id == nodes);
+            console.log(nodes);
+            var selectedNode = this.state.graph.nodes.find(
+              (x) => x.id == nodes
+            );
 
-            console.log(node.find((x) => x.id == nodes));
+            console.log(this.state.graph.nodes.find((x) => x.id == nodes));
             var paper = document.getElementById("paperr");
 
             paper.style.position = "absolute";
@@ -66,38 +114,141 @@ class SketchPage extends Component {
             if (selectedNode.nodeType === "instagram") {
               this.setState({
                 menu: (
-                  <div>
-                    <a
-                      href={
-                        "https://www.instagram.com/" +
-                        this.state.selectedNode.data
-                      }
+                  <div
+                    style={{
+                      padding: theme.spacing(1),
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <Link
+                      href={this.state.selectedNode.data}
+                      color="textPrimary"
                     >
-                      @{this.state.selectedNode.data}
-                    </a>
+                      {this.state.selectedNode.data}
+                    </Link>
                   </div>
                 ),
               });
             } else if (selectedNode.nodeType === "telegram") {
               this.setState({
                 menu: (
-                  <div>
-                    <a
-                      href={"https://www.t.me/" + this.state.selectedNode.data}
+                  <div
+                    style={{
+                      padding: theme.spacing(1),
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <Link
+                      href={this.state.selectedNode.data}
+                      color="textPrimary"
                     >
-                      @{this.state.selectedNode.data}
-                    </a>
+                      {this.state.selectedNode.data}
+                    </Link>
                   </div>
                 ),
               });
             } else if (selectedNode.nodeType === "git") {
+              console.log(this.state.selectedNode);
               this.setState({
                 menu: (
-                  <div>
-                    <a href={this.state.selectedNode.data}>
-                      @{this.state.selectedNode.data}
-                    </a>
+                  <div
+                    style={{
+                      padding: theme.spacing(1),
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <Link
+                      href={this.state.selectedNode.data}
+                      color="textPrimary"
+                    >
+                      {this.state.selectedNode.data}
+                    </Link>
                   </div>
+                ),
+              });
+            } else if (selectedNode.nodeType === "user") {
+              this.setState({
+                menu: (
+                  <Grid container spacing={1} style={{ padding: "0.5vh" }}>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        color="secondary"
+                        onClick={this.addGithubNode}
+                      >
+                        <Avatar
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png"
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Github
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        style={{
+                          backgroundColor: theme.palette.secondary.light,
+                        }}
+                        onClick={this.addInstagramNode}
+                      >
+                        <Avatar
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/800px-Instagram-Icon.png"
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Instagram
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={this.addTelegramNode}
+                      >
+                        <Avatar
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/640px-Telegram_logo.svg.png"
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Telegram
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        style={{
+                          backgroundColor: theme.palette.secondary.light,
+                        }}
+                      >
+                        <Avatar
+                          src="https://static.thenounproject.com/png/1561912-200.png"
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Rename
+                      </Button>
+                    </Grid>
+                  </Grid>
                 ),
               });
             }
@@ -150,16 +301,15 @@ class SketchPage extends Component {
       .padStart(2, "0");
     return `#${red}${green}${blue}`;
   }
-  createNode = (x, y, name, typ) => {
+  createNodeGroup = (label) => {
     const color = this.randomColor();
     const id = this.state.counter + 1;
-    console.log("()()()()", this.state);
 
     this.setState(({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
       //const id = this.state.counter + 1;
       return {
         graph: {
-          nodes: [{ id, label: `${name}`, color, x, y, typ }, ...nodes],
+          nodes: [new Node(id, label, "user", ""), ...nodes],
           edges: [...edges],
         },
         counter: id,
@@ -167,13 +317,34 @@ class SketchPage extends Component {
         ...rest,
       };
     });
+    console.log(this.state.graph.nodes);
+  };
+  createNode = (label, type, data, parentID) => {
+    const color = this.randomColor();
+    const id = this.state.counter + 1;
+    console.log("()()()()", this.state);
+    console.log(data);
+
+    this.setState(({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
+      //const id = this.state.counter + 1;
+      return {
+        graph: {
+          nodes: [new Node(id, label, type, data), ...nodes],
+          edges: [{ from: parentID, to: id }, ...edges],
+        },
+        counter: id,
+        graphKey: uuidv4,
+        ...rest,
+      };
+    });
+    console.log(this.state.graph.nodes);
   };
   triggerText = "+";
   onSubmit = (event) => {
     event.preventDefault(event);
     const plugin = event.target[0].value;
     const target = event.target[1].value;
-    this.createNode(0, 0, target, plugin);
+    this.createNodeGroup(target);
   };
 
   render() {
@@ -258,12 +429,14 @@ class SketchPage extends Component {
             elevation={3}
             id="paperr"
             style={{
-              height: "10vh",
-              // width: "10vh",
-              backgroundColor: "#bbbbbb",
+              // height: "10vh",
+              minWidth: theme.spacing(30),
+              backgroundColor: theme.palette.primary.main,
+              // color: theme.palette.secondary.main,
               top: "100px",
               left: "100px",
-              visibility: "hidden",
+              visibility: this.state.vis,
+              borderRadius: "1vh",
             }}
           >
             {this.state.menu}

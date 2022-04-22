@@ -156,7 +156,43 @@ export const getGithubInfo = async (username) => {
     .then((response) => {
       message = response.data.message;
     })
-    .catch((error) => {});
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const getInstagramInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_instagram), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const getTelegramInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_telegram), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
 
   return message;
 };

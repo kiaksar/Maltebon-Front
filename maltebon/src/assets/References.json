@@ -23,5 +23,7 @@
   "url_change_bio": "/account/changebio",
   "url_change_dob": "/account/changedob",
   "url_change_name": "/account/changefname",
-  "url_github": "/plugins/use/github"
+  "url_github": "/plugins/use/github",
+  "url_instagram": "/plugins/use/instagram",
+  "url_telegram": "/plugins/use/telegram"
 }
