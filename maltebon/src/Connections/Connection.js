@@ -196,3 +196,20 @@ export const getTelegramInfo = async (username) => {
 
   return message;
 };
+export const setPluginToken = async (token, type) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_setToken), {
+      param1: token,
+      p_name: type,
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
