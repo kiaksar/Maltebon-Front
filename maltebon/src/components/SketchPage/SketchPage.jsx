@@ -80,7 +80,7 @@ class SketchPage extends Component {
       graphKey: 1,
       counter: 1,
       graph: {
-        nodes: [new Node(4, "amirsmart", "user", "")],
+        nodes: [new Node(1, "amirsmart", "user", "")],
         edges: [],
       },
       events: {
