@@ -136,11 +136,80 @@ export const GetProfile = async () => {
   await axios
     .get(makeURL("/account/profile"))
     .then((response) => {
-      console.log("This is profile", response)
+      console.log("This is profile", response);
       return response;
     })
     .catch((error) => {
       console.log("Error in getting profile info", error);
       return error;
+    });
+};
+
+export const getGithubInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_github), {
+      param1: username,
+      param2: "-",
     })
-}
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const getInstagramInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_instagram), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const getTelegramInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_telegram), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const setPluginToken = async (token, type) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_setToken), {
+      param1: token,
+      p_name: type,
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};

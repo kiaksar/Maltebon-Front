@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import LoginPage from "./components/LoginPage/LoginPage";
 import LandingPage from "./components/LandingPage/LandingPage";
 import SignupPage from "./components/SignupPage/SignupPage";
+import SketchPage from "./components/SketchPage/SketchPage"; 
 import Footer2 from "./components/Footer/Footer2";
 
 // const useStyles = makeStyles((theme) => ({
@@ -33,6 +34,8 @@ function App() {
         <Route path="/" exact={true} element={<LandingPage />}></Route>
         <Route element={<LoginPage />} path="/login" exact="true" />
         <Route element={<SignupPage />} path="/register" exact="true" />
+        <Route element={<SketchPage />} path="/sketch" exact="true" />
+
         <Route
           element={<Profile theme={Theme} />}
           path="/profile"
