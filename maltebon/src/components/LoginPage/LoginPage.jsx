@@ -137,6 +137,7 @@ class LoginPage extends Component {
                       type="button"
                       color="primary"
                       style={{ width: "100%" }}
+                      title="Log in"
                     >
                       Log in
                     </Button>
