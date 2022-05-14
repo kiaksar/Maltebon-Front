@@ -143,6 +143,7 @@ class SignupPage extends Component {
                       type="button"
                       color="primary"
                       style={{ width: "100%" }}
+                      title="Sign up"
                     >
                       Sign Up
                     </Button>
