@@ -83,7 +83,7 @@ class LandingPage extends Component {
                 />
                 <Typed
                   style={{
-                    color: theme.palette.primary.main,
+                    color: theme.palette.secondary.main,
                     fontSize: "10vh",
                     position: "absolute",
                     left: "65%",
@@ -99,7 +99,7 @@ class LandingPage extends Component {
               <Typography variant="h4" style={{ margin: "10% 10hw" }}>
                 <Typed
                   style={{
-                    color: theme.palette.primary.contrastText,
+                    color: theme.palette.secondary.contrastText,
                     position: "absolute",
                     left: "50%",
                     top: "40%",
@@ -123,8 +123,8 @@ class LandingPage extends Component {
               onClick={() => window.location.replace("/sketch")}
               style={{
                 borderRadius: "20px",
-                color: theme.palette.primary.contrastText,
-                background: theme.palette.primary.main,
+                color: theme.palette.secondary.contrastText,
+                background: theme.palette.secondary.main,
                 position: "absolute",
                 left: "25%",
                 top: "80%",
@@ -140,8 +140,8 @@ class LandingPage extends Component {
               variant="contained"
               style={{
                 borderRadius: "20px",
-                color: theme.palette.primary.contrastText,
-                background: theme.palette.primary.main,
+                color: theme.palette.secondary.contrastText,
+                background: theme.palette.secondary.main,
                 position: "absolute",
                 left: "25%",
                 top: "91%",

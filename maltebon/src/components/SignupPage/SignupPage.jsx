@@ -5,7 +5,18 @@ import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { Register, checkResponse } from "../../Connections/Connection";
 import { theme } from "../Theme/theme";
+import codeBG from "../pics/code.jpg";
 
+
+const styles = {
+  heroContainer: {
+    height: "100vh",
+    backgroundImage: `url(${codeBG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+  },
+};
 class SignupPage extends Component {
   state = {
     username: "",
@@ -24,6 +35,13 @@ class SignupPage extends Component {
     return (
       <form style={{ minHeight: "80vh" }}>
         <ThemeProvider theme={theme}>
+        <Grid
+          direction="column-reverse"
+          justify="flex-end"
+          alignItems="right"
+          style={styles.heroContainer}>
+
+          </Grid>
           <Paper
             elevation={10}
             style={{
@@ -74,6 +92,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Username"
                       variant="filled"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -91,6 +110,7 @@ class SignupPage extends Component {
                       label="Password"
                       variant="filled"
                       type="password"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -108,6 +128,7 @@ class SignupPage extends Component {
                       label="Conf-Password"
                       variant="filled"
                       type="password"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -125,6 +146,7 @@ class SignupPage extends Component {
                       label="Email"
                       variant="filled"
                       type="email"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -142,7 +164,7 @@ class SignupPage extends Component {
                       onClick={this.handleRegister}
                       type="button"
                       color="primary"
-                      style={{ width: "100%" }}
+                      style={{ width: "100%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main}}
                     >
                       Sign Up
                     </Button>
