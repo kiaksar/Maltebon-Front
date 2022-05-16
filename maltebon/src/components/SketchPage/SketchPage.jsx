@@ -25,6 +25,55 @@ class SketchPage extends Component {
     menu: "",
     nodeList: [],
   };
+
+  deleteNode = () => {
+    this.setState({ vis: "hidden" });
+    var sth = this.state.graph.edges.filter(
+      (x) =>
+        x.from === this.state.selectedNode.id ||
+        x.to === this.state.selectedNode.id
+    );
+    let difference = this.state.graph.edges.filter((x) => !sth.includes(x));
+    // var sthh = [];
+    // sth.forEach((element) => {
+    //   sthh.push(
+    //     this.state.graph.edges.filter(
+    //       (x) =>
+    //         x.from === element.from ||
+    //         x.to === element.to ||
+    //         x.from === element.to ||
+    //         x.to === element.from
+    //     )
+    //   );
+    //   console.log(sthh);
+    // });
+
+    // var minSize = 1000;
+    // var index = 0;
+    // for (var i = 0; i < sthh.length; i++) {
+    //   if (sthh[i].length <= minSize) {
+    //     minSize = sthh[i].length;
+    //     index = i;
+    //   }
+    // }
+    // console.log(sthh[index]);
+
+    // var newList = this.state.graph.edges.filter(
+    //   (x) =>
+    //     sthh[index].find((y) => x.from === y.from && x.to === y.to) ===
+    //     undefined
+    // );
+    var newList = difference;
+    console.log(newList);
+    var nodeList = this.state.graph.nodes.filter(
+      (x) => x.id !== this.state.selectedNode.id
+    );
+    console.log(nodeList);
+    var graph = { nodes: nodeList, edges: newList };
+    this.setState({ graph: graph });
+    // this.state.graph.nodes.filter((x) => x.id === this.state.selectedNode.id);
+  };
+
   addGithubNode = async () => {
     this.setState({ vis: "hidden" });
     await getGithubInfo(this.state.selectedNode.label).then((e) => {
@@ -67,15 +116,52 @@ class SketchPage extends Component {
       }
     });
   };
+  componentDidMount() {
+    var canvas = document.getElementById("myGraph").children[0].children[0];
+    // console.log(canvas);
+    // var canvas = network.canvas.frame.canvas;
+    // var ctx = canvas.getContext("2d");
+  }
   constructor(props) {
     super(props);
 
+    // ctx.drawImage(document.getElementById("scream"), -100, -100);
     this.state = {
       posX: 0,
       posY: 0,
       vis: "hidden",
       selectedNode: "",
       menu: "",
+      rendered: 0,
+      options: {
+        layout: {
+          // hierarchical: true,
+        },
+        edges: {
+          color: "#000000",
+          smooth: {
+            enabled: false,
+            type: "continuous",
+          },
+        },
+        autoResize: true,
+        interaction: {
+          // navigationButtons: true,
+          dragView: false,
+          // zoomView: false,
+        },
+
+        physics: {
+          // enabled: false,
+          // stabilization: true,
+          // solver: "forceAtlas2Based",
+          timestep: 0.2,
+          // wind: {
+          //   x: 10,
+          // },
+        },
+        // physics: false,
+      },
       // nodeList: [new Node(4, "amirsmart", "user", "")],
       graphKey: 1,
       counter: 1,
@@ -83,6 +169,7 @@ class SketchPage extends Component {
         nodes: [new Node(1, "amirsmart", "user", "")],
         edges: [],
       },
+      physics: { enabled: false },
       events: {
         select: ({ nodes, edges }) => {
           if (nodes.length !== 0) {
@@ -91,14 +178,14 @@ class SketchPage extends Component {
             var selectedNode = this.state.graph.nodes.find(
               (x) => x.id == nodes
             );
-
+            selectedNode.chosen = false;
             console.log(this.state.graph.nodes.find((x) => x.id == nodes));
             var paper = document.getElementById("paperr");
 
             paper.style.position = "absolute";
             paper.style.visibility = "visible";
             var e = window.event;
-
+            console.log(this.state.graph);
             // paper.style.backgroundColor = green;
             this.setState({ posX: e.clientX });
             this.setState({ posY: e.clientY });
@@ -127,6 +214,25 @@ class SketchPage extends Component {
                     >
                       {this.state.selectedNode.data}
                     </Link>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.deleteNode}
+                    >
+                      <Avatar
+                        src="https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Delete
+                    </Button>
                   </div>
                 ),
               });
@@ -146,6 +252,25 @@ class SketchPage extends Component {
                     >
                       {this.state.selectedNode.data}
                     </Link>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.deleteNode}
+                    >
+                      <Avatar
+                        src="https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Delete
+                    </Button>
                   </div>
                 ),
               });
@@ -166,6 +291,25 @@ class SketchPage extends Component {
                     >
                       {this.state.selectedNode.data}
                     </Link>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.deleteNode}
+                    >
+                      <Avatar
+                        src="https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Delete
+                    </Button>
                   </div>
                 ),
               });
@@ -236,16 +380,18 @@ class SketchPage extends Component {
                         style={{
                           backgroundColor: theme.palette.secondary.light,
                         }}
+                        onClick={this.deleteNode}
                       >
                         <Avatar
-                          src="https://static.thenounproject.com/png/1561912-200.png"
+                          src="https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg"
                           style={{
                             height: theme.spacing(3),
                             width: theme.spacing(3),
                             marginRight: theme.spacing(1),
                           }}
+                          // variant="square"
                         />
-                        Rename
+                        Delete
                       </Button>
                     </Grid>
                   </Grid>
@@ -278,17 +424,50 @@ class SketchPage extends Component {
         // doubleClick: ({ pointer: { canvas } }) => {
         //   this.createNode(canvas.x, canvas.y);
         // },
+        beforeDrawing: ({ canvas }) => {
+          var ctx = canvas.getContext("2d");
+          var w = ctx.canvas.width;
+          var h = ctx.canvas.height;
+          var x, y;
+          var data =
+            '<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"> \
+        <defs> \
+            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse"> \
+                <path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5" /> \
+            </pattern> \
+            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"> \
+                <rect width="80" height="80" fill="url(#smallGrid)" /> \
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1" /> \
+            </pattern> \
+        </defs> \
+        <rect width="100%" height="100%" fill="url(#smallGrid)" /> \
+    </svg>';
+
+          var DOMURL = window.URL || window.webkitURL || window;
+
+          var img = new Image();
+          var svg = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
+          var url = DOMURL.createObjectURL(svg);
+
+          img.onload = function () {
+            ctx.drawImage(img, 0, 0);
+            DOMURL.revokeObjectURL(url);
+          };
+          img.src = url;
+          //   console.log(canvas);
+          //   var image = document.createElement("IMG");
+          //   image.onload = function () {
+          //     console.log("image loaded");
+          //     var ctx = canvas.getContext("2d");
+          //     ctx.drawImage(image, 100, 0);
+          //   };
+          //   image.src =
+          //     "https://www.freeiconspng.com/uploads/white-grid-png-29.png";
+        },
       },
     };
   }
-  options = {
-    layout: {
-      hierarchical: true,
-    },
-    edges: {
-      color: "#000000",
-    },
-  };
+
   randomColor() {
     const red = Math.floor(Math.random() * 256)
       .toString(16)
@@ -349,17 +528,21 @@ class SketchPage extends Component {
 
   render() {
     return (
-      <form style={{ minHeight: "80vh" }}>
+      <form style={{ minHeight: "80vh", alignItems: "center" }}>
         <ThemeProvider theme={theme}>
           <Paper
             elevation={10}
             style={{
-              display: "inline-flex",
-              position: "absolute",
-              left: "50%",
+              // display: "inline-flex",
+              // position: "absolute",
+              left: "30%",
               top: "50%",
-              transform: "translate(-50%, -50%)",
+              width: "80%",
+              // transform: "translate(-50%, -50%)",
               padding: "1vw",
+              margin: "auto",
+              marginTop: "5vh",
+              marginBottom: "5vh",
             }}
           >
             <Grid container spacing={1} direction={"column"}>
@@ -400,7 +583,13 @@ class SketchPage extends Component {
                       graph={this.state.graph}
                       events={this.state.events}
                       options={this.state.options}
-                      style={{ height: "50vh" }}
+                      style={{
+                        height: "70vh",
+                        // backgroundImage:
+                        //   "url(https://i.pinimg.com/originals/e7/3e/6d/e73e6dcb23084c4b47e2ec70ebd80438.jpg)",
+                      }}
+                      identifier="myGraph"
+                      // physics={this.state.physics}
                     />
                   </Grid>
 
