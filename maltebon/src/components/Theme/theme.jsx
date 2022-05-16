@@ -3,17 +3,17 @@ import { alpha, createTheme, makeStyles } from "@material-ui/core";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#008000",
-      textColor: "#daf2da",
-      dark: "#004b23",
+      main: "#222",
+      textColor: "#008000",
+      dark: "#222",
       light: "#9ef01a",
       black: "#222",
     },
     secondary: {
-      main: "#ed9121",
-      light: "#ffbf00",
+      main: "#008000",
+      light: "#9ef01a",
       dark: "#cc0000",
-      textColor: "#28190e",
+      textColor: "#fff",
     },
   },
   direction: "ltr",

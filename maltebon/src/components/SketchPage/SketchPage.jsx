@@ -7,6 +7,7 @@ import Graph from "react-graph-vis";
 // import Node from "react-graph-vis"
 import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
+import code1BG from "../pics/code1.jpg";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
@@ -15,6 +16,19 @@ import {
   getInstagramInfo,
   getTelegramInfo,
 } from "../../Connections/Connection";
+import { getUser } from "../../Connections/Common";
+
+
+const styles = {
+  heroContainer: {
+    height: "100vh",
+    backgroundImage: `url(${code1BG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    opacity:"0.75"
+  },
+};
 
 class SketchPage extends Component {
   state = {
@@ -80,7 +94,7 @@ class SketchPage extends Component {
       graphKey: 1,
       counter: 1,
       graph: {
-        nodes: [new Node(1, "amirsmart", "user", "")],
+        nodes: [new Node(1, getUser(), "user", "")],
         edges: [],
       },
       events: {
@@ -125,7 +139,10 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
+                      <Typography style={{ color:"#fff"}}>
                       {this.state.selectedNode.data}
+
+                      </Typography>
                     </Link>
                   </div>
                 ),
@@ -144,7 +161,10 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
+                      <Typography style={{ color:"#fff"}}>
                       {this.state.selectedNode.data}
+
+                      </Typography>
                     </Link>
                   </div>
                 ),
@@ -164,7 +184,10 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
+                      <Typography style={{ color:"#fff"}}>
                       {this.state.selectedNode.data}
+
+                      </Typography>
                     </Link>
                   </div>
                 ),
@@ -286,7 +309,7 @@ class SketchPage extends Component {
       hierarchical: true,
     },
     edges: {
-      color: "#000000",
+      color: "#222",
     },
   };
   randomColor() {
@@ -351,6 +374,13 @@ class SketchPage extends Component {
     return (
       <form style={{ minHeight: "80vh" }}>
         <ThemeProvider theme={theme}>
+        <Grid container
+          direction="column-reverse"
+          justify="flex-end"
+          alignItems="right"
+          style={styles.heroContainer}>
+
+          </Grid>
           <Paper
             elevation={10}
             style={{
