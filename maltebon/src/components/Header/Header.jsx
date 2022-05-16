@@ -344,6 +344,7 @@ function Header(props) {
                   variant="contained"
                   // color="secondary"
                   style={{
+                    color: theme.palette.secondary.contrastText,
                     fontFamily: "Segoe UI",
                     backgroundColor: theme.palette.secondary.main,
                     margin: "2px",
@@ -358,6 +359,7 @@ function Header(props) {
                   variant="contained"
                   // color="secondary"
                   style={{
+                    color: theme.palette.secondary.contrastText,
                     fontFamily: "Segoe UI",
                     backgroundColor: theme.palette.secondary.main,
                   }}

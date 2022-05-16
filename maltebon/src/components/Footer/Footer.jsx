@@ -55,7 +55,7 @@ class Footer extends Component {
                       style={{
                         padding: "0 3vw",
                         width: "100%",
-                        background: theme.palette.primary.main,
+                        background: theme.palette.secondary.main,
                       }}
                     >
                       <Grid container direction="column" alignItems="center">
