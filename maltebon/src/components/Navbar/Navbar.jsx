@@ -36,6 +36,7 @@ class Navbar extends Component {
                     fontSize: "10vh",
                     margin: "0 5vw",
                   }}
+                  data-testid="navbar-maltebon"
                 >
                   Maltebon
                 </Typography>
@@ -63,6 +64,7 @@ class Navbar extends Component {
                     color: theme.palette.primary.contrastText,
                     padding: "1.5vh 2vw",
                   }}
+                  data-testid="navbar-login"
                 >
                   Log in
                 </Button>
@@ -83,6 +85,7 @@ class Navbar extends Component {
                     color: theme.palette.primary.contrastText,
                     padding: "1.5vh 2vw",
                   }}
+                  testid="navbar-signup"
                 >
                   Sign Up
                 </Button>

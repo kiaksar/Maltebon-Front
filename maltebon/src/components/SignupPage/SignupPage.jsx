@@ -92,6 +92,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Username"
                       variant="filled"
+                      data-testid="signup-usernameBox"
                       style={{width : "13vw"}}
                     />
                   </Grid>
@@ -110,6 +111,7 @@ class SignupPage extends Component {
                       label="Password"
                       variant="filled"
                       type="password"
+                      data-testid="signup-passwordBox"
                       style={{width : "13vw"}}
                     />
                   </Grid>
@@ -128,6 +130,7 @@ class SignupPage extends Component {
                       label="Conf-Password"
                       variant="filled"
                       type="password"
+                      data-testid="signup-confPasswordBox"
                       style={{width : "13vw"}}
                     />
                   </Grid>
@@ -146,6 +149,7 @@ class SignupPage extends Component {
                       label="Email"
                       variant="filled"
                       type="email"
+                      data-testid="signup-emailBox"
                       style={{width : "13vw"}}
                     />
                   </Grid>
@@ -164,6 +168,8 @@ class SignupPage extends Component {
                       onClick={this.handleRegister}
                       type="button"
                       color="primary"
+                      title="Sign up"
+                      data-testid="signup-signupButton"
                       style={{ width: "100%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main}}
                     >
                       Sign Up

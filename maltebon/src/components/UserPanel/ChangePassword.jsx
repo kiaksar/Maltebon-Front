@@ -112,6 +112,7 @@ class ChangePassword extends Component {
                   width: "30%",
                   backgroundColor: theme.palette.primary.light,
                 }}
+                title="Change password"
                 onClick={this.changePassword}
               >
                 Change password
