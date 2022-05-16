@@ -132,6 +132,7 @@ class LandingPage extends Component {
                 padding: "3vh 5vw",
                 fontSize: "2vh",
               }}
+              data-testid="landing-getStartedButton"
             >
               GET STARTED
             </Button>
@@ -149,6 +150,7 @@ class LandingPage extends Component {
                 padding: "3vh 5vw",
                 fontSize: "2vh",
               }}
+              data-testid="landing-maltebon"
             >
               Maltebon ??
             </Button>
