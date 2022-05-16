@@ -6,6 +6,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { Login } from "../../Connections/Connection";
 import references from "../../assets/References.json";
+import codeBG from "../pics/code.jpg";
 import { theme } from "../Theme/theme";
 
 axios.defaults.withCredentials = true;
@@ -30,7 +31,15 @@ function checkResponse(responseData) {
       break;
   }
 }
-
+const styles = {
+  heroContainer: {
+    height: "100vh",
+    backgroundImage: `url(${codeBG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+  },
+};
 class LoginPage extends Component {
   state = {
     username: "",
@@ -46,6 +55,13 @@ class LoginPage extends Component {
     return (
       <form style={{ minHeight: "80vh" }}>
         <ThemeProvider theme={theme}>
+          <Grid container
+          direction="column-reverse"
+          justify="flex-end"
+          alignItems="right"
+          style={styles.heroContainer}>
+
+          </Grid>
           <Paper
             elevation={10}
             style={{
@@ -102,6 +118,7 @@ class LoginPage extends Component {
                       id="outlined-basic"
                       label="Username"
                       variant="filled"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -119,6 +136,7 @@ class LoginPage extends Component {
                       label="Password"
                       variant="filled"
                       type="password"
+                      style={{width : "13vw"}}
                     />
                   </Grid>
                   <Grid
@@ -135,9 +153,7 @@ class LoginPage extends Component {
                     <Button
                       onClick={this.handleLogin}
                       type="button"
-                      color="primary"
-                      style={{ width: "100%" }}
-                      title="Log in"
+                      style={{ width: "100%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main}}
                     >
                       Log in
                     </Button>

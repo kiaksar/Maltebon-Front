@@ -16,6 +16,7 @@ import {
   Card,
   Collapse,
   Grid,
+  Hidden,
   IconButton,
   Paper,
   ThemeProvider,
@@ -27,6 +28,8 @@ import ExtensionIcon from "@material-ui/icons/Extension";
 import { theme } from "../Theme/theme";
 import EditTokens from "./EditTokens";
 import ChangePassword from "./ChangePassword";
+import profileBG from "../pics/profileB.jpg";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -61,7 +64,16 @@ function a11yProps(index) {
 }
 
 //
-
+const styles = {
+  heroContainer: {
+    height: "100vh",
+    backgroundImage: `url(${profileBG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    opacity:"0.75",padding: "5vw", minHeight: "80vh" 
+  },
+};
 class Profile extends Component {
   state = {
     value: 0,
@@ -90,15 +102,19 @@ class Profile extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div style={{ padding: "5vw", minHeight: "80vh" }}>
+        <div direction="column-reverse"
+          justify="flex-end"
+          alignItems="right"
+          style={styles.heroContainer}>
           {/* <AppBar position="static"> */}
           {/* </AppBar> */}
-          <Grid container>
+          <Grid container style={{margin:"auto"}}>
             <Grid item lg={1} xs={1} md={1}></Grid>
             <Grid item lg={10} xs={10} md={10}>
               <Paper>
                 <Grid container>
                   <Grid item lg={2} xs={12} md={2}>
+                    <Hidden only={['xs','sm','md']}>
                     <div
                       style={{
                         padding: "0vw 1vw",
@@ -108,18 +124,6 @@ class Profile extends Component {
                         height: "100%",
                       }}
                     >
-                      <div style={{ paddingTop: "1vw" }}>
-                        <Avatar
-                          style={{
-                            // marginTop: "1vw",
-                            margin: "auto",
-                            marginBottom: "2vw",
-                            width: "10vh",
-                            height: "10vh",
-                          }}
-                        ></Avatar>
-                      </div>
-
                       {this.state.classes !== null && (
                         <Tabs
                           selectionFollowsFocus
@@ -128,11 +132,14 @@ class Profile extends Component {
                           variant="fullWidth"
                           onChange={this.handleChange}
                           aria-label="Vertical tabs example"
+                          indicatorColor={theme.palette.secondary.textColor}
                           // className={this.state.classes.tabs}
                           style={{
                             margin: "auto",
                             alignItems: "center",
+
                           }}
+                          
                           centered
                         >
                           {/* <Divider></Divider> */}
@@ -189,6 +196,75 @@ class Profile extends Component {
                         </Tabs>
                       )}
                     </div>
+                  </Hidden>
+                  <Hidden only={['lg','xl']}>
+                    <div
+                      style={{
+                        padding: "0vw 1vw",
+                        backgroundColor: theme.palette.primary.black,
+                        color: theme.palette.primary.contrastText,
+                        height: "100%",
+                      }}
+                    >
+                      {this.state.classes !== null && (
+                        <Tabs
+                          selectionFollowsFocus
+                          value={this.state.value}
+                          variant="fullWidth"
+                          onChange={this.handleChange}
+                          aria-label="Vertical tabs example"
+                          indicatorColor={theme.palette.secondary.textColor}
+                          style={{
+                            margin: "auto",
+                            alignItems: "center",
+                          }}
+                          
+                        >
+                          <Grid container>
+                            <Grid item xs={6} sm={6} md={12} style={{textAlign: "center"}}>
+                                <Tab
+                                style={{
+                                  marginTop: "1vw",
+                                  marginBottom: "1vw",
+                                  borderBottom: "1px solid",
+                                  borderTop: "1px solid",
+                                  borderRight:"1px solid",
+                                  borderLeft:"1px solid",
+                                  alignItems: "center",
+                                  width : "100%"
+                                }}
+                                label={<span>Edit Profile</span>}
+                                icon={<FaceIcon />}
+                                onClick={() => {
+                                  this.setState({ value: 0 });
+                                }}
+                                />
+                            </Grid>
+                            <Grid item xs={6} sm={6} md={12} style={{textAlign: "center"}}>
+                              <Tab
+                              style={{
+                                marginTop: "1vw",
+                                marginBottom: "1vw",
+                                borderBottom: "1px solid",
+                                borderTop: "1px solid",
+                                borderLeft:"1px solid",
+                                borderRight:"1px solid",
+                                textAlign: "center",
+                                width : "100%"
+                              }}
+                              label="Tokens"
+                              icon={<ExtensionIcon />}
+                              onClick={() => {
+                                this.setState({ value: 1 });
+                              }}
+                              >
+                              </Tab>
+                            </Grid>
+                          </Grid>
+                        </Tabs>
+                      )}
+                    </div>
+                  </Hidden>
                   </Grid>
 
                   <Grid item lg={10} xs={12} md={10}>
