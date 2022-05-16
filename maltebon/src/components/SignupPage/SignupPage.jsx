@@ -74,6 +74,7 @@ class SignupPage extends Component {
                       id="outlined-basic"
                       label="Username"
                       variant="filled"
+                      data-testid="signup-usernameBox"
                     />
                   </Grid>
                   <Grid
@@ -91,6 +92,7 @@ class SignupPage extends Component {
                       label="Password"
                       variant="filled"
                       type="password"
+                      data-testid="signup-passwordBox"
                     />
                   </Grid>
                   <Grid
@@ -108,6 +110,7 @@ class SignupPage extends Component {
                       label="Conf-Password"
                       variant="filled"
                       type="password"
+                      data-testid="signup-confPasswordBox"
                     />
                   </Grid>
                   <Grid
@@ -125,6 +128,7 @@ class SignupPage extends Component {
                       label="Email"
                       variant="filled"
                       type="email"
+                      data-testid="signup-emailBox"
                     />
                   </Grid>
                   <Grid
@@ -144,6 +148,7 @@ class SignupPage extends Component {
                       color="primary"
                       style={{ width: "100%" }}
                       title="Sign up"
+                      data-testid="signup-signupButton"
                     >
                       Sign Up
                     </Button>
