@@ -14,7 +14,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install
+      
+      - name: Install jest seperatly
+        run: npm install jest --force
+        
+      - name: Install enzyme 
+        run: npm install enzyme --force
 
       - name: Test
         run: npm test
