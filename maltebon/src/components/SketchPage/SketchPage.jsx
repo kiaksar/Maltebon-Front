@@ -7,6 +7,7 @@ import Graph from "react-graph-vis";
 // import Node from "react-graph-vis"
 import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
+import code1BG from "../pics/code1.jpg";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
@@ -15,6 +16,18 @@ import {
   getInstagramInfo,
   getTelegramInfo,
 } from "../../Connections/Connection";
+import { getUser } from "../../Connections/Common";
+
+const styles = {
+  heroContainer: {
+    height: "100vh",
+    backgroundImage: `url(${code1BG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    opacity: "0.75",
+  },
+};
 
 class SketchPage extends Component {
   state = {
@@ -162,11 +175,11 @@ class SketchPage extends Component {
         },
         // physics: false,
       },
-      // nodeList: [new Node(4, "amirsmart", "user", "")],
+
       graphKey: 1,
       counter: 1,
       graph: {
-        nodes: [new Node(1, "amirsmart", "user", "")],
+        nodes: [new Node(1, getUser(), "user", "")],
         edges: [],
       },
       physics: { enabled: false },
@@ -212,7 +225,9 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
-                      {this.state.selectedNode.data}
+                      <Typography style={{ color: "#fff" }}>
+                        {this.state.selectedNode.data}
+                      </Typography>
                     </Link>
                     <Button
                       fullWidth
@@ -250,7 +265,9 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
-                      {this.state.selectedNode.data}
+                      <Typography style={{ color: "#fff" }}>
+                        {this.state.selectedNode.data}
+                      </Typography>
                     </Link>
                     <Button
                       fullWidth
@@ -289,7 +306,9 @@ class SketchPage extends Component {
                       href={this.state.selectedNode.data}
                       color="textPrimary"
                     >
-                      {this.state.selectedNode.data}
+                      <Typography style={{ color: "#fff" }}>
+                        {this.state.selectedNode.data}
+                      </Typography>
                     </Link>
                     <Button
                       fullWidth
@@ -467,7 +486,6 @@ class SketchPage extends Component {
       },
     };
   }
-
   randomColor() {
     const red = Math.floor(Math.random() * 256)
       .toString(16)
@@ -530,106 +548,114 @@ class SketchPage extends Component {
     return (
       <form style={{ minHeight: "80vh", alignItems: "center" }}>
         <ThemeProvider theme={theme}>
-          <Paper
-            elevation={10}
-            style={{
-              // display: "inline-flex",
-              // position: "absolute",
-              left: "30%",
-              top: "50%",
-              width: "80%",
-              // transform: "translate(-50%, -50%)",
-              padding: "1vw",
-              margin: "auto",
-              marginTop: "5vh",
-              marginBottom: "5vh",
-            }}
+          <Grid
+            container
+            direction="column-reverse"
+            justify="flex-end"
+            alignItems="right"
+            style={styles.heroContainer}
           >
-            <Grid container spacing={1} direction={"column"}>
-              <Grid
-                item
-                lg={12}
-                xs={12}
-                md={12}
-                style={{ margin: "auto", textAlign: "center" }}
-              >
-                <Grid container spacing={1} direction={"column"}>
-                  <Grid
-                    item
-                    lg={12}
-                    xs={12}
-                    md={12}
-                    style={{ margin: "auto", textAlign: "center" }}
-                  >
-                    <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
-                      <Typography
-                        variant="h4"
-                        style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
-                      >
-                        Sketch
-                      </Typography>
-                    </div>
-                  </Grid>
+            <Paper
+              elevation={10}
+              style={{
+                // display: "inline-flex",
+                // position: "absolute",
+                left: "30%",
+                top: "50%",
+                width: "80%",
+                // transform: "translate(-50%, -50%)",
+                padding: "1vw",
+                margin: "auto",
+                marginTop: "5vh",
+                marginBottom: "5vh",
+              }}
+            >
+              <Grid container spacing={1} direction={"column"}>
+                <Grid
+                  item
+                  lg={12}
+                  xs={12}
+                  md={12}
+                  style={{ margin: "auto", textAlign: "center" }}
+                >
+                  <Grid container spacing={1} direction={"column"}>
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
+                      style={{ margin: "auto", textAlign: "center" }}
+                    >
+                      <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
+                        <Typography
+                          variant="h4"
+                          style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                        >
+                          Sketch
+                        </Typography>
+                      </div>
+                    </Grid>
 
-                  <Grid
-                    item
-                    lg={12}
-                    xs={12}
-                    md={12}
-                    style={{ margin: "auto", textAlign: "center" }}
-                  >
-                    <Graph
-                      key={this.state.counter}
-                      graph={this.state.graph}
-                      events={this.state.events}
-                      options={this.state.options}
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
+                      style={{ margin: "auto", textAlign: "center" }}
+                    >
+                      <Graph
+                        key={this.state.counter}
+                        graph={this.state.graph}
+                        events={this.state.events}
+                        options={this.state.options}
+                        style={{
+                          height: "70vh",
+                          // backgroundImage:
+                          //   "url(https://i.pinimg.com/originals/e7/3e/6d/e73e6dcb23084c4b47e2ec70ebd80438.jpg)",
+                        }}
+                        identifier="myGraph"
+                        // physics={this.state.physics}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
                       style={{
-                        height: "70vh",
-                        // backgroundImage:
-                        //   "url(https://i.pinimg.com/originals/e7/3e/6d/e73e6dcb23084c4b47e2ec70ebd80438.jpg)",
+                        margin: "auto",
+                        textAlign: "center",
                       }}
-                      identifier="myGraph"
-                      // physics={this.state.physics}
-                    />
-                  </Grid>
-
-                  <Grid
-                    item
-                    lg={12}
-                    xs={12}
-                    md={12}
-                    style={{
-                      margin: "auto",
-                      textAlign: "center",
-                    }}
-                  >
-                    <AddNodeContainer
-                      triggerText={this.triggerText}
-                      onSubmit={this.onSubmit}
-                      // disabled
-                    />
+                    >
+                      <AddNodeContainer
+                        triggerText={this.triggerText}
+                        onSubmit={this.onSubmit}
+                        // disabled
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Paper>
-          <Paper
-            variant="outlined"
-            elevation={3}
-            id="paperr"
-            style={{
-              // height: "10vh",
-              minWidth: theme.spacing(30),
-              backgroundColor: theme.palette.primary.main,
-              // color: theme.palette.secondary.main,
-              top: "100px",
-              left: "100px",
-              visibility: this.state.vis,
-              borderRadius: "1vh",
-            }}
-          >
-            {this.state.menu}
-          </Paper>
+            </Paper>
+            <Paper
+              variant="outlined"
+              elevation={3}
+              id="paperr"
+              style={{
+                // height: "10vh",
+                minWidth: theme.spacing(30),
+                backgroundColor: theme.palette.primary.main,
+                // color: theme.palette.secondary.main,
+                top: "100px",
+                left: "100px",
+                visibility: this.state.vis,
+                borderRadius: "1vh",
+              }}
+            >
+              {this.state.menu}
+            </Paper>
+          </Grid>
         </ThemeProvider>
       </form>
     );
