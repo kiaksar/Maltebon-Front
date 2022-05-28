@@ -12,6 +12,7 @@
     "axios": "^0.26.1",
     "coockies": "^1.0.1",
     "focus-trap-react": "^8.9.2",
+    "jest": "^28.1.0",
     "react": "^17.0.2",
     "react-device-detect": "^2.1.2",
     "react-digraph": "^8.0.0-beta.7",
