@@ -3,6 +3,6 @@
     "@testing-library/jest-dom": "^5.16.4"
   }, 
   "scripts": {
-    "test": "react-scripts test"
+    "test": "jest"
   }
 }
