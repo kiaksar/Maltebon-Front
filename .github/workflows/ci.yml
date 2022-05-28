@@ -23,4 +23,4 @@ jobs:
         run: npm install enzyme --force
 
       - name: Test
-        run: npm test
+        run: npm test a
