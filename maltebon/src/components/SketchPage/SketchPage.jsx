@@ -8,13 +8,17 @@ import Graph from "react-graph-vis";
 import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
 import code1BG from "../pics/code1.jpg";
+import linkedin from "../pics/Linkedin.png";
+import whois from "../pics/whois.png";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
 import {
   getGithubInfo,
   getInstagramInfo,
+  getLinkedinInfo,
   getTelegramInfo,
+  getWhoisInfo,
 } from "../../Connections/Connection";
 import { getUser } from "../../Connections/Common";
 
@@ -75,6 +79,34 @@ class SketchPage extends Component {
         this.createNode(
           this.state.selectedNode.label,
           "telegram",
+          e,
+          this.state.selectedNode.id
+        );
+      }
+    });
+  };
+  addLinkedinNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getLinkedinInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        this.createNode(
+          this.state.selectedNode.label,
+          "Linkedin",
+          e,
+          this.state.selectedNode.id
+        );
+      }
+    });
+  };
+  addWhoisNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getWhoisInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        this.createNode(
+          this.state.selectedNode.label,
+          "Whois",
           e,
           this.state.selectedNode.id
         );
@@ -256,10 +288,47 @@ class SketchPage extends Component {
                       <Button
                         fullWidth
                         variant="contained"
+                        onClick={this.addLinkedinNode}
                         style={{
                           backgroundColor: theme.palette.secondary.light,
                         }}
                       >
+                        <Avatar
+                          src={linkedin}
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Linked-in
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={this.addWhoisNode}
+                      >
+                        <Avatar
+                          src={whois}
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Whois
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        style={{
+                          backgroundColor: theme.palette.secondary.light,
+                        }}                      >
                         <Avatar
                           src="https://static.thenounproject.com/png/1561912-200.png"
                           style={{

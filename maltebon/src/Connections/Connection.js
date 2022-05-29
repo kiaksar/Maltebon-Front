@@ -196,6 +196,40 @@ export const getTelegramInfo = async (username) => {
 
   return message;
 };
+export const getLinkedinInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_linkedin), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
+export const getWhoisInfo = async (username) => {
+  let message = "";
+
+  await axios
+    .post(makeURL(references.url_whois), {
+      param1: username,
+      param2: "-",
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+};
 export const setPluginToken = async (token, type) => {
   let message = "";
 

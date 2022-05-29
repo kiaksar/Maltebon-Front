@@ -26,5 +26,7 @@
   "url_github": "/plugins/use/github",
   "url_instagram": "/plugins/use/instagram",
   "url_telegram": "/plugins/use/telegram",
+  "url_linkedin": "/plugins/use/linkedin",
+  "url_whois": "/plugins/use/whois",
   "url_setToken": "/plugins"
 }
