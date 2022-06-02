@@ -37,6 +37,7 @@ class SketchPage extends Component {
     selectedNode: "",
     menu: "",
     nodeList: [],
+    firstNodeConnect: null,
   };
 
   deleteNode = () => {
@@ -129,6 +130,64 @@ class SketchPage extends Component {
       }
     });
   };
+  deleteEdge = () => {
+    var newList = this.state.graph.edges.filter(
+      (x) => x !== this.state.selectedEdge
+    );
+    var nodes = this.state.graph.nodes;
+    var graph = { nodes: nodes, edges: newList };
+    this.setState({ graph: graph });
+    this.setState({ vis: "hidden" });
+  };
+  handleConnect = async () => {
+    console.log(this.state.firstNodeConnect);
+    console.log(this.state.selectedNode);
+    console.log(this.state.graph);
+    if (
+      this.state.firstNodeConnect === undefined ||
+      this.state.firstNodeConnect === null
+    ) {
+      await this.setState({
+        firstNodeConnect: this.state.selectedNode,
+      });
+      console.log(this.state.firstNodeConnect);
+    } else {
+      // var newGraph = this.state.graph;
+      // newGraph.edges = [
+      //   {
+      //     from: this.state.firstNodeConnect.id,
+      //     to: this.state.selectedNode.id,
+      //   },
+      //   ...newGraph.edges,
+      // ];
+      // newGraph.graphKey = uuidv4;
+      // this.setState({ graph: newGraph });
+      // console.log(newGraph);
+      const id = this.state.counter + 1;
+      this.setState(
+        ({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
+          //const id = this.state.counter + 1;
+          return {
+            graph: {
+              nodes: [...nodes],
+              edges: [
+                {
+                  from: this.state.firstNodeConnect.id,
+                  to: this.state.selectedNode.id,
+                },
+                ...edges,
+              ],
+            },
+            counter: id,
+            graphKey: uuidv4,
+            ...rest,
+          };
+        }
+      );
+      this.setState({ firstNodeConnect: null });
+    }
+    this.setState({ vis: "hidden" });
+  };
   componentDidMount() {
     var canvas = document.getElementById("myGraph").children[0].children[0];
     // console.log(canvas);
@@ -144,6 +203,7 @@ class SketchPage extends Component {
       posY: 0,
       vis: "hidden",
       selectedNode: "",
+      selectedEdge: "",
       menu: "",
       rendered: 0,
       options: {
@@ -248,6 +308,25 @@ class SketchPage extends Component {
                       />
                       Delete
                     </Button>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.handleConnect}
+                    >
+                      <Avatar
+                        src="https://www.nicepng.com/png/detail/202-2026385_people-connection-png-for-kids-connect-icon-png.png"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Connect
+                    </Button>
                   </div>
                 ),
               });
@@ -287,6 +366,25 @@ class SketchPage extends Component {
                         // variant="square"
                       />
                       Delete
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.handleConnect}
+                    >
+                      <Avatar
+                        src="https://www.nicepng.com/png/detail/202-2026385_people-connection-png-for-kids-connect-icon-png.png"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Connect
                     </Button>
                   </div>
                 ),
@@ -328,6 +426,25 @@ class SketchPage extends Component {
                         // variant="square"
                       />
                       Delete
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      style={{
+                        backgroundColor: theme.palette.secondary.light,
+                      }}
+                      onClick={this.handleConnect}
+                    >
+                      <Avatar
+                        src="https://www.nicepng.com/png/detail/202-2026385_people-connection-png-for-kids-connect-icon-png.png"
+                        style={{
+                          height: theme.spacing(3),
+                          width: theme.spacing(3),
+                          marginRight: theme.spacing(1),
+                        }}
+                        // variant="square"
+                      />
+                      Connect
                     </Button>
                   </div>
                 ),
@@ -413,24 +530,81 @@ class SketchPage extends Component {
                         Delete
                       </Button>
                     </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        style={{
+                          backgroundColor: theme.palette.secondary.light,
+                        }}
+                        onClick={this.handleConnect}
+                      >
+                        <Avatar
+                          src="https://www.nicepng.com/png/detail/202-2026385_people-connection-png-for-kids-connect-icon-png.png"
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                          // variant="square"
+                        />
+                        Connect
+                      </Button>
+                    </Grid>
                   </Grid>
                 ),
               });
             }
+          } else if (edges.length !== 0) {
+            var selectedEdge = this.state.graph.edges.find(
+              (x) => x.id === edges[0]
+            );
+            console.log(selectedEdge);
+            console.log(this.state.graph);
+            var paper = document.getElementById("paperr");
+
+            paper.style.position = "absolute";
+            paper.style.visibility = "visible";
+            var e = window.event;
+            console.log(this.state.graph);
+            // paper.style.backgroundColor = green;
+            this.setState({ posX: e.clientX });
+            this.setState({ posY: e.clientY });
+            this.setState({ selectedNode: selectedNode });
+            // console.log(this.state.selectedType);
+            paper.style.top = this.state.posY + "px";
+            // paper.setAttribute("top", this.state.posY);
+            paper.style.left = this.state.posX + "px";
+            this.setState({ vis: true });
+            console.log(this.state.menu);
+            this.setState({ selectedEdge: selectedEdge });
+            this.setState({
+              menu: (
+                <Grid container spacing={1} style={{ padding: "0.5vh" }}>
+                  <Grid item xs={12} lg={12} md={12}>
+                    <Button color="secondary" onClick={this.deleteEdge}>
+                      Delete edge
+                    </Button>
+                  </Grid>
+                </Grid>
+              ),
+            });
           }
 
           // console.log("Selected edges:");
           // console.log(edges);
           // alert("Selected node: " + nodes);
         },
-        click: ({ nodes }) => {
+        click: ({ nodes, edges }) => {
           console.log(nodes);
+          console.log(edges);
           if (nodes.length === 0) {
-            this.setState({ vis: false });
-            var paper = document.getElementById("paperr");
-
-            // paper.style.position = "fixed";
-            paper.style.visibility = "hidden";
+            if (edges.length === 0) {
+              this.setState({ vis: false });
+              var paper = document.getElementById("paperr");
+              // paper.style.position = "fixed";
+              paper.style.visibility = "hidden";
+            }
           }
         },
         zoom: ({}) => {
@@ -617,7 +791,28 @@ class SketchPage extends Component {
                         // physics={this.state.physics}
                       />
                     </Grid>
-
+                    {this.state.firstNodeConnect !== null &&
+                      this.state.firstNodeConnect !== undefined && (
+                        <Grid
+                          item
+                          lg={12}
+                          xs={12}
+                          md={12}
+                          style={{ margin: "auto", textAlign: "center" }}
+                        >
+                          <Typography>
+                            Connecting from :{" "}
+                            {this.state.firstNodeConnect.label}
+                          </Typography>
+                          <Button
+                            onClick={() => {
+                              this.setState({ firstNodeConnect: null });
+                            }}
+                          >
+                            Cancel connection
+                          </Button>
+                        </Grid>
+                      )}
                     <Grid
                       item
                       lg={12}
