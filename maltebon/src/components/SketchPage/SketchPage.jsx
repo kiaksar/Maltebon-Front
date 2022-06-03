@@ -610,7 +610,6 @@ class SketchPage extends Component {
         zoom: ({}) => {
           this.setState({ vis: false });
           var paper = document.getElementById("paperr");
-
           // paper.style.position = "fixed";
           paper.style.visibility = "hidden";
         },
@@ -802,7 +801,8 @@ class SketchPage extends Component {
                         >
                           <Typography>
                             Connecting from :{" "}
-                            {this.state.firstNodeConnect.label}
+                            {this.state.firstNodeConnect.label}{" "}
+                            {this.state.firstNodeConnect.nodeType}
                           </Typography>
                           <Button
                             onClick={() => {
@@ -828,6 +828,20 @@ class SketchPage extends Component {
                         onSubmit={this.onSubmit}
                         // disabled
                       />
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        onClick={() => {
+                          var canvas =
+                            document.getElementById("myGraph").children[0]
+                              .children[0];
+                          console.log(canvas);
+                          var image = canvas.toDataURL("image/png");
+                          // window.location.href = image;
+                        }}
+                      >
+                        Save
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>

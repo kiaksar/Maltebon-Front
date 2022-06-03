@@ -9,7 +9,7 @@ class Node {
   image;
   x;
   y;
-  type = "def";
+  type = "user";
   value = 10;
   shape = "image";
   nodeType = "";
