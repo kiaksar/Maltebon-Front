@@ -4,9 +4,37 @@ import { Grid } from "@material-ui/core";
 import whois from "../../assets/unnamed.png";
 import GitHub from "../../assets/GitHub-Mark.png";
 import linkedin from "../../assets/Linkendin.png";
-import { setPluginToken } from "../../Connections/Connection";
+import { setPluginToken, getPluginToken } from "../../Connections/Connection";
 
 class EditTokens extends Component {
+  async componentDidMount() {
+    await getPluginToken("whois").then((token) => {
+      if (token !== false){
+        this.setState({WhoIs:token.param1})
+      }
+    })
+    await getPluginToken("linkedin").then((token) => {
+      if (token !== false){
+        this.setState({Linkedin:token.param1})
+      }
+    })
+    await getPluginToken("github").then((token) => {
+      if (token !== false){
+        this.setState({GithubIsActive:token.param1 !== ''})
+      }
+    })
+    await getPluginToken("telegram").then((token) => {
+      if (token !== false){
+        this.setState({TelegramIsActive:token.param1 !== ''})
+      }
+    })
+    await getPluginToken("instagram").then((token) => {
+      if (token !== false){
+        this.setState({InstagramIsActive:token.param1 !== ''})
+      }
+    })
+
+  }
   state = {
     WhoIs: "",
     Linkedin: "",
@@ -16,25 +44,31 @@ class EditTokens extends Component {
     GithubIsActive: false,
   };
   handleTelegramChange = async () => {
-    await setPluginToken("-", "telegram").then((e) => {
+    await setPluginToken(!this.state.TelegramIsActive ? '-':'', "telegram").then((e) => {
       console.log(e);
       this.setState({ TelegramIsActive: !this.state.TelegramIsActive });
     });
   };
   handleInstagramChange = async () => {
-    await setPluginToken("-", "instagram").then((e) => {
+    await setPluginToken(!this.state.InstagramIsActive ? '-':'', "instagram").then((e) => {
       console.log(e);
       this.setState({ InstagramIsActive: !this.state.InstagramIsActive });
     });
   };
   handleGithubChange = async () => {
-    await setPluginToken("-", "github").then((e) => {
+    await setPluginToken(!this.state.GithubIsActive ? '-':'', "github").then((e) => {
       console.log(e);
       this.setState({ GithubIsActive: !this.state.GithubIsActive });
     });
   };
   handleWhoisChange = async () => {
-    await setPluginToken("at_EKRs0rSRoInDIuwtIxnTCvc1T8MCD", "whois").then((e) => {
+    await setPluginToken(this.state.WhoIs, "whois").then((e) => {
+      console.log(e);
+    });
+  };
+  handleLinkedinChange = async () => {
+    console.log("change: " , this.state.Linkedin)
+    await setPluginToken(this.state.Linkedin, "linkedin").then((e) => {
       console.log(e);
     });
   };
@@ -70,9 +104,12 @@ class EditTokens extends Component {
               <TextField
                 fullWidth
                 onChange={(e) => {
-                  this.setState({ WhoIs: e.target.value });
-                  this.handleWhoisChange();
+                  this.setState({ WhoIs: e.target.value } , this.handleWhoisChange);
+                  
+                  
                 }}
+                
+                value={this.state.WhoIs}
               />
             </Grid>
           </Grid>
@@ -95,8 +132,12 @@ class EditTokens extends Component {
               <TextField
                 fullWidth
                 onChange={(e) => {
-                  this.setState({ Linkedin: e.target.value });
+                  this.setState({ Linkedin: e.target.value } , this.handleLinkedinChange);
+                  
+                  
                 }}
+                
+                value={this.state.Linkedin}
               />
             </Grid>
           </Grid>

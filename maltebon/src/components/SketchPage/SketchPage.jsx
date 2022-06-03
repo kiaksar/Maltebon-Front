@@ -10,6 +10,10 @@ import { v4 as uuidv4 } from "uuid";
 import code1BG from "../pics/code1.jpg";
 import linkedin from "../pics/Linkedin.png";
 import whois from "../pics/whois.png";
+import BookmarkBorder from "@material-ui/icons/BookmarkBorder";
+import GetAppIcon from "@material-ui/icons/GetApp";
+
+import TextField from "@material-ui/core/TextField";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
@@ -19,6 +23,8 @@ import {
   getLinkedinInfo,
   getTelegramInfo,
   getWhoisInfo,
+  saveSketchPad,
+  exportSketchPad
 } from "../../Connections/Connection";
 import { getUser } from "../../Connections/Common";
 
@@ -101,27 +107,84 @@ class SketchPage extends Component {
   };
   addWhoisNode = async () => {
     this.setState({ vis: "hidden" });
-    await getWhoisInfo(this.state.selectedNode.label).then((e) => {
+    await getWhoisInfo(this.state.selectedNode.label, "whois-history").then((e) => {
       if (e !== false) {
         console.log(e.result);
-        e.result.forEach(element => {
+        e.result.emails.forEach(element => {
+          console.log("emails: " , element)
           this.createNode(
-            this.state.selectedNode.label,
-            "Whois",
-            element.domainName,
+            element,
+            "email",
+            element,
             this.state.selectedNode.id
           );  
         });
-        
+        e.result.names.forEach(element => {
+          console.log("names: " , element)
+          this.createNode(
+            element,
+            "telegram",
+            element,
+            this.state.selectedNode.id
+          );  
+        });
+        e.result.telephones.forEach(element => {
+          console.log("telephones: " , element)
+          this.createNode(
+            element,
+            "telephone",
+            element,
+            this.state.selectedNode.id
+          );  
+        });
       }
-    });
+
+          // this.createNode(
+          //   this.state.selectedNode.label,
+          //   "telegram",
+          //   element.domainName,
+          //   this.state.selectedNode.id
+          // );  
+        });
+        
   };
+
+  handleSketchSave = async () => {
+    if (this.state.sketchName !== ""){
+      var res = {'graph':this.state.graph}
+      await saveSketchPad(res , this.state.sketchName).then((e) => {
+        window.alert(e)
+      })
+    }
+    else{
+      window.alert("Error: SketchName is Empty")
+
+    }
+
+  }
+
+  handleSketchExport = async () => {
+    if (this.state.sketchName !== ""){
+      exportSketchPad(this.state.sketchName).then((e) => {
+        window.alert(e)
+      })
+    }
+    else{
+      window.alert("Error: hell")
+
+    }
+
+  }
+
+
   constructor(props) {
     super(props);
 
     this.state = {
+      sketchName:"",
       posX: 0,
       posY: 0,
+      dataUrl:"",
       vis: "hidden",
       selectedNode: "",
       menu: "",
@@ -133,6 +196,7 @@ class SketchPage extends Component {
         edges: [],
       },
       events: {
+
         select: ({ nodes, edges }) => {
           if (nodes.length !== 0) {
             console.log("Selected nodes:");
@@ -384,6 +448,7 @@ class SketchPage extends Component {
       color: "#222",
     },
   };
+
   randomColor() {
     const red = Math.floor(Math.random() * 256)
       .toString(16)
@@ -415,10 +480,7 @@ class SketchPage extends Component {
     console.log(this.state.graph.nodes);
   };
   createNode = (label, type, data, parentID) => {
-    const color = this.randomColor();
     const id = this.state.counter + 1;
-    console.log("()()()()", this.state);
-    console.log(data);
 
     this.setState(({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
       //const id = this.state.counter + 1;
@@ -432,7 +494,6 @@ class SketchPage extends Component {
         ...rest,
       };
     });
-    console.log(this.state.graph.nodes);
   };
   triggerText = "+";
   onSubmit = (event) => {
@@ -485,9 +546,42 @@ class SketchPage extends Component {
                         variant="h4"
                         style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
                       >
-                        Sketch
+                        
+                        <TextField
+                          onChange={(e) => {
+                            this.setState({ sketchName: e.target.value });
+                          }}
+                          id="outlined-basic"
+                          label="SketchName"
+                          variant="filled"
+                          style={{width : "13vw"}}
+                        />
+                        <Button
+                          onClick={this.handleSketchSave}
+                          type="button"
+                          color="primary"
+                          style={{ width: "100%" , borderRadius:100 }}
+                        >
+                          <BookmarkBorder />
+                          
+                          
+                      </Button>
+                        
+
+                      <Button
+                          onClick={this.handleSketchExport}
+                          type="button"
+                          color="primary"
+                          style={{ width: "100%" , borderRadius:100 }}
+                        >
+                          <GetAppIcon />
+                          
+                          
+                      </Button>
+                        
                       </Typography>
                     </div>
+                    
                   </Grid>
 
                   <Grid

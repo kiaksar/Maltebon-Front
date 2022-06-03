@@ -28,5 +28,6 @@
   "url_telegram": "/plugins/use/telegram",
   "url_linkedin": "/plugins/use/linkedin",
   "url_whois": "/plugins/use/whois",
-  "url_setToken": "/plugins"
+  "url_setToken": "/plugins",
+  "url_sketch": "/sketchs"
 }

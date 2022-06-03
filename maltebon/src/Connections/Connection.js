@@ -3,6 +3,7 @@ import references from "../assets/References.json";
 import { setUserSession, cookie, getUser } from "./Common";
 import Cookies from "universal-cookie";
 import { makeURL } from "./Common";
+import domtoimage from 'dom-to-image';
 
 export const Logout = async () => {
   cookie.remove("x-access-token");
@@ -213,13 +214,13 @@ export const getLinkedinInfo = async (username) => {
 
   return message;
 };
-export const getWhoisInfo = async (username) => {
+export const getWhoisInfo = async (username , type) => {
   let message = "";
 
   await axios
     .post(makeURL(references.url_whois), {
-      param1: "whois-history",
-      param2: "hiweb.ir",
+      param1: type,
+      param2: username,
     })
     .then((response) => {
       message = response.data.message;
@@ -230,6 +231,59 @@ export const getWhoisInfo = async (username) => {
 
   return message;
 };
+
+export const saveSketchPad = async (data , name) => {
+  let message = "";
+
+  await axios
+  .post(makeURL(references.url_sketch), {
+    name: name,
+    data: JSON.stringify(data),
+  })
+  .then((response) => {
+    message = response.data.message;
+  })
+  .catch((error) => {
+    message = false;
+  });
+  return message;
+
+}
+
+export const exportSketchPad =  (data , name) => {
+  var visNetworkNodes = document.getElementsByClassName("vis-network");
+  var theVisNetworkNode = visNetworkNodes[0]; // If you only have on graph vis element on the page
+  domtoimage.toBlob(theVisNetworkNode)
+  .then(function (blob) {
+      window.saveAs(blob, 'my-node.png');
+  });
+ 
+
+  // canvasToImage(canvasEl, {
+  //   name: 'myImage',
+  //   type: 'jpg',
+  //   quality: 0.7
+  // });
+
+}
+
+export const getPluginToken = async (plugin_name) => {
+  let message = "";
+
+  await axios
+    .put(makeURL(references.url_setToken), {
+      p_name: plugin_name,
+    })
+    .then((response) => {
+      message = response.data.message;
+    })
+    .catch((error) => {
+      message = false;
+    });
+
+  return message;
+}
+
 export const setPluginToken = async (token, type) => {
   let message = "";
 
