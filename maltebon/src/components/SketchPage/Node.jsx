@@ -52,6 +52,10 @@ class Node {
         this.image = 
               "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
         break;
+      case "linkedin":
+          this.image = 
+                "https://upload.wikimedia.org/wikipedia/commons/e/e6/729101_linkedin_icon.png";
+          break;
       default:
         break;
     }

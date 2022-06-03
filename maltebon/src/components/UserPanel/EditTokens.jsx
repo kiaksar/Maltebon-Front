@@ -15,7 +15,7 @@ class EditTokens extends Component {
     })
     await getPluginToken("linkedin").then((token) => {
       if (token !== false){
-        this.setState({Linkedin:token.param1})
+        this.setState({LinkedinIsActive:token.param1 !== ''})
       }
     })
     await getPluginToken("github").then((token) => {
@@ -42,6 +42,7 @@ class EditTokens extends Component {
     TelegramIsActive: false,
     InstagramIsActive: false,
     GithubIsActive: false,
+    LinkedinIsActive: false
   };
   handleTelegramChange = async () => {
     await setPluginToken(!this.state.TelegramIsActive ? '-':'', "telegram").then((e) => {
@@ -67,9 +68,9 @@ class EditTokens extends Component {
     });
   };
   handleLinkedinChange = async () => {
-    console.log("change: " , this.state.Linkedin)
-    await setPluginToken(this.state.Linkedin, "linkedin").then((e) => {
+    await setPluginToken(!this.state.LinkedinIsActive ? '-':'', "linkedin").then((e) => {
       console.log(e);
+      this.setState({ LinkedinIsActive: !this.state.LinkedinIsActive });
     });
   };
   render() {
@@ -114,10 +115,12 @@ class EditTokens extends Component {
             </Grid>
           </Grid>
         </div>
+
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>
               <Avatar src={linkedin} variant="square" />
+
             </Grid>
             <Grid
               item
@@ -129,19 +132,16 @@ class EditTokens extends Component {
               <Typography>Linkedin</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
-              <TextField
-                fullWidth
-                onChange={(e) => {
-                  this.setState({ Linkedin: e.target.value } , this.handleLinkedinChange);
-                  
-                  
-                }}
-                
-                value={this.state.Linkedin}
+              <Switch
+                checked={this.state.LinkedinIsActive}
+                onChange={this.handleLinkedinChange}
+                name="Linkedin"
+                inputProps={{ "aria-label": "secondary checkbox" }}
               />
             </Grid>
           </Grid>
         </div>
+
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>

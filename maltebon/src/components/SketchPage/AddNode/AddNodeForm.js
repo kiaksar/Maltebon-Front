@@ -23,6 +23,7 @@ export const AddNodeForm = ({ onSubmit }) => {
                       id="Plugin-basic"
                       label="Plugin"
                       variant="filled"
+                      defaultValue="user"
       />
 
       </div>
@@ -34,6 +35,7 @@ export const AddNodeForm = ({ onSubmit }) => {
                       id="Token-basic"
                       label="Target"
                       variant="filled"
+                      
       />
       </div>
       <div className="form-group">

@@ -96,12 +96,15 @@ class SketchPage extends Component {
     await getLinkedinInfo(this.state.selectedNode.label).then((e) => {
       if (e !== false) {
         console.log(e);
-        this.createNode(
-          this.state.selectedNode.label,
-          "Linkedin",
-          e,
-          this.state.selectedNode.id
-        );
+        e.forEach(element => {
+          this.createNode(
+            element.public_id,
+            "linkedin",
+            element.public_id,
+            this.state.selectedNode.id
+          );
+        });
+
       }
     });
   };
@@ -192,7 +195,7 @@ class SketchPage extends Component {
       graphKey: 1,
       counter: 1,
       graph: {
-        nodes: [new Node(1, getUser(), "user", "")],
+        nodes: [new Node(1, "root", "user", "")],
         edges: [],
       },
       events: {
@@ -291,6 +294,30 @@ class SketchPage extends Component {
                   </div>
                 ),
               });
+            }
+              else if (selectedNode.nodeType === "linkedin") {
+                console.log(this.state.selectedNode);
+                this.setState({
+                  menu: (
+                    <div
+                      style={{
+                        padding: theme.spacing(1),
+                        fontFamily: "sans-serif",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <Link
+                        href={"https://www.linkedin.com/in/"+this.state.selectedNode.data}
+                        color="textPrimary"
+                      >
+                        <Typography style={{ color:"#fff"}}>
+                        {"https://www.linkedin.com/in/"+this.state.selectedNode.data}
+  
+                        </Typography>
+                      </Link>
+                    </div>
+                  ),
+                });
             } else if (selectedNode.nodeType === "user") {
               this.setState({
                 menu: (
