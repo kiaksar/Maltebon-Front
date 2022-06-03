@@ -103,13 +103,16 @@ class SketchPage extends Component {
     this.setState({ vis: "hidden" });
     await getWhoisInfo(this.state.selectedNode.label).then((e) => {
       if (e !== false) {
-        console.log(e);
-        this.createNode(
-          this.state.selectedNode.label,
-          "Whois",
-          e,
-          this.state.selectedNode.id
-        );
+        console.log(e.result);
+        e.result.forEach(element => {
+          this.createNode(
+            this.state.selectedNode.label,
+            "Whois",
+            element.domainName,
+            this.state.selectedNode.id
+          );  
+        });
+        
       }
     });
   };

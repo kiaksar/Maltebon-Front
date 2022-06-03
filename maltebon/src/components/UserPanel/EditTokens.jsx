@@ -3,13 +3,13 @@ import React, { Component } from "react";
 import { Grid } from "@material-ui/core";
 import whois from "../../assets/unnamed.png";
 import GitHub from "../../assets/GitHub-Mark.png";
-import maltego from "../../assets/images.png";
+import linkedin from "../../assets/Linkendin.png";
 import { setPluginToken } from "../../Connections/Connection";
 
 class EditTokens extends Component {
   state = {
     WhoIs: "",
-    Maltego: "",
+    Linkedin: "",
     Github: "",
     TelegramIsActive: false,
     InstagramIsActive: false,
@@ -31,6 +31,11 @@ class EditTokens extends Component {
     await setPluginToken("-", "github").then((e) => {
       console.log(e);
       this.setState({ GithubIsActive: !this.state.GithubIsActive });
+    });
+  };
+  handleWhoisChange = async () => {
+    await setPluginToken("at_EKRs0rSRoInDIuwtIxnTCvc1T8MCD", "whois").then((e) => {
+      console.log(e);
     });
   };
   render() {
@@ -66,8 +71,8 @@ class EditTokens extends Component {
                 fullWidth
                 onChange={(e) => {
                   this.setState({ WhoIs: e.target.value });
+                  this.handleWhoisChange();
                 }}
-                disabled
               />
             </Grid>
           </Grid>
@@ -75,7 +80,7 @@ class EditTokens extends Component {
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>
-              <Avatar src={maltego} variant="square" />
+              <Avatar src={linkedin} variant="square" />
             </Grid>
             <Grid
               item
@@ -84,15 +89,14 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>Maltego</Typography>
+              <Typography>Linkedin</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <TextField
                 fullWidth
                 onChange={(e) => {
-                  this.setState({ Maltego: e.target.value });
+                  this.setState({ Linkedin: e.target.value });
                 }}
-                disabled
               />
             </Grid>
           </Grid>

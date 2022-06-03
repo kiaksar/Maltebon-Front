@@ -218,8 +218,8 @@ export const getWhoisInfo = async (username) => {
 
   await axios
     .post(makeURL(references.url_whois), {
-      param1: username,
-      param2: "-",
+      param1: "whois-history",
+      param2: "hiweb.ir",
     })
     .then((response) => {
       message = response.data.message;
