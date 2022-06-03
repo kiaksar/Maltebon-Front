@@ -8,13 +8,23 @@ import Graph from "react-graph-vis";
 import Node from "./Node";
 import { v4 as uuidv4 } from "uuid";
 import code1BG from "../pics/code1.jpg";
+import linkedin from "../pics/Linkedin.png";
+import whois from "../pics/whois.png";
+import BookmarkBorder from "@material-ui/icons/BookmarkBorder";
+import GetAppIcon from "@material-ui/icons/GetApp";
+
+import TextField from "@material-ui/core/TextField";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
 import {
   getGithubInfo,
   getInstagramInfo,
+  getLinkedinInfo,
   getTelegramInfo,
+  getWhoisInfo,
+  saveSketchPad,
+  exportSketchPad,
 } from "../../Connections/Connection";
 import { getUser } from "../../Connections/Common";
 
@@ -194,13 +204,97 @@ class SketchPage extends Component {
     // var canvas = network.canvas.frame.canvas;
     // var ctx = canvas.getContext("2d");
   }
+  addLinkedinNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getLinkedinInfo(this.state.selectedNode.label).then((e) => {
+      if (e !== false) {
+        console.log(e);
+        e.forEach((element) => {
+          this.createNode(
+            element.public_id,
+            "linkedin",
+            element.public_id,
+            this.state.selectedNode.id
+          );
+        });
+      }
+    });
+  };
+  addWhoisNode = async () => {
+    this.setState({ vis: "hidden" });
+    await getWhoisInfo(this.state.selectedNode.label, "whois-history").then(
+      (e) => {
+        if (e !== false) {
+          console.log(e.result);
+          e.result.emails.forEach((element) => {
+            console.log("emails: ", element);
+            this.createNode(
+              element,
+              "email",
+              element,
+              this.state.selectedNode.id
+            );
+          });
+          e.result.names.forEach((element) => {
+            console.log("names: ", element);
+            this.createNode(
+              element,
+              "telegram",
+              element,
+              this.state.selectedNode.id
+            );
+          });
+          e.result.telephones.forEach((element) => {
+            console.log("telephones: ", element);
+            this.createNode(
+              element,
+              "telephone",
+              element,
+              this.state.selectedNode.id
+            );
+          });
+        }
+
+        // this.createNode(
+        //   this.state.selectedNode.label,
+        //   "telegram",
+        //   element.domainName,
+        //   this.state.selectedNode.id
+        // );
+      }
+    );
+  };
+
+  handleSketchSave = async () => {
+    if (this.state.sketchName !== "") {
+      var res = { graph: this.state.graph };
+      await saveSketchPad(res, this.state.sketchName).then((e) => {
+        window.alert(e);
+      });
+    } else {
+      window.alert("Error: SketchName is Empty");
+    }
+  };
+
+  handleSketchExport = async () => {
+    if (this.state.sketchName !== "") {
+      exportSketchPad(this.state.sketchName).then((e) => {
+        window.alert(e);
+      });
+    } else {
+      window.alert("Error: hell");
+    }
+  };
+
   constructor(props) {
     super(props);
 
     // ctx.drawImage(document.getElementById("scream"), -100, -100);
     this.state = {
+      sketchName: "",
       posX: 0,
       posY: 0,
+      dataUrl: "",
       vis: "hidden",
       selectedNode: "",
       selectedEdge: "",
@@ -239,7 +333,7 @@ class SketchPage extends Component {
       graphKey: 1,
       counter: 1,
       graph: {
-        nodes: [new Node(1, getUser(), "user", "")],
+        nodes: [new Node(1, "root", "user", "")],
         edges: [],
       },
       physics: { enabled: false },
@@ -449,6 +543,32 @@ class SketchPage extends Component {
                   </div>
                 ),
               });
+            } else if (selectedNode.nodeType === "linkedin") {
+              console.log(this.state.selectedNode);
+              this.setState({
+                menu: (
+                  <div
+                    style={{
+                      padding: theme.spacing(1),
+                      fontFamily: "sans-serif",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <Link
+                      href={
+                        "https://www.linkedin.com/in/" +
+                        this.state.selectedNode.data
+                      }
+                      color="textPrimary"
+                    >
+                      <Typography style={{ color: "#fff" }}>
+                        {"https://www.linkedin.com/in/" +
+                          this.state.selectedNode.data}
+                      </Typography>
+                    </Link>
+                  </div>
+                ),
+              });
             } else if (selectedNode.nodeType === "user") {
               this.setState({
                 menu: (
@@ -513,13 +633,52 @@ class SketchPage extends Component {
                       <Button
                         fullWidth
                         variant="contained"
+                        onClick={this.addLinkedinNode}
+                        style={{
+                          backgroundColor: theme.palette.secondary.light,
+                        }}
+                        // onClick={this.deleteNode}
+                      >
+                        <Avatar
+                          src={linkedin}
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Linked-in
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={this.addWhoisNode}
+                      >
+                        <Avatar
+                          src={whois}
+                          style={{
+                            height: theme.spacing(3),
+                            width: theme.spacing(3),
+                            marginRight: theme.spacing(1),
+                          }}
+                        />
+                        Whois
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} lg={12} md={12}>
+                      <Button
+                        fullWidth
+                        variant="contained"
                         style={{
                           backgroundColor: theme.palette.secondary.light,
                         }}
                         onClick={this.deleteNode}
                       >
                         <Avatar
-                          src="https://icon-library.com/images/delete-icon-png/delete-icon-png-16.jpg"
+                          src="https://static.thenounproject.com/png/1561912-200.png"
                           style={{
                             height: theme.spacing(3),
                             width: theme.spacing(3),
@@ -660,6 +819,15 @@ class SketchPage extends Component {
       },
     };
   }
+  options = {
+    layout: {
+      hierarchical: true,
+    },
+    edges: {
+      color: "#222",
+    },
+  };
+
   randomColor() {
     const red = Math.floor(Math.random() * 256)
       .toString(16)
@@ -691,10 +859,7 @@ class SketchPage extends Component {
     console.log(this.state.graph.nodes);
   };
   createNode = (label, type, data, parentID) => {
-    const color = this.randomColor();
     const id = this.state.counter + 1;
-    console.log("()()()()", this.state);
-    console.log(data);
 
     this.setState(({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
       //const id = this.state.counter + 1;
@@ -708,7 +873,6 @@ class SketchPage extends Component {
         ...rest,
       };
     });
-    console.log(this.state.graph.nodes);
   };
   triggerText = "+";
   onSubmit = (event) => {
@@ -765,7 +929,32 @@ class SketchPage extends Component {
                           variant="h4"
                           style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
                         >
-                          Sketch
+                          <TextField
+                            onChange={(e) => {
+                              this.setState({ sketchName: e.target.value });
+                            }}
+                            id="outlined-basic"
+                            label="SketchName"
+                            variant="filled"
+                            style={{ width: "13vw" }}
+                          />
+                          <Button
+                            onClick={this.handleSketchSave}
+                            type="button"
+                            color="primary"
+                            style={{ width: "100%", borderRadius: 100 }}
+                          >
+                            <BookmarkBorder />
+                          </Button>
+
+                          <Button
+                            onClick={this.handleSketchExport}
+                            type="button"
+                            color="primary"
+                            style={{ width: "100%", borderRadius: 100 }}
+                          >
+                            <GetAppIcon />
+                          </Button>
                         </Typography>
                       </div>
                     </Grid>
