@@ -6,7 +6,7 @@ test("it should render navbar correctly", async () => {
   render(<Navbar />);
   const maltebon = screen.getByTestId("navbar-maltebon");
   const loginButton = screen.getByTestId("navbar-login");
-  const signupButton = screen.getByTestId("navbar-signup");
+  const signupButton = screen.getByText("Sign Up");
   expect(maltebon).toBeInTheDocument();
   expect(loginButton).toBeInTheDocument();
   expect(signupButton).toBeInTheDocument();
