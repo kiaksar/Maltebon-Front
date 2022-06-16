@@ -28,6 +28,7 @@ jobs:
         cache: 'npm'
     - run: npm install @babel/preset-react
     - run: npm install @babel/preset-env
+    - run: npm install @babel/plugin-transform-modules-commonjs
     - run: npm install -g jest
     - run: npm ci
     - run: npm run build --if-present
