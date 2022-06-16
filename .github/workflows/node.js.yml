@@ -11,6 +11,9 @@ on:
 
 jobs:
   build:
+    defaults:
+       run:
+         working-directory: ./maltebon/
 
     runs-on: ubuntu-latest
 
