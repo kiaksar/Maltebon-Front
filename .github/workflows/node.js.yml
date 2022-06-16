@@ -32,7 +32,7 @@ jobs:
     - run: npm install @babel/preset-react --force
     - run: npm install @babel/preset-env --force
     - run: npm install @babel/plugin-transform-modules-commonjs --force
-    - run: npm install -g jest
-    - run: npm ci
+    - run: npm install -g jest --force
+    - run: npm ci --force
     - run: npm run build --if-present
     - run: npm test --updateSnapshot
