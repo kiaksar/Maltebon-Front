@@ -9,7 +9,7 @@ test("it should render login page correctly", async () => {
   render(<LoginPage />);
   const usernameBox = screen.getByText("Username");
   const passwordBox = screen.getByText("Password");
-  const loginButton = screen.getByTitle("Log in");
+  const loginButton = screen.getByRole("button");
   expect(usernameBox).toBeInTheDocument();
   expect(passwordBox).toBeInTheDocument();
   expect(loginButton).toBeInTheDocument();
