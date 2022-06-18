@@ -193,7 +193,7 @@ export default class MySketchPage extends Component {
               ],
             },
             counter: id,
-            graphKey: uuidv4,
+            graphKey: uuidv4(),
             ...rest,
           };
         }
@@ -214,16 +214,54 @@ export default class MySketchPage extends Component {
     .then((response) => {
       var sketch = response.data[0]
       var data = JSON.parse(sketch.data )
-      console.log(typeof data , data.graph);
-      
       this.setState({
         token:token,
-        sketchName:"sketch.name",
-        graph:{nodes: [new Node(1, "root", "user", "")] , edges:[]}
+        sketchName:sketch.name,
+        graph:{nodes: [] , edges:[] , graphKey:uuidv4()}
       });
+      let nds = data.graph.nodes;
+      nds.sort(function(a, b){return a.id - b.id}); 
+      
+      nds.forEach(element => {
+        console.log("sort" , element.id)
+        this.setState({counter:element.id -1})
+        this.createNode(element.label , element.nodeType , element.data , -1)
+        
+      });
+      let eds = data.graph.edges;
+
+     
+      eds.forEach(element => {
+        const id = this.state.counter + 1;
+        console.log("edge" , element.id)
+
+      this.setState(
+        ({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
+          //const id = this.state.counter + 1;
+          return {
+            graph: {
+              nodes: [...nodes],
+              edges: [
+                {
+                  from: element.from,
+                  to: element.to,
+                },
+                ...edges,
+              ],
+            },
+            counter: id,
+            graphKey: uuidv4(),
+            ...rest,
+          };
+        }
+      );
+      })
+      console.log("edge" , this.state.graph , nds)
+
     })
     .catch((error) => {
       console.log("Error in getting sketch", error);
+      window.alert("Error in getting sketch")
     });
     var canvas = document.getElementById("myGraph").children[0].children[0];
     // console.log(canvas);
@@ -359,8 +397,11 @@ export default class MySketchPage extends Component {
       },
 
       graphKey: 1,
-      counter: 1,
-      graph: {},
+      counter: 0,
+      graph:{
+        nodes: [],
+        edges: []
+      },
       physics: { enabled: false },
       events: {
         select: ({ nodes, edges }) => {
@@ -877,7 +918,7 @@ export default class MySketchPage extends Component {
           edges: [...edges],
         },
         counter: id,
-        graphKey: uuidv4,
+        graphKey: uuidv4(),
         ...rest,
       };
     });
@@ -894,7 +935,7 @@ export default class MySketchPage extends Component {
           edges: [{ from: parentID, to: id }, ...edges],
         },
         counter: id,
-        graphKey: uuidv4,
+        graphKey: uuidv4(),
         ...rest,
       };
     });
@@ -962,6 +1003,7 @@ export default class MySketchPage extends Component {
                             label="SketchName"
                             variant="filled"
                             style={{ width: "13vw" }}
+                            value={this.state.sketchName}
                           />
                           <Button
                             onClick={this.handleSketchSave}
