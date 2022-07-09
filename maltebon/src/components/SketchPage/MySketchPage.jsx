@@ -12,8 +12,9 @@ import linkedin from "../pics/Linkedin.png";
 import whois from "../pics/whois.png";
 import BookmarkBorder from "@material-ui/icons/BookmarkBorder";
 import GetAppIcon from "@material-ui/icons/GetApp";
-
 import TextField from "@material-ui/core/TextField";
+import axios from "axios";
+import { makeURL } from "../../Connections/Common";
 
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
@@ -39,7 +40,7 @@ const styles = {
   },
 };
 
-class SketchPage extends Component {
+export default class MySketchPage extends Component {
   state = {
     posX: 0,
     posY: 0,
@@ -199,7 +200,7 @@ class SketchPage extends Component {
               ],
             },
             counter: id,
-            graphKey: uuidv4,
+            graphKey: uuidv4(),
             ...rest,
           };
         }
@@ -208,7 +209,65 @@ class SketchPage extends Component {
     }
     this.setState({ vis: "hidden" });
   };
-  componentDidMount() {
+  async componentDidMount() {
+    var href = window.location.href.split("/");
+    var token = href[href.length - 1];
+    console.log("token ", token);
+    await axios
+      .put(makeURL("/sketchs"), {
+        token: token,
+      })
+      .then((response) => {
+        var sketch = response.data[0];
+        var data = JSON.parse(sketch.data);
+        this.setState({
+          token: token,
+          sketchName: sketch.name,
+          graph: { nodes: [], edges: [], graphKey: uuidv4() },
+        });
+        let nds = data.graph.nodes;
+        nds.sort(function (a, b) {
+          return a.id - b.id;
+        });
+
+        nds.forEach((element) => {
+          console.log("sort", element.id);
+          this.setState({ counter: element.id - 1 });
+          this.createNode(element.label, element.nodeType, element.data, -1);
+        });
+        let eds = data.graph.edges;
+
+        eds.forEach((element) => {
+          const id = this.state.counter + 1;
+          console.log("edge", element.id);
+
+          this.setState(
+            ({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
+              //const id = this.state.counter + 1;
+              return {
+                graph: {
+                  nodes: [...nodes],
+                  edges: [
+                    {
+                      from: element.from,
+                      to: element.to,
+                    },
+                    ...edges,
+                  ],
+                },
+                counter: id,
+                graphKey: uuidv4(),
+                ...rest,
+              };
+            }
+          );
+        });
+        console.log("edge", this.state.graph, nds);
+      })
+      .catch((error) => {
+        console.log("Error in getting sketch", error);
+        window.alert("Error in getting sketch");
+      });
     var canvas = document.getElementById("myGraph").children[0].children[0];
     // console.log(canvas);
     // var canvas = network.canvas.frame.canvas;
@@ -307,6 +366,7 @@ class SketchPage extends Component {
 
     // ctx.drawImage(document.getElementById("scream"), -100, -100);
     this.state = {
+      token: "",
       sketchName: "",
       posX: 0,
       posY: 0,
@@ -347,15 +407,15 @@ class SketchPage extends Component {
       },
 
       graphKey: 1,
-      counter: 1,
+      counter: 0,
       graph: {
-        nodes: [new Node(1, "root", "user", "")],
+        nodes: [],
         edges: [],
       },
       physics: { enabled: false },
       events: {
         select: ({ nodes, edges }) => {
-          if (nodes.length == 1) {
+          if (nodes.length !== 0) {
             console.log("Selected nodes:");
             console.log(nodes);
             var selectedNode = this.state.graph.nodes.find(
@@ -364,6 +424,7 @@ class SketchPage extends Component {
             selectedNode.chosen = false;
             console.log(this.state.graph.nodes.find((x) => x.id == nodes));
             var paper = document.getElementById("paperr");
+
             paper.style.position = "absolute";
             paper.style.visibility = "visible";
             var e = window.event;
@@ -867,7 +928,7 @@ class SketchPage extends Component {
           edges: [...edges],
         },
         counter: id,
-        graphKey: uuidv4,
+        graphKey: uuidv4(),
         ...rest,
       };
     });
@@ -884,7 +945,7 @@ class SketchPage extends Component {
           edges: [{ from: parentID, to: id }, ...edges],
         },
         counter: id,
-        graphKey: uuidv4,
+        graphKey: uuidv4(),
         ...rest,
       };
     });
@@ -952,6 +1013,7 @@ class SketchPage extends Component {
                             label="SketchName"
                             variant="filled"
                             style={{ width: "13vw" }}
+                            value={this.state.sketchName}
                           />
                           <Button
                             onClick={this.handleSketchSave}
@@ -1060,5 +1122,3 @@ class SketchPage extends Component {
     );
   }
 }
-
-export default SketchPage;
