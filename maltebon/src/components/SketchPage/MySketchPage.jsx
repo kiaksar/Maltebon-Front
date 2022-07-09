@@ -40,8 +40,6 @@ const styles = {
   },
 };
 
-
-
 export default class MySketchPage extends Component {
   state = {
     posX: 0,
@@ -51,8 +49,8 @@ export default class MySketchPage extends Component {
     menu: "",
     nodeList: [],
     firstNodeConnect: null,
+    nodeToConnect: null,
   };
-
 
   deleteNode = () => {
     this.setState({ vis: "hidden" });
@@ -104,42 +102,51 @@ export default class MySketchPage extends Component {
 
   addGithubNode = async () => {
     this.setState({ vis: "hidden" });
-    await getGithubInfo(this.state.selectedNode.label).then((e) => {
+    this.setState({
+      nodeToConnect: JSON.parse(JSON.stringify(this.state.selectedNode)),
+    });
+    await getGithubInfo(this.state.nodeToConnect.label).then((e) => {
       if (e !== false) {
         console.log(e);
         this.createNode(
-          this.state.selectedNode.label,
+          this.state.nodeToConnect.label,
           "git",
           e,
-          this.state.selectedNode.id
+          this.state.nodeToConnect.id
         );
       }
     });
   };
   addInstagramNode = async () => {
     this.setState({ vis: "hidden" });
-    await getInstagramInfo(this.state.selectedNode.label).then((e) => {
+    this.setState({
+      nodeToConnect: JSON.parse(JSON.stringify(this.state.selectedNode)),
+    });
+    await getInstagramInfo(this.state.nodeToConnect.label).then((e) => {
       if (e !== false) {
         console.log(e);
         this.createNode(
-          this.state.selectedNode.label,
+          this.state.nodeToConnect.label,
           "instagram",
           e,
-          this.state.selectedNode.id
+          this.state.nodeToConnect.id
         );
       }
     });
   };
   addTelegramNode = async () => {
     this.setState({ vis: "hidden" });
-    await getTelegramInfo(this.state.selectedNode.label).then((e) => {
+    this.setState({
+      nodeToConnect: JSON.parse(JSON.stringify(this.state.selectedNode)),
+    });
+    await getTelegramInfo(this.state.nodeToConnect.label).then((e) => {
       if (e !== false) {
         console.log(e);
         this.createNode(
-          this.state.selectedNode.label,
+          this.state.nodeToConnect.label,
           "telegram",
           e,
-          this.state.selectedNode.id
+          this.state.nodeToConnect.id
         );
       }
     });
@@ -203,66 +210,64 @@ export default class MySketchPage extends Component {
     this.setState({ vis: "hidden" });
   };
   async componentDidMount() {
-
-    var href = window.location.href.split('/')
-    var token =href[href.length - 1]
-    console.log("token " , token )
+    var href = window.location.href.split("/");
+    var token = href[href.length - 1];
+    console.log("token ", token);
     await axios
-    .put(makeURL("/sketchs"), {
-      token: token,
-    })
-    .then((response) => {
-      var sketch = response.data[0]
-      var data = JSON.parse(sketch.data )
-      this.setState({
-        token:token,
-        sketchName:sketch.name,
-        graph:{nodes: [] , edges:[] , graphKey:uuidv4()}
-      });
-      let nds = data.graph.nodes;
-      nds.sort(function(a, b){return a.id - b.id}); 
-      
-      nds.forEach(element => {
-        console.log("sort" , element.id)
-        this.setState({counter:element.id -1})
-        this.createNode(element.label , element.nodeType , element.data , -1)
-        
-      });
-      let eds = data.graph.edges;
-
-     
-      eds.forEach(element => {
-        const id = this.state.counter + 1;
-        console.log("edge" , element.id)
-
-      this.setState(
-        ({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
-          //const id = this.state.counter + 1;
-          return {
-            graph: {
-              nodes: [...nodes],
-              edges: [
-                {
-                  from: element.from,
-                  to: element.to,
-                },
-                ...edges,
-              ],
-            },
-            counter: id,
-            graphKey: uuidv4(),
-            ...rest,
-          };
-        }
-      );
+      .put(makeURL("/sketchs"), {
+        token: token,
       })
-      console.log("edge" , this.state.graph , nds)
+      .then((response) => {
+        var sketch = response.data[0];
+        var data = JSON.parse(sketch.data);
+        this.setState({
+          token: token,
+          sketchName: sketch.name,
+          graph: { nodes: [], edges: [], graphKey: uuidv4() },
+        });
+        let nds = data.graph.nodes;
+        nds.sort(function (a, b) {
+          return a.id - b.id;
+        });
 
-    })
-    .catch((error) => {
-      console.log("Error in getting sketch", error);
-      window.alert("Error in getting sketch")
-    });
+        nds.forEach((element) => {
+          console.log("sort", element.id);
+          this.setState({ counter: element.id - 1 });
+          this.createNode(element.label, element.nodeType, element.data, -1);
+        });
+        let eds = data.graph.edges;
+
+        eds.forEach((element) => {
+          const id = this.state.counter + 1;
+          console.log("edge", element.id);
+
+          this.setState(
+            ({ graph: { nodes, edges }, counter, graphKey, ...rest }) => {
+              //const id = this.state.counter + 1;
+              return {
+                graph: {
+                  nodes: [...nodes],
+                  edges: [
+                    {
+                      from: element.from,
+                      to: element.to,
+                    },
+                    ...edges,
+                  ],
+                },
+                counter: id,
+                graphKey: uuidv4(),
+                ...rest,
+              };
+            }
+          );
+        });
+        console.log("edge", this.state.graph, nds);
+      })
+      .catch((error) => {
+        console.log("Error in getting sketch", error);
+        window.alert("Error in getting sketch");
+      });
     var canvas = document.getElementById("myGraph").children[0].children[0];
     // console.log(canvas);
     // var canvas = network.canvas.frame.canvas;
@@ -270,7 +275,10 @@ export default class MySketchPage extends Component {
   }
   addLinkedinNode = async () => {
     this.setState({ vis: "hidden" });
-    await getLinkedinInfo(this.state.selectedNode.label).then((e) => {
+    this.setState({
+      nodeToConnect: JSON.parse(JSON.stringify(this.state.selectedNode)),
+    });
+    await getLinkedinInfo(this.state.nodeToConnect.label).then((e) => {
       if (e !== false) {
         console.log(e);
         e.forEach((element) => {
@@ -278,7 +286,7 @@ export default class MySketchPage extends Component {
             element.public_id,
             "linkedin",
             element.public_id,
-            this.state.selectedNode.id
+            this.state.nodeToConnect.id
           );
         });
       }
@@ -286,7 +294,10 @@ export default class MySketchPage extends Component {
   };
   addWhoisNode = async () => {
     this.setState({ vis: "hidden" });
-    await getWhoisInfo(this.state.selectedNode.label, "whois-history").then(
+    this.setState({
+      nodeToConnect: JSON.parse(JSON.stringify(this.state.selectedNode)),
+    });
+    await getWhoisInfo(this.state.nodeToConnect.label, "whois-history").then(
       (e) => {
         if (e !== false) {
           console.log(e.result);
@@ -296,7 +307,7 @@ export default class MySketchPage extends Component {
               element,
               "email",
               element,
-              this.state.selectedNode.id
+              this.state.nodeToConnect.id
             );
           });
           e.result.names.forEach((element) => {
@@ -305,7 +316,7 @@ export default class MySketchPage extends Component {
               element,
               "telegram",
               element,
-              this.state.selectedNode.id
+              this.state.nodeToConnect.id
             );
           });
           e.result.telephones.forEach((element) => {
@@ -314,7 +325,7 @@ export default class MySketchPage extends Component {
               element,
               "telephone",
               element,
-              this.state.selectedNode.id
+              this.state.nodeToConnect.id
             );
           });
         }
@@ -352,11 +363,10 @@ export default class MySketchPage extends Component {
 
   constructor(props) {
     super(props);
-    
-    
+
     // ctx.drawImage(document.getElementById("scream"), -100, -100);
     this.state = {
-      token : "",
+      token: "",
       sketchName: "",
       posX: 0,
       posY: 0,
@@ -398,9 +408,9 @@ export default class MySketchPage extends Component {
 
       graphKey: 1,
       counter: 0,
-      graph:{
+      graph: {
         nodes: [],
-        edges: []
+        edges: [],
       },
       physics: { enabled: false },
       events: {
@@ -1112,4 +1122,3 @@ export default class MySketchPage extends Component {
     );
   }
 }
-
