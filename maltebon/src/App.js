@@ -13,6 +13,7 @@ import SketchPage from "./components/SketchPage/SketchPage";
 import Footer2 from "./components/Footer/Footer2";
 import SavedSketchpadMiniBox from "./components/UserPanel/SavedSketchpadMiniBox";
 import SavedSketchpads from "./components/UserPanel/SavedSketchpads";
+import MySketchPage from "./components/SketchPage/MySketchPage";
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     flexGrow: 1,
@@ -36,7 +37,7 @@ function App() {
         <Route element={<LoginPage />} path="/login" exact="true" />
         <Route element={<SignupPage />} path="/register" exact="true" />
         <Route element={<SketchPage />} path="/sketch" exact="true" />
-
+        <Route element={<MySketchPage />} path="/Mysketchs/:token" exact="true"/>
         <Route
           element={<Profile theme={Theme} />}
           path="/profile"

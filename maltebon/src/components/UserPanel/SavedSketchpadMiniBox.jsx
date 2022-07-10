@@ -21,7 +21,10 @@ class SavedSketchpadMiniBox extends Component {
   };
   render() {
     return (
-      <Card style={{border:"2px solid #9ef01a", background:'transparent'}}>
+      <Card onClick={() => {
+        window.location.replace("/Mysketchs/"+this.props.link);
+      }}
+      style={{border:"2px solid #9ef01a", background:'transparent'}}>
         <CardActionArea>
           <CardMedia image={this.state.image}  />
           <CardContent>
@@ -31,8 +34,6 @@ class SavedSketchpadMiniBox extends Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          
-
         </CardActions>
       </Card>
     );
