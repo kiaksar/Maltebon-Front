@@ -51,6 +51,7 @@ class SignupPage extends Component {
               top: "50%",
               transform: "translate(-50%, -50%)",
               padding: "1vw",
+              background:'#222'
             }}
           >
             <Grid container spacing={1} direction={"column"}>
@@ -72,7 +73,7 @@ class SignupPage extends Component {
                     <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
                       <Typography
                         variant="h4"
-                        style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                        style={{ fontFamily: "Fredoka", fontWeight: "bold", color:'#9ef01a'}}
                       >
                         Register
                       </Typography>
@@ -93,7 +94,7 @@ class SignupPage extends Component {
                       label="Username"
                       variant="filled"
                       data-testid="signup-usernameBox"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -112,7 +113,7 @@ class SignupPage extends Component {
                       variant="filled"
                       type="password"
                       data-testid="signup-passwordBox"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -131,7 +132,7 @@ class SignupPage extends Component {
                       variant="filled"
                       type="password"
                       data-testid="signup-confPasswordBox"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -150,7 +151,7 @@ class SignupPage extends Component {
                       variant="filled"
                       type="email"
                       data-testid="signup-emailBox"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -170,7 +171,7 @@ class SignupPage extends Component {
                       color="primary"
                       title="Sign up"
                       data-testid="signup-signupButton"
-                      style={{ width: "100%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main}}
+                      style={{ width: "94%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main , marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     >
                       Sign Up
                     </Button>

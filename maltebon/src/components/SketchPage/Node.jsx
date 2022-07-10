@@ -51,10 +51,28 @@ class Node {
           "https://cdn0.iconfinder.com/data/icons/network-ui-line-badge-filled-outline/64/Network-hierarchy-root-connection-512.png";
         // this.value = 3;
         break;
+      case "email":
+        this.image =
+          "https://upload.wikimedia.org/wikipedia/commons/4/4f/Android_Email_2.0_Icon.png";
+        break;
+      case "telephone":
+        this.image =
+          "https://upload.wikimedia.org/wikipedia/commons/d/d4/Phone_communication_icon.png";
+        break;
+      case "name":
+        this.image =
+          "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
+        break;
+      case "linkedin":
+        this.image =
+          "https://upload.wikimedia.org/wikipedia/commons/e/e6/729101_linkedin_icon.png";
+        break;
       default:
         break;
     }
 
+    this.x = id * 10;
+    this.y = id * 10;
     this.color = "#fff";
   }
 }
