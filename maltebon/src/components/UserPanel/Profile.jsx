@@ -114,11 +114,11 @@ class Profile extends Component {
         >
           {/* <AppBar position="static"> */}
           {/* </AppBar> */}
-          <Grid container style={{ margin: "auto" }}>
-            <Grid item lg={1} xs={1} md={1}></Grid>
+          <Grid container style={{ margin: "auto"}}>
+            <Grid item lg={1} xs={1} md={1}/>
             <Grid item lg={10} xs={10} md={10}>
               <Paper>
-                <Grid container>
+                <Grid container style={{background:'#222'}}>
                   <Grid item lg={2} xs={12} md={2}>
                     <Hidden only={["xs", "sm", "md"]}>
                       <div
@@ -156,6 +156,7 @@ class Profile extends Component {
                                 // padding: "1vw",
                                 alignItems: "center",
                                 // textAlign: "left",
+                                color:'#9ef01a'
                               }}
                               label={<span>Edit Profile</span>}
                               icon={<FaceIcon />}
@@ -174,6 +175,8 @@ class Profile extends Component {
                                 borderTop: "1px solid",
                                 // padding: "1vw",
                                 textAlign: "center",
+                                color:'#9ef01a'
+
                               }}
                               label="Tokens"
                               icon={<ExtensionIcon />}
@@ -192,6 +195,8 @@ class Profile extends Component {
                                 borderTop: "1px solid",
                                 // padding: "1vw",
                                 textAlign: "center",
+                                color:'#9ef01a'
+
                               }}
                               label="Saved"
                               icon={<NoteIcon />}

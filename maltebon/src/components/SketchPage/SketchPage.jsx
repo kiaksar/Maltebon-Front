@@ -14,7 +14,6 @@ import BookmarkBorder from "@material-ui/icons/BookmarkBorder";
 import GetAppIcon from "@material-ui/icons/GetApp";
 
 import TextField from "@material-ui/core/TextField";
-
 import { AddNodeContainer } from "./AddNode/AddNodeContainer";
 import { green } from "@material-ui/core/colors";
 import {
@@ -874,7 +873,7 @@ class SketchPage extends Component {
       };
     });
   };
-  triggerText = "Add Node";
+  triggerText = "+ Add Node";
   onSubmit = (event) => {
     event.preventDefault(event);
     const plugin = event.target[0].value;

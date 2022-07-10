@@ -71,6 +71,7 @@ class LoginPage extends Component {
               top: "50%",
               transform: "translate(-50%, -50%)",
               padding: "1vw",
+              background:'#222'
             }}
           >
             <Grid container spacing={1} direction={"column"}>
@@ -98,7 +99,7 @@ class LoginPage extends Component {
                     >
                       <Typography
                         variant="h4"
-                        style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                        style={{ fontFamily: "Fredoka", fontWeight: "bold", color:'#9ef01a', borderRadius:10}}
                       >
                         Log in
                       </Typography>
@@ -118,7 +119,7 @@ class LoginPage extends Component {
                       id="outlined-basic"
                       label="Username"
                       variant="filled"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -136,7 +137,7 @@ class LoginPage extends Component {
                       label="Password"
                       variant="filled"
                       type="password"
-                      style={{width : "13vw"}}
+                      style={{width : "300px", background:'#9ef01a', marginLeft:'10px', marginRight:'10px', borderRadius:10}}
                     />
                   </Grid>
                   <Grid
@@ -153,7 +154,7 @@ class LoginPage extends Component {
                     <Button
                       onClick={this.handleLogin}
                       type="button"
-                      style={{ width: "100%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main}}
+                      style={{ width: "94%", color: theme.palette.secondary.textColor, background: theme.palette.secondary.main , marginLeft:'10px', marginRight:'10px'}}
                     >
                       Log in
                     </Button>

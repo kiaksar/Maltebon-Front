@@ -124,6 +124,7 @@ class EditProfile extends Component {
             fontFamily: "Fredoka",
             fontWeight: "bold",
             paddingBottom: "5vh",
+            color:'#9ef01a'
           }}
         >
           Account Information
@@ -131,7 +132,7 @@ class EditProfile extends Component {
         <form noValidate autoComplete="off">
           <Grid container spacing={2}>
             <Grid item lg={4} xs={12} md={4}>
-              <Grid container style={{ height: "100%" }}>
+              <Grid container style={{ height: "100%"}}>
                 <Grid
                   item
                   lg={12}
@@ -141,7 +142,7 @@ class EditProfile extends Component {
                 >
                   <Avatar
                     variant="square"
-                    style={{ width: "20vh", height: "20vh", margin: "auto" }}
+                    style={{ width: "20vh", height: "20vh", margin: "auto", borderRadius:100 }}
                     src={this.state.imageURL}
                   />
                 </Grid>
@@ -160,6 +161,8 @@ class EditProfile extends Component {
                       fontFamily: "Fredoka",
                       fontWeight: "bold",
                       backgroundColor: theme.palette.secondary.main,
+                      borderRadius:10,
+                      color: this.state.isEditting ? 'gray' : '#fff',
                     }}
                     disabled={this.state.isEditting}
                   >
@@ -180,7 +183,7 @@ class EditProfile extends Component {
                   <TextField
                     variant="filled"
                     label="Email"
-                    style={{ width: "100%", fontFamily: "Fredoka" }}
+                    style={{borderRadius:10, background:'#9ef01a', width: "100%", fontFamily: "Fredoka" }}
                     disabled
                     value={this.state.email}
                   />
@@ -189,7 +192,7 @@ class EditProfile extends Component {
                   <TextField
                     variant="filled"
                     label="Name"
-                    style={{ width: "100%", fontFamily: "Fredoka" }}
+                    style={{borderRadius:10, background:'#9ef01a', width: "100%", fontFamily: "Fredoka" }}
                     disabled={this.state.isEditting}
                     value={this.state.name}
                     onChange={(e) => {
@@ -201,7 +204,7 @@ class EditProfile extends Component {
                   <TextField
                     variant="filled"
                     label="Username"
-                    style={{ width: "100%" }}
+                    style={{borderRadius:10, background:'#9ef01a', width: "100%" }}
                     // disabled={this.state.isEditting}
                     disabled
                     value={this.state.username}
@@ -223,9 +226,11 @@ class EditProfile extends Component {
                     <Button
                       variant="contained"
                       style={{
-                        backgroundColor: theme.palette.primary.light,
+                        backgroundColor: theme.palette.primary.textColor,
                         marginTop: "2vh",
                         width: "80%",
+                        borderRadius:10,
+                        color:'#fff'
                       }}
                       disabled={this.state.loading}
                       onClick={this.makeEditable}
@@ -249,9 +254,11 @@ class EditProfile extends Component {
                     <Button
                       variant="contained"
                       style={{
-                        backgroundColor: theme.palette.primary.light,
+                        backgroundColor: theme.palette.primary.textColor,
                         marginTop: "2vh",
                         width: "80%",
+                        borderRadius:10,
+                        color:'#fff'
                       }}
                       onClick={() => {
                         this.props.changePass();

@@ -15,28 +15,24 @@ import { Typography } from "@material-ui/core";
 class SavedSketchpadMiniBox extends Component {
   state = {
     image: "",
-    title: "test",
+    title: "Test",
     link: "",
     isFavorite: false,
   };
   render() {
     return (
-      <Card>
+      <Card style={{border:"2px solid #9ef01a", background:'transparent'}}>
         <CardActionArea>
-          <CardMedia image={this.state.image} />
+          <CardMedia image={this.state.image}  />
           <CardContent>
-            <Typography variant="h4" component="h2">
+            <Typography variant="h4" component="h2" style={{color:'#9ef01a'}}>
               {this.state.title}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton>
-            {this.state.isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <IconButton>
-            <ShareIcon />
-          </IconButton>
+          
+
         </CardActions>
       </Card>
     );
