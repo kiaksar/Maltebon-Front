@@ -88,8 +88,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     "&:hover": {
-      color: "#DDA15E",
-      textDecoration: "underline #DDA15E",
+      color: "#9ef01a",
+      textDecoration: "underline #9ef01a",
     },
   },
   extendedIcon: {
