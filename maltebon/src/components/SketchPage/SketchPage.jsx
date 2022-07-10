@@ -362,7 +362,7 @@ class SketchPage extends Component {
     });
     console.log(this.state.graph.nodes);
   };
-  triggerText = "+";
+  triggerText = "Add Node ";
   onSubmit = (event) => {
     event.preventDefault(event);
     const plugin = event.target[0].value;
@@ -392,6 +392,7 @@ class SketchPage extends Component {
               padding: "1vw",
             }}
           >
+<<<<<<< Updated upstream
             <Grid container spacing={1} direction={"column"}>
               <Grid
                 item
@@ -449,6 +450,143 @@ class SketchPage extends Component {
                       onSubmit={this.onSubmit}
                       // disabled
                     />
+=======
+            <Paper
+              elevation={10}
+              style={{
+                //display: "inline-flex",
+                // position: "absolute",
+                left: "30%",
+                top: "50%",
+                width: "80%",
+                margin:'auto',
+                // transform: "translate(-50%, -50%)",
+                padding: "1vw",
+                backgroundColor:'#222'
+              //  marginTop: "5vh",
+               // marginBottom: "5vh",
+                //marginLeft:"9vw"
+              }}
+            >
+              <Grid container spacing={1} direction={"column"}>
+                <Grid
+                  item
+                  lg={12}
+                  xs={12}
+                  md={12}
+                  style={{ margin: "auto", textAlign: "center" }}
+                >
+                  <Grid container spacing={1} direction={"column"} >
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
+                      style={{ margin: "auto", textAlign: "center"}}
+                    >
+                      <div style={{ fontWeight: "bold", fontSize: "2vh" }}>
+                        <Typography
+                          variant="h4"
+                          style={{ fontFamily: "Fredoka", fontWeight: "bold" }}
+                        >
+                          <TextField
+                            onChange={(e) => {
+                              this.setState({ sketchName: e.target.value });
+                            }}
+                            id="outlined-basic"
+                            label="SketchName"
+                            variant="filled"
+                            style={{backgroundColor:'#9ef01a', borderRadius: 100 }}
+                          />
+                          <Button
+                            onClick={this.handleSketchSave}
+                            type="button"
+                            color="primary"
+                            style={{background:"#008000", color:"#FFF", width: "100%", borderRadius: 100 }}
+                          >
+                            <BookmarkBorder />
+                            <div>
+                              {"SAVE "}
+                            </div>
+                          </Button>
+
+                          <Button
+                            onClick={this.handleSketchExport}
+                            type="button"
+                            style={{background:"#008000", color:"#FFF", width: "100%", borderRadius: 100 }}
+                          >
+                            <GetAppIcon />
+                            <div>
+                              {"Downlod "}
+                            </div>
+                          </Button>
+                        </Typography>
+                      </div>
+                    </Grid>
+
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
+                      style={{ margin: "auto", textAlign: "center",backgroundColor:'#fff',marginBottom:'10px' }}
+                    >
+                      <Graph
+                        key={this.state.counter}
+                        graph={this.state.graph}
+                        events={this.state.events}
+                        options={this.state.options}
+                        style={{
+                          //PAIN
+                          height: "70vh",
+                          // backgroundImage:
+                          //   "url(https://i.pinimg.com/originals/e7/3e/6d/e73e6dcb23084c4b47e2ec70ebd80438.jpg)",
+                        }}
+                        identifier="myGraph"
+                        // physics={this.state.physics}
+                      />
+                    </Grid>
+                    {this.state.firstNodeConnect !== null &&
+                      this.state.firstNodeConnect !== undefined && (
+                        <Grid
+                          item
+                          lg={12}
+                          xs={12}
+                          md={12}
+                          style={{ margin: "auto", textAlign: "center" }}
+                        >
+                          <Typography>
+                            Connecting from :{" "}
+                            {this.state.firstNodeConnect.label}
+                          </Typography>
+                          <Button
+                            onClick={() => {
+                              this.setState({ firstNodeConnect: null });
+                            }}
+                          >
+                            Cancel connection
+                          </Button>
+                        </Grid>
+                      )}
+                    <Grid
+                      item
+                      lg={12}
+                      xs={12}
+                      md={12}
+                      style={{
+                        margin: "auto",
+                        textAlign: "center",
+                        background:"#9ef01a",
+                        borderRadius:'30px',
+                      }}
+                    >
+                      <AddNodeContainer
+                        triggerText={this.triggerText}
+                        onSubmit={this.onSubmit}
+                        // disabled
+                      />
+                    </Grid>
+>>>>>>> Stashed changes
                   </Grid>
                 </Grid>
               </Grid>
