@@ -13,27 +13,27 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Typography } from "@material-ui/core";
 class SavedSketchpadMiniBox extends Component {
-  
+  state = {
+    image: "",
+    title: "Test",
+    link: "",
+    isFavorite: false,
+  };
   render() {
     return (
       <Card onClick={() => {
         window.location.replace("/Mysketchs/"+this.props.link);
-      }}>
+      }}
+      style={{border:"2px solid #9ef01a", background:'transparent'}}>
         <CardActionArea>
-          <CardMedia image={this.props.image} />
+          <CardMedia image={this.state.image}  />
           <CardContent>
-            <Typography variant="h4" component="h2">
-              {this.props.title}
+            <Typography variant="h4" component="h2" style={{color:'#9ef01a'}}>
+              {this.state.title}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <IconButton>
-            {this.props.isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <IconButton>
-            <ShareIcon />
-          </IconButton>
         </CardActions>
       </Card>
     );

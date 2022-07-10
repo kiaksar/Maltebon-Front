@@ -83,6 +83,7 @@ class EditTokens extends Component {
             fontFamily: "Fredoka",
             fontWeight: "bold",
             paddingBottom: "5vh",
+            color: '#9ef01a'
           }}
         >
           Your Tokens
@@ -90,7 +91,7 @@ class EditTokens extends Component {
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>
-              <Avatar src={whois} variant="square" />
+              <Avatar src={whois} variant="square" style={{borderRadius:25}} />
             </Grid>
             <Grid
               item
@@ -99,7 +100,7 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>who.is</Typography>
+              <Typography style={{color:'#9ef01a'}}>who.is</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <TextField
@@ -109,7 +110,7 @@ class EditTokens extends Component {
                   
                   
                 }}
-                
+                inputProps={{style:{color:'#9ef01a'}}}
                 value={this.state.WhoIs}
               />
             </Grid>
@@ -119,7 +120,7 @@ class EditTokens extends Component {
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>
-              <Avatar src={linkedin} variant="square" />
+              <Avatar src={linkedin} variant="square"style={{borderRadius:25}} />
 
             </Grid>
             <Grid
@@ -129,7 +130,7 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>Linkedin</Typography>
+              <Typography style={{color:'#9ef01a'}}>Linkedin</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <Switch
@@ -145,7 +146,7 @@ class EditTokens extends Component {
         <div style={{ paddingBottom: "2vh" }}>
           <Grid container>
             <Grid item lg={1} xs={1} md={1}>
-              <Avatar src={GitHub} variant="square" />
+              <Avatar src={GitHub} variant="square" style={{borderRadius:25}} />
             </Grid>
             <Grid
               item
@@ -154,7 +155,7 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>Github</Typography>
+              <Typography style={{color:'#9ef01a'}}>Github</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <Switch
@@ -172,6 +173,7 @@ class EditTokens extends Component {
               <Avatar
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/640px-Telegram_logo.svg.png"
                 variant="square"
+                style={{borderRadius:25}}
               />
             </Grid>
             <Grid
@@ -181,7 +183,7 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>Telegram</Typography>
+              <Typography style={{color:'#9ef01a'}}>Telegram</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <Switch
@@ -199,6 +201,7 @@ class EditTokens extends Component {
               <Avatar
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/800px-Instagram-Icon.png"
                 variant="square"
+                style={{borderRadius:25}}
               />
             </Grid>
             <Grid
@@ -208,7 +211,7 @@ class EditTokens extends Component {
               md={2}
               style={{ margin: "auto", textAlign: "center" }}
             >
-              <Typography>Instagram</Typography>
+              <Typography style={{color:'#9ef01a'}}>Instagram</Typography>
             </Grid>
             <Grid item lg={9} xs={9} md={9}>
               <Switch

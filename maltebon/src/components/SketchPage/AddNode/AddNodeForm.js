@@ -14,8 +14,8 @@ export const AddNodeForm = ({ onSubmit }) => {
     target:""
   })
   return (
-    <form onSubmit={onSubmit}>
-      <div className="form-group">
+    <form onSubmit={onSubmit} style={{textAlign:'center'}}>
+    <div className="form-group">
       <TextField
                       onChange={(e) => {
                         setState({ plugin: e.target.value });
@@ -24,6 +24,9 @@ export const AddNodeForm = ({ onSubmit }) => {
                       label="Plugin"
                       variant="filled"
                       defaultValue="user"
+                      style={{width:'17vw', marginBottom:'1vh', background:'#9ef01a', }}
+                      inputProps={{ readOnly: true, }}
+                      
       />
 
       </div>
@@ -35,6 +38,8 @@ export const AddNodeForm = ({ onSubmit }) => {
                       id="Token-basic"
                       label="Target"
                       variant="filled"
+                      style={{width:'17vw', marginBottom:'2vh', background:'#9ef01a'}}
+
                       
       />
       </div>
@@ -43,11 +48,11 @@ export const AddNodeForm = ({ onSubmit }) => {
           className="form-control btn btn-primary" 
           type="submit"
           color="primary"
-          style={{ width: "100%" , borderRadius:100 }}
+          style={{ width: "auto" , borderRadius:100,background:'#008000',color:'#FFF' }}
         >
           Add
         </Button>
-      </div>
+    </div>
     </form>
   );
 };
