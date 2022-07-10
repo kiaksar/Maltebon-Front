@@ -976,6 +976,7 @@ class SketchPage extends Component {
                           // backgroundImage:
                           //   "url(https://i.pinimg.com/originals/e7/3e/6d/e73e6dcb23084c4b47e2ec70ebd80438.jpg)",
                         }}
+                        data-testid="sketch-canvas"
                         identifier="myGraph"
                         // physics={this.state.physics}
                       />
