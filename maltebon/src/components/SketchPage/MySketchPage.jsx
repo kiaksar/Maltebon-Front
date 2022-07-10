@@ -713,6 +713,7 @@ export default class MySketchPage extends Component {
                         style={{
                           backgroundColor: theme.palette.secondary.light,
                         }}
+                        disabled
                         // onClick={this.deleteNode}
                       >
                         <Avatar
@@ -770,7 +771,8 @@ export default class MySketchPage extends Component {
                         fullWidth
                         variant="contained"
                         style={{
-                          backgroundColor: theme.palette.secondary.light,
+                          backgroundColor: theme.palette.primary.textColor,
+                          color: "#fff"
                         }}
                         onClick={this.handleConnect}
                       >
@@ -950,7 +952,7 @@ export default class MySketchPage extends Component {
       };
     });
   };
-  triggerText = "+";
+  triggerText = "+ Add Node";
   onSubmit = (event) => {
     event.preventDefault(event);
     const plugin = event.target[0].value;
@@ -972,16 +974,12 @@ export default class MySketchPage extends Component {
             <Paper
               elevation={10}
               style={{
-                // display: "inline-flex",
-                // position: "absolute",
                 left: "30%",
                 top: "50%",
                 width: "80%",
-                // transform: "translate(-50%, -50%)",
+                margin:'auto',
                 padding: "1vw",
-                margin: "auto",
-                marginTop: "5vh",
-                marginBottom: "5vh",
+                backgroundColor:'#222'
               }}
             >
               <Grid container spacing={1} direction={"column"}>
@@ -1012,25 +1010,31 @@ export default class MySketchPage extends Component {
                             id="outlined-basic"
                             label="SketchName"
                             variant="filled"
-                            style={{ width: "13vw" }}
+                            style={{backgroundColor:'#9ef01a', borderRadius: 100 }}
                             value={this.state.sketchName}
                           />
                           <Button
                             onClick={this.handleSketchSave}
                             type="button"
                             color="primary"
-                            style={{ width: "100%", borderRadius: 100 }}
+                            style={{background:"#008000", color:"#FFF", width: "100%", borderRadius: 100 }}
                           >
                             <BookmarkBorder />
+                            <div>
+                              {"SAVE "}
+                            </div>
                           </Button>
 
                           <Button
                             onClick={this.handleSketchExport}
                             type="button"
                             color="primary"
-                            style={{ width: "100%", borderRadius: 100 }}
+                            style={{background:"#008000", color:"#FFF", width: "100%", borderRadius: 100 }}
                           >
                             <GetAppIcon />
+                            <div>
+                              {"Download "}
+                            </div>
                           </Button>
                         </Typography>
                       </div>
@@ -1041,7 +1045,7 @@ export default class MySketchPage extends Component {
                       lg={12}
                       xs={12}
                       md={12}
-                      style={{ margin: "auto", textAlign: "center" }}
+                      style={{ margin: "auto", textAlign: "center",backgroundColor:'#fff',marginBottom:'10px' }}
                     >
                       <Graph
                         key={this.state.counter}
@@ -1087,6 +1091,8 @@ export default class MySketchPage extends Component {
                       style={{
                         margin: "auto",
                         textAlign: "center",
+                        background:"#9ef01a",
+                        borderRadius:'30px',
                       }}
                     >
                       <AddNodeContainer
